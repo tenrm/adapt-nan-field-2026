@@ -199,6 +199,82 @@ footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-s
 footer .partners{background:#fff;border-radius:14px;padding:12px;display:inline-block;max-width:100%}
 footer .logos{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bottom:12px}
 .cse{background:#000;border-radius:10px;padding:6px;max-width:300px}
+/* ---------- WADIGA ---------- */
+:root{--rice:#9ad35b;--tea:#00863d;--lychee:#d8728a;--fallow:#d9d4c7;--water:#2f7fb8;--water-soft:#e3f0f9}
+@media (prefers-color-scheme:dark){:root{--fallow:#4a4f45;--water:#7fb8e0;--water-soft:#1d2d38}}
+.wd-hero{display:flex;gap:16px;align-items:center;background:linear-gradient(120deg,#1f4f6e,#2f7fb8);color:#fff;border-radius:var(--radius);padding:20px 22px;margin-bottom:14px}
+.wd-hero h2{font-size:clamp(22px,4vw,30px);color:#fff}
+.wd-hero p{margin:6px 0 0;opacity:.92;max-width:720px}
+.wd-hero .kick{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;font-weight:600}
+.wd-drops{font-size:56px;margin-left:auto}
+@media (max-width:600px){.wd-drops{display:none}}
+.wd-sub{display:flex;flex-wrap:wrap;gap:2px;border-radius:14px}
+.wd-sub button{flex:1 1 auto}
+.wd-h{font-size:20px;color:var(--green);margin:20px 0 10px}
+.steps-list{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps-list li{counter-increment:s;position:relative;padding:10px 0 10px 46px;border-bottom:1px solid var(--line)}
+.steps-list li::before{content:counter(s);position:absolute;left:0;top:10px;width:32px;height:32px;border-radius:50%;background:var(--water);color:#fff;display:grid;place-items:center;font-weight:700}
+.steps-list b{display:block}
+.cropdot{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px}
+.tbl-num td,.tbl-num th{text-align:right}
+.tbl-num td:first-child,.tbl-num th:first-child{text-align:left}
+.neg{color:var(--terra);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--ink2);margin:6px 0}
+/* grouped bars */
+.gb{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:end;height:200px;position:relative;margin:16px 0 20px}
+.gb .grp{display:flex;gap:4px;align-items:flex-end;justify-content:center;height:100%;position:relative}
+.gb .b{width:22%;max-width:26px;border-radius:4px 4px 0 0;position:relative}
+.gb .b.negb{border-radius:0 0 4px 4px}
+.gb .b em{position:absolute;left:50%;transform:translateX(-50%);font-style:normal;font-size:11px;color:var(--ink2);white-space:nowrap}
+.gbx{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center;font-size:13px;color:var(--muted)}
+/* board */
+.wd-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.wd-toolbar select,.wd-toolbar input,.wd-form select,.wd-form input{font:inherit;padding:6px 8px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}
+.btn.sm{padding:6px 12px;font-size:14px;border-radius:10px}
+.yearchips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.yearchips button{border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 12px;cursor:pointer;font-weight:600}
+.yearchips button[aria-pressed=true]{background:var(--water);border-color:var(--water);color:#fff}
+.wd-grid2{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+.board{max-width:760px;margin:0 auto}
+.ptable th{white-space:nowrap}
+.meter{height:12px;border-radius:99px;background:var(--surface2);overflow:hidden;margin:6px 0}
+.meter i{display:block;height:100%;background:var(--water)}
+.meter.over i{background:var(--terra)}
+.wd-grid2>*{min-width:0}
+@media (max-width:600px){.board{gap:3px!important;padding:5px!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 16px minmax(0,1fr) minmax(0,1fr)!important}.plot{padding:3px;font-size:11px}.plot select,.plot input{font-size:12px;padding:2px}.board .river span{display:none}}
+.board{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 34px minmax(0,1fr) minmax(0,1fr);gap:6px;background:#efe6cf;border-radius:14px;padding:10px;position:relative}
+@media (prefers-color-scheme:dark){.board{background:#2b2a22}}
+.board .river{grid-column:3;grid-row:1 / span 8;background:linear-gradient(180deg,#7fb8e0,#2f7fb8);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.board .river span{writing-mode:vertical-rl;color:#fff;font-size:12px;font-weight:700;letter-spacing:.2em}
+.plot{border-radius:10px;padding:5px;background:var(--surface);border:2px solid var(--line);min-width:0;display:flex;flex-direction:column;gap:3px;font-size:12px}
+.plot .ph{display:flex;justify-content:space-between;gap:4px;font-weight:700}
+.plot .ow{background:var(--ink);color:var(--bg);border-radius:6px;padding:0 5px;font-size:11px}
+.plot select,.plot input{width:100%;font:inherit;font-size:13px;padding:3px 4px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink);min-width:0}
+.plot .pr{font-size:11px;color:var(--ink2);text-align:right;font-variant-numeric:tabular-nums}
+.plot.c1{background:color-mix(in srgb,var(--rice) 45%,var(--surface));border-color:var(--rice)}
+.plot.c2{background:color-mix(in srgb,var(--tea) 30%,var(--surface));border-color:var(--tea)}
+.plot.c3{background:color-mix(in srgb,var(--lychee) 38%,var(--surface));border-color:var(--lychee)}
+.plot.hl{outline:3px solid var(--gold);outline-offset:1px}
+.updown{display:flex;justify-content:space-between;font-size:12px;color:var(--ink2);font-weight:600;margin:4px 2px}
+.ptable td,.ptable th{padding:6px 6px;font-size:14px}
+.ptable input{width:64px;font:inherit;font-size:14px;padding:3px 5px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink)}
+.ptable tr.sel{background:var(--water-soft)}
+.wd-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.wd-form label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--ink2);font-weight:600}
+.ownmap{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;max-width:420px}
+.ownmap select{font:inherit;font-size:13px;padding:3px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}
+.stack{display:flex;flex-direction:column-reverse;height:180px;width:100%;max-width:56px;margin:0 auto;gap:2px}
+.stack i{display:block;width:100%;position:relative}
+.stack i:first-child{border-radius:0 0 4px 4px}
+.stack i:last-child{border-radius:4px 4px 0 0}
+.stack i span{position:absolute;inset:0;display:grid;place-items:center;font-size:11px;font-style:normal;color:#fff;font-weight:700}
+.stacks{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;align-items:end}
+.stacks .lab{text-align:center;font-size:13px;color:var(--muted);margin-top:4px}
+.hiddenval{filter:blur(6px);cursor:pointer}
+.obs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.obs-grid .card h3{font-size:17px;color:var(--water);margin-bottom:6px}
+.obs-grid ul{margin:0;padding-left:18px;color:var(--ink2);font-size:15px}
+.wd-link{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:14px;font-weight:600;color:var(--water);background:var(--water-soft);border:0;border-radius:999px;padding:3px 10px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -280,6 +356,20 @@ footer .logos{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bot
   </section>
 
   <!-- MAP -->
+  <!-- WADIGA -->
+  <section class="panel" id="p-wadiga">
+    <div class="wd-hero">
+      <div>
+        <div class="kick">ComMod · Role-playing game</div>
+        <h2>WADIGA — Water Distribution Game</h2>
+        <p data-w="lead"></p>
+      </div>
+      <div class="wd-drops" aria-hidden="true">💧</div>
+    </div>
+    <div class="seg wd-sub" role="tablist" id="wdsub"></div>
+    <div id="wdview"></div>
+  </section>
+
   <section class="panel" id="p-map">
     <div class="sec-title"><h2 data-i="whereWeGo"></h2><small data-i="mapNote"></small></div>
     <div class="mapgrid">
@@ -374,7 +464,7 @@ const I18N = {
   title:"คู่มือภาคสนาม",
   subtitle:"7 วันแห่งการเรียนรู้เชิงลึกในจังหวัดน่าน — โครงการวิจัย ADAPT-Nan: Advancing Development of Agroecology in Nan Province in Thailand · หลักสูตรระดับปริญญาตรี",
   dates:"8 – 15 พฤศจิกายน 2569",
-  tab_home:"หน้าแรก", tab_prog:"กำหนดการ", tab_groups:"กลุ่ม", tab_map:"แผนที่", tab_prep:"เตรียมตัว", tab_facts:"ข้อมูลน่าน",
+  tab_home:"หน้าแรก", tab_prog:"กำหนดการ", tab_groups:"กลุ่ม", tab_wadiga:"WADIGA", tab_map:"แผนที่", tab_prep:"เตรียมตัว", tab_facts:"ข้อมูลน่าน",
   intensive:"การเรียนรู้ภาคสนามแบบเข้มข้น", intensiveSub:"พักที่ศูนย์ CU-ผาสิงห์ และออกภาคสนามทุกวัน",
   intro:"ช่วงภาคสนามทำให้การเตรียมความพร้อมผ่านระบบออนไลน์เกิดขึ้นจริง ในแต่ละวันผู้เข้าร่วมจะได้ทำงานร่วมกับเกษตรกร พระสงฆ์ ผู้ประกอบการ และผู้จัดกิจกรรมชุมชน ผู้ริเริ่มและพัฒนาทางเลือกด้านเกษตรนิเวศในพื้นที่ลุ่มน้ำของจังหวัดน่าน พร้อมเรียนรู้ความเชื่อมโยงระหว่างการเปลี่ยนแปลงสภาพภูมิอากาศ ความมั่นคงทางอาหาร และวิถีชีวิตชนบท สัปดาห์นี้จะปิดท้ายด้วยการนำเสนอข้อเสนอของคุณเองต่อคณะผู้มีส่วนได้ส่วนเสียในท้องถิ่น",
   s1:"วันที่น่าน", s2:"พื้นที่เรียนรู้", s3:"กลุ่มต่อพื้นที่", s4:"ชั่วโมงภาคสนาม",
@@ -428,7 +518,7 @@ const I18N = {
   title:"Field Block Guide",
   subtitle:"Seven days of immersive learning in Nan Province, Thailand — ADAPT-Nan: Advancing Development of Agroecology in Nan Province in Thailand · Bachelor's programme",
   dates:"8 – 15 November 2026",
-  tab_home:"Home", tab_prog:"Programme", tab_groups:"Groups", tab_map:"Map", tab_prep:"Prepare", tab_facts:"Nan facts",
+  tab_home:"Home", tab_prog:"Programme", tab_groups:"Groups", tab_wadiga:"WADIGA", tab_map:"Map", tab_prep:"Prepare", tab_facts:"Nan facts",
   intensive:"Intensive Field Block", intensiveSub:"Based at CU-Phasing Center with daily excursions",
   intro:"The field block brings the online preparation to life. Each day you will work alongside farmers, monks, entrepreneurs and community organisers who have built agroecological alternatives in Nan's watersheds, and learn to trace the links between climate change, food security and rural livelihoods. The week ends with your own proposals, presented to a panel of local stakeholders.",
   s1:"days in Nan", s2:"host sites", s3:"groups per site", s4:"field hours",
@@ -522,7 +612,7 @@ const DAYS = [
    ["16:00","travel",{th:"ออกเดินทางไปโรงเรียนชาวนา",en:"Depart for the Farmers' School"}],
    ["17:00","free",{th:"เข้าห้องพักและพักผ่อนตามอัธยาศัย",en:"Check in and free time"}],
    ["18:00","meal",{th:"รับประทานอาหารเย็น",en:"Dinner"}],
-   ["19:00","session",{th:"เกม WADIGA (Water Distribution Game)",en:"WADIGA game (Water Distribution Game)"}],
+   ["19:00","session",{th:"เกม WADIGA (Water Distribution Game)",en:"WADIGA game (Water Distribution Game)"},"wadiga"],
    ["20:30","free",{th:"พักผ่อนตามอัธยาศัย",en:"Free time"}],
  ]},
  {date:"2026-11-10",dow:{th:"อ.",en:"Tue"},n:10,img:"d10",accom:"school",
@@ -672,6 +762,7 @@ const TABS = [
  ["home",'<path d="M3 11 12 3l9 8"/><path d="M5 10v10h14V10"/>'],
  ["prog",'<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/>'],
  ["groups",'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M15 15c3 0 6 1.5 6 4"/>'],
+ ["wadiga",'<path d="M12 2.5C9 7 6 10.5 6 14a6 6 0 0 0 12 0c0-3.5-3-7-6-11.5z"/>'],
  ["map",'<path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/>'],
  ["prep",'<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/>'],
  ["facts",'<path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/>'],
@@ -701,7 +792,7 @@ function renderStatic(){
 }
 
 function render(){
-  renderStatic(); renderNow(); renderGlance(); renderChips(); renderDay(); renderGroups(); renderSites(); renderPrep(); renderFacts();
+  renderStatic(); renderNow(); renderGlance(); renderChips(); renderDay(); renderGroups(); renderSites(); renderPrep(); renderFacts(); renderWadiga();
   document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on", p.id==="p-"+TAB));
 }
 
@@ -758,7 +849,7 @@ function renderDay(){
     d.dress ? `<span class="pill terra">${esc(L(d.dress))}</span>` : "",
   ].join("");
   const items = d.items.map((it,i)=>{
-    const extra = it[3] ? subList(d, it[3]) : "";
+    const extra = it[3]==="wadiga" ? `<br><button class="wd-link" data-go="wadiga">💧 ${w("wgo")} →</button>` : it[3] ? subList(d, it[3]) : "";
     const grp = it[1]==="group" ? `<div class="muted" style="font-size:14px">${esc(L(GROUPWORK))}</div>` : "";
     return `<li class="${it[1]}${isToday&&st.cur===i?" nowitem":""}"><span class="tm">${it[0]}</span><span class="dot"></span><div class="tx">${esc(L(it[2]))}${extra}${grp}</div></li>`;
   }).join("");
@@ -892,6 +983,386 @@ document.addEventListener("pointermove", e=>{
   tip.textContent = b.dataset.tip; tip.style.opacity=1;
   tip.style.left = Math.min(e.clientX+12, innerWidth-250)+"px"; tip.style.top=(e.clientY+14)+"px";
 });
+/* ================= WADIGA — Water Distribution Game ================= */
+const WT = {
+ th:{
+  lead:"เกมบทบาทสมมติจำลองการแบ่งปันน้ำในลุ่มน้ำขนาดเล็กบนพื้นที่สูง ผู้เล่น 6–12 คนรับบทเกษตรกรที่ต้องเลือกพืช แบ่งน้ำ และตัดสินใจลงทุน ท่ามกลางฝนและราคาที่ไม่แน่นอน",
+  s_about:"เกี่ยวกับเกม", s_info:"ข้อมูลสาธารณะ", s_play:"บันทึกเกม", s_sum:"สรุปผล", s_obs:"การสังเกต", s_setup:"ตั้งค่า",
+  origin:"ที่มาของเกม",
+  originT:"WADIGA พัฒนาจากกระบวนการ ComMod (Companion Modelling) ที่หมู่บ้านอาข่าแม่สลาบ จ.เชียงราย (2545–2548) ซึ่งศึกษาการเปลี่ยนจากพืชไร่เพื่อยังชีพไปสู่สวนลิ้นจี่และชาอูหลงที่ต้องใช้น้ำชลประทาน และความขัดแย้งเรื่องการแบ่งปันน้ำในฤดูแล้ง ต้นแบบเกมแบบทั่วไปนี้ออกแบบในการอบรมที่จุฬาลงกรณ์มหาวิทยาลัยเมื่อ พ.ค. 2552 (Trébuil, Le Page & Garcia)",
+  goal:"วัตถุประสงค์",
+  goalT:"เกมไม่ได้จำลองสถานการณ์จริงแห่งใดแห่งหนึ่ง แต่เป็นเวทีให้ผู้เล่นสื่อสาร ประสานงาน และเจรจาเรื่องการจัดการน้ำร่วมกัน และการเปลี่ยนระบบการผลิตจากพืชล้มลุกไปสู่ไม้ยืนต้นเชิงพาณิชย์",
+  question:"คำถามหลัก (PARDI)", questionT:"การจัดการน้ำร่วมกันส่งผลอย่างไรต่อการปรับเปลี่ยนไปปลูกพืชสวนในลุ่มน้ำขนาดเล็กบนพื้นที่สูง?",
+  board:"องค์ประกอบของเกม",
+  boardT:"กระดานเป็นหุบเขาลาดชันที่มีลำน้ำไหลผ่านกลาง มี 32 แปลง (แปลงละ 0.5 ha) ฝั่งละ 16 แปลง ปลูกได้ 3 พืช: ข้าว (พืชอาหาร), ชา และลิ้นจี่ (ไม้ยืนต้นเชิงพาณิชย์) น้ำแทนด้วยลูกแก้วในแก้วใสที่ต้นน้ำ เงินใช้ธนบัตรเกม",
+  roles:"บทบาท",
+  rolesL:[["ผู้เล่น–เกษตรกร (6–12 คน)","P1–P2 ได้ 4 แปลง เงิน 80 · P3–P6 ได้ 3 แปลง เงิน 60 · P7–P12 ได้ 2 แปลง เงิน 40 (20 หน่วยต่อแปลง)"],["ผู้จัดการชลประทาน","อาจกำหนดตั้งแต่ต้นหรือเกิดขึ้นเองระหว่างเกม ดูแลกติกาการใช้น้ำที่ตกลงกัน"],["ผู้ดำเนินเกม (1)","อธิบายกติกา ประกาศ คุมเวลา — ไม่ตัดสินใจแทนผู้เล่น"],["นายธนาคาร (1)","จ่าย/รับเงิน ให้กู้ดอกเบี้ย 10% ต่อปี"],["ผู้บันทึกข้อมูล (2)","บันทึกการตัดสินใจและคำนวณรายได้ (หน้า ‘บันทึกเกม’)"],["ผู้สังเกตการณ์ (2+)","บันทึกบทสนทนาและพฤติกรรมผู้เล่น"]],
+  turn:"ขั้นตอนในแต่ละรอบ (1 รอบ = 1 ปีการเพาะปลูก)",
+  turnL:[["เลือกพืชในแต่ละแปลง","จ่ายค่าลงทุนปลูกชา/ลิ้นจี่ที่ธนาคาร (กู้ได้ ดอกเบี้ย 10%/ปี) แล้ววางสัญลักษณ์พืชบนกระดาน"],["ประกาศปริมาณฝน","สุ่ม ฝนชุก / ปกติ / น้อย — ลูกแก้วถูกใส่ในแก้วที่ต้นน้ำ โดยไม่บอกจำนวนที่แน่นอน"],["แบ่งปันน้ำ","คุยกันที่ ‘หมู่บ้าน’ 10 นาที แล้วเรียกผู้เล่นทีละคนจากต้นน้ำ แปลงริมน้ำก่อนแปลงที่ไกลออกไป ตักน้ำใส่แปลงของตนต่อหน้าทุกคน"],["ประกาศระดับราคา","สุ่ม สูง / กลาง / ต่ำ — ข้าวราคาคงที่ ชา ±33% ลิ้นจี่ ±60%"],["บันทึกและรับรายได้","ผู้บันทึกคำนวณรายได้ ผู้เล่นรับเงินที่ธนาคาร (กู้ยืมกันเองในหมู่บ้านได้ แต่ไม่บันทึก)"],["ประชุมหมู่บ้าน","ทบทวนสิ่งที่เกิดขึ้น และวางกลยุทธ์ร่วมกันสำหรับปีถัดไป"]],
+  turnNote:"เล่นอย่างน้อย 4 รอบ — 1–2 รอบแรกเพื่อให้ทุกคนเข้าใจกติกา",
+  room:"การจัดห้อง",
+  roomT:"กระดานและโต๊ะบันทึกอยู่กลางห้อง (เอียงกระดานให้เห็นต้นน้ำ–ปลายน้ำ) · ‘หมู่บ้าน’ สำหรับคุยกันอยู่ห่างจากกระดาน · ‘ธนาคาร’ อยู่มุมที่เป็นส่วนตัว · ป้ายข้อมูลพืชติดไว้มุมหนึ่งของห้อง",
+  info_t:"ป้ายข้อมูลสาธารณะสำหรับผู้เล่น",
+  estT:"ค่าลงทุนปลูก (จ่ายครั้งเดียวเมื่อเริ่มปลูก)", needT:"ความต้องการน้ำ (หน่วย/แปลง)", prodT:"รายได้ต่อแปลงตามจำนวนหน่วยน้ำที่ได้รับ (ราคาระดับกลาง)",
+  prodN:"น้ำเกินความต้องการไม่ได้เพิ่มผลผลิต · ลิ้นจี่ที่ไม่ได้น้ำเลยขาดทุน",
+  priceT:"ตัวคูณราคาตามระดับราคา", rainT:"ปริมาณฝนและน้ำที่ใช้ได้",
+  rainCols:["ปีฝน","น้ำต่อแปลงที่ปลูก","ช่วงแปรผัน","สำหรับ 32 แปลง"],
+  crop:"พืช", water:"น้ำ (หน่วย)", units:"หน่วย", level:"ระดับราคา",
+  c0:"พักดิน", c1:"ข้าว", c2:"ชา", c3:"ลิ้นจี่",
+  r_wet:"ฝนชุก", r_normal:"ฝนปกติ", r_dry:"ฝนน้อย",
+  p_high:"สูง", p_medium:"กลาง", p_low:"ต่ำ",
+  year:"ปี", draw:"สุ่ม", rain:"ฝน", price:"ราคา", avail:"น้ำที่มี", used:"ใช้แล้ว", left:"เหลือ", over:"เกิน",
+  copyPrev:"คัดลอกพืชจากปีก่อน", clearW:"ล้างน้ำ", reveal:"แตะเพื่อแสดง",
+  upstream:"ต้นน้ำ", downstream:"ปลายน้ำ", river:"ลำน้ำ",
+  order:"ลำดับเรียกตักน้ำ (ต้นน้ำ → ปลายน้ำ, ริมน้ำก่อน)",
+  player:"ผู้เล่น", plots:"แปลง", cashStart:"เงินต้นปี", loan:"กู้", est:"ค่าลงทุน", income:"รายได้", repay:"คืนกู้+ดอก", adj:"ปรับ ±", cashEnd:"เงินปลายปี", wuse:"น้ำ",
+  adjHelp:"‘ปรับ ±’ = ซื้อ/ขายที่ดิน ลงทุนอื่น หรือรายการอื่นที่ธนาคารบันทึก",
+  totals:"รวม", noData:"ยังไม่มีข้อมูล — เริ่มบันทึกที่แท็บ ‘บันทึกเกม’",
+  s_crop:"การใช้แปลงในแต่ละปี", s_wshare:"สัดส่วนการใช้น้ำตามพืช", s_inc:"รายได้ต่อผู้เล่นต่อปี", s_cum:"รายได้สะสม", s_cash:"เงินคงเหลือ และตัวคูณ (เงินปลายเกม ÷ เงินตั้งต้น)", s_wpl:"การใช้น้ำต่อผู้เล่นต่อปี",
+  mult:"ตัวคูณ",
+  exportCsv:"ดาวน์โหลด CSV", exportJson:"สำรองข้อมูล (JSON)", importJson:"นำเข้า JSON", reset:"เริ่มเกมใหม่", resetQ:"ล้างข้อมูลเกมทั้งหมด?",
+  saved:"บันทึกอัตโนมัติในเบราว์เซอร์นี้",
+  setupT:"ตั้งค่าเซสชัน", nPlayers:"จำนวนผู้เล่น", sessName:"ชื่อเซสชัน", upEnd:"ต้นน้ำอยู่ฝั่ง", upA:"แปลง 1–4", upB:"แปลง 29–32",
+  nameCol:"ชื่อ/กลุ่ม", cash0:"เงินตั้งต้น", ownT:"ผู้ถือครองแปลง (ค่าเริ่มต้นตามไฟล์ Template ADAPT)", restoreOwn:"คืนค่าเริ่มต้น",
+  estTea:"ค่าลงทุนชา", estLy:"ค่าลงทุนลิ้นจี่", rate:"ดอกเบี้ยเงินกู้ (%)",
+  rule:"สูตรคำนวณ", ruleT:"รายได้แปลง = ผลผลิต(พืช, น้ำ) × ตัวคูณราคา · ค่าลงทุนคิดเมื่อแปลงเปลี่ยนเป็นชา/ลิ้นจี่ (หรือปลูกครั้งแรก) · เงินปลายปี = เงินต้นปี + กู้ − ค่าลงทุน + รายได้ − กู้×(1+ดอกเบี้ย) ± ปรับ",
+  obsT:"แนวทางการสังเกตและถอดบทเรียน", obsLead:"ผู้สังเกตการณ์ช่วยให้เข้าใจว่าเกิดอะไรขึ้นระหว่างเกม — ไม่ใช่แค่ตัวเลขผลลัพธ์",
+  why:"ทำไมต้องสังเกต?", whyL:["เข้าใจกลยุทธ์และเหตุผลของผู้เล่น","จับการเปลี่ยนแปลงของมุมมองและการเรียนรู้ร่วมกัน","มีข้อมูลสำหรับการถอดบทเรียน (debriefing)"],
+  what:"สังเกตอะไร?", whatL:["คำพูด: ปฏิกิริยา อารมณ์ คำพูดสำคัญ (verbatim)","ภาษากาย: ท่าที บทบาทเฉพาะ การใช้อำนาจ","พลวัตกลุ่ม: การจับกลุ่มย่อย พันธมิตร การกีดกัน","ตัวชี้วัด: การใช้น้ำ รายได้ การเปลี่ยนพืช กติกาที่ตกลงกัน"],
+  power:"อำนาจและความเป็นธรรม", powerL:["ระวังภาพ ‘ชุมชนที่เป็นเนื้อเดียวกัน’","ฉันทามติที่เร็วเกินไปอาจสะท้อนเสียงของผู้มีอิทธิพล","ใครได้ประโยชน์ ใครเสียเปรียบจากตำแหน่งต้นน้ำ–ปลายน้ำ?","ผู้ดำเนินเกมไม่เป็นกลางโดยสมบูรณ์ — ต้องโปร่งใสถึงเจตนา"],
+  debrief:"คำถามถอดบทเรียน", debriefL:["รู้สึกอย่างไรกับบทบาทของตนเอง? (ต้นน้ำ/ปลายน้ำ แปลงมาก/น้อย)","เกิดกติกาการแบ่งน้ำอะไรขึ้นบ้าง? ใครเสนอ ใครปฏิบัติตาม?","ปีฝนน้อยเปลี่ยนการตัดสินใจอย่างไร?","การเปลี่ยนไปปลูกชา/ลิ้นจี่คุ้มหรือเสี่ยงอย่างไร?","สิ่งที่เกิดในเกมเหมือน/ต่างจากสิ่งที่เห็นในน่านอย่างไร? (เชื่อมกับวันที่ 9–12 พ.ย.)","ถ้าเล่นอีกครั้ง จะเปลี่ยนอะไร?"],
+  loops:"วงจรการเรียนรู้ (ComMod)", loopsT:"วิเคราะห์สถานการณ์เริ่มต้น → ออกแบบแบบจำลอง (เกม/ABM) → จำลองแบบมีส่วนร่วม → ประเมินผล → ปรับโจทย์และกลุ่มผู้เกี่ยวข้อง แล้ววนซ้ำ",
+  refs:"อ้างอิง: Trébuil, Le Page & Garcia (2017) WaDiGa & conceptual model (PARDI); Trébuil et al. (2021) Boucles d’apprentissage; Hassenforder, Dray & Daré (2020); Barnaud (2008, 2013)",
+  wgo:"เปิดหน้าเกม WADIGA",
+ },
+ en:{
+  lead:"A role-playing game on sharing irrigation water in a small upland watershed. 6–12 players act as farmers who choose crops, share water and invest under uncertain rainfall and prices.",
+  s_about:"About", s_info:"Public info", s_play:"Game recorder", s_sum:"Summary", s_obs:"Observation", s_setup:"Setup",
+  origin:"Origin",
+  originT:"WADIGA grew out of a ComMod (Companion Modelling) process in the Akha village of Mae Salaep, Chiang Rai (2002–2005), which explored the shift from subsistence crops to irrigated lychee orchards and Oolong tea, and the resulting tensions over dry-season water sharing. This generic version was designed during a training course at Chulalongkorn University in May 2009 (Trébuil, Le Page & Garcia).",
+  goal:"Objectives",
+  goalT:"The game does not recreate a real place. It offers players a platform to communicate, coordinate and negotiate collective water management and the transition from annual crops to commercial perennial horticulture.",
+  question:"Key question (PARDI)", questionT:"What are the effects of collective water management on horticultural diversification in a small upland watershed?",
+  board:"Game components",
+  boardT:"The board is a steep valley with a river in the middle and 32 equal plots (0.5 ha each), 16 on each bank. Three crops: rice (food crop), tea and lychee (commercial perennials). Water is represented by marbles in a transparent glass at the top of the watershed; money by game banknotes.",
+  roles:"Roles",
+  rolesL:[["Farmer-players (6–12)","P1–P2: 4 plots, 80 cash · P3–P6: 3 plots, 60 · P7–P12: 2 plots, 40 (20 units per plot)"],["Irrigation manager","Set up from the start or emerging during play; watches over agreed water rules"],["Facilitator (1)","Explains rules, makes announcements, keeps time — never decides for a player"],["Banker (1)","Pays and collects money; lends at 10% per year"],["Data recorders (2)","Record decisions and compute incomes (‘Game recorder’ tab)"],["Observers (2+)","Record exchanges and player behaviour"]],
+  turn:"Steps of a round (1 round = 1 cropping year)",
+  turnL:[["Choose crops on each plot","Pay establishment costs for tea/lychee at the bank (loans at 10%/year), then place crop symbols on the board"],["Announce rainfall","Wet / normal / dry is drawn; marbles go into the glass upstream without revealing the exact number"],["Share the water","10 minutes of discussion in the ‘village’, then players are called one by one from upstream, river-side plots before outer plots, and publicly take water for their plots"],["Announce price level","High / medium / low is drawn — rice price is fixed, tea ±33%, lychee ±60%"],["Record & get paid","Recorders compute incomes; players collect them at the bank (informal village credit allowed, not recorded)"],["Village meeting","Discuss the season and agree on a collective strategy for next year"]],
+  turnNote:"Play at least 4 rounds — the first 1–2 let everyone master the rules.",
+  room:"Room layout",
+  roomT:"Board and recording desk in the centre (board tilted to show upstream–downstream) · ‘Village’ meeting space away from the board · ‘Bank’ in a more private corner · Crop information posted on a wall.",
+  info_t:"Public information board for players",
+  estT:"Crop establishment cost (paid once when planted)", needT:"Water needs (units/plot)", prodT:"Income per plot by water units received (medium price)",
+  prodN:"Excess water does not raise output · lychee with no water makes a loss",
+  priceT:"Price multipliers by price level", rainT:"Rainfall and available water",
+  rainCols:["Rain year","Water per cultivated plot","Variation","For 32 plots"],
+  crop:"Crop", water:"Water (units)", units:"units", level:"Price level",
+  c0:"Fallow", c1:"Rice", c2:"Tea", c3:"Lychee",
+  r_wet:"Wet", r_normal:"Normal", r_dry:"Dry",
+  p_high:"High", p_medium:"Medium", p_low:"Low",
+  year:"Year", draw:"Draw", rain:"Rain", price:"Price", avail:"Available", used:"Used", left:"Left", over:"Over by",
+  copyPrev:"Copy crops from previous year", clearW:"Clear water", reveal:"tap to reveal",
+  upstream:"Upstream", downstream:"Downstream", river:"River",
+  order:"Water call order (upstream → downstream, river-side first)",
+  player:"Player", plots:"Plots", cashStart:"Start cash", loan:"Loan", est:"Establish.", income:"Income", repay:"Repay+int.", adj:"Adjust ±", cashEnd:"End cash", wuse:"Water",
+  adjHelp:"‘Adjust ±’ = land buy/sell, other investment or any other bank entry",
+  totals:"Total", noData:"No data yet — start recording in the ‘Game recorder’ tab",
+  s_crop:"Crop allocation per year", s_wshare:"Share of water use per crop", s_inc:"Income per player & year", s_cum:"Cumulated gross income", s_cash:"Cash balance and multiplier (final cash ÷ initial cash)", s_wpl:"Water use per player & year",
+  mult:"Multiplier",
+  exportCsv:"Download CSV", exportJson:"Back up (JSON)", importJson:"Import JSON", reset:"New game", resetQ:"Clear all game data?",
+  saved:"Auto-saved in this browser",
+  setupT:"Session setup", nPlayers:"Number of players", sessName:"Session name", upEnd:"Upstream end", upA:"Plots 1–4", upB:"Plots 29–32",
+  nameCol:"Name/group", cash0:"Initial cash", ownT:"Plot ownership (defaults from the ADAPT template)", restoreOwn:"Restore defaults",
+  estTea:"Tea establishment", estLy:"Lychee establishment", rate:"Loan interest (%)",
+  rule:"Calculation", ruleT:"Plot income = production(crop, water) × price multiplier · establishment cost is charged when a plot turns to tea/lychee (or is first planted) · end cash = start cash + loan − establishment + income − loan×(1+interest) ± adjustments",
+  obsT:"Observation & debriefing guide", obsLead:"Observers help understand what happens during the game — not only the final numbers.",
+  why:"Why observe?", whyL:["Understand players' strategies and reasoning","Capture changes in perceptions and collective learning","Feed the debriefing"],
+  what:"What to observe?", whatL:["Verbal: reactions, emotions, key quotes (verbatim)","Non-verbal: attitudes, specific roles, power plays","Group dynamics: sub-groups, coalitions, exclusion","Indicators: water use, incomes, crop changes, agreed rules"],
+  power:"Power & fairness", powerL:["Beware the myth of a homogeneous community","A quick consensus may reflect the most influential voices","Who gains or loses from upstream–downstream position?","Facilitators are never fully neutral — be transparent about intentions"],
+  debrief:"Debriefing questions", debriefL:["How did you feel in your role? (upstream/downstream, many/few plots)","What water-sharing rules emerged? Who proposed them, who followed them?","How did dry years change decisions?","Was switching to tea/lychee worth the risk?","How does the game compare with what we see in Nan? (link to 9–12 Nov visits)","If you played again, what would you change?"],
+  loops:"Learning loops (ComMod)", loopsT:"Analyse the initial situation → design the model (game/ABM) → participatory simulations → evaluate effects → reframe the problem and the panel of stakeholders, then iterate.",
+  refs:"References: Trébuil, Le Page & Garcia (2017) WaDiGa & conceptual model (PARDI); Trébuil et al. (2021) Boucles d’apprentissage; Hassenforder, Dray & Daré (2020); Barnaud (2008, 2013)",
+  wgo:"Open the WADIGA game page",
+ }
+};
+const w = k => (WT[LANG]||WT.en)[k] ?? k;
+
+/* ---- model (from WaDiGa-game session_Template / ADAPT) ---- */
+const WD_PROD = [[0,0,0,0],[5,10,10,10],[0,5,20,30],[-10,0,15,40]];   // [crop][water 0,1,2,>=3]  (calProduction)
+const WD_PRICE = {high:[1,1,4/3,1.6], medium:[1,1,1,1], low:[1,1,2/3,0.4]};
+const WD_RAIN = {wet:{per:2,v:6}, normal:{per:1,v:4}, dry:{per:0.75,v:2}};
+const WD_NEED = [0,1,3,3];
+const WD_COLORS = ["var(--fallow)","var(--rice)","var(--tea)","var(--lychee)"];
+const WD_OWN_DEFAULT = [1,1,2,2, 1,1,2,2, 4,3,5,6, 4,3,5,6, 4,3,5,6, 7,7,10,12, 9,8,10,12, 9,8,11,11]; // plot 1..32 → player
+const WD_CASH_DEFAULT = [80,80,60,60,60,60,40,40,40,40,40,40];
+const NYEARS = 6;
+const prod = (c,wat) => WD_PROD[c][Math.min(Math.max(wat|0,0),3)];
+
+function wdNew(){
+  return {v:2, name:"ADAPT-Nan 2026", n:12, up:"high",
+    players: WD_CASH_DEFAULT.map((c,i)=>({name:"P"+(i+1), cash0:c})),
+    own: WD_OWN_DEFAULT.slice(), est:[0,0,40,60], rate:10,
+    years: Array.from({length:NYEARS},()=>({rain:"", water:"", price:"", crop:Array(32).fill(0), wat:Array(32).fill(0), loan:Array(12).fill(0), adj:Array(12).fill(0), touched:false})),
+    cur:0, hide:true};
+}
+let WD; try{ WD = JSON.parse(localStorage.getItem("an_wadiga")||"null"); }catch(e){ WD=null; }
+if (!WD || !WD.years) WD = wdNew();
+if (!WD.v){ WD.up="high"; WD.v=2; }
+let WSUB = "about";
+function wdSave(){ try{ localStorage.setItem("an_wadiga", JSON.stringify(WD)); }catch(e){} }
+
+/* ---- computations ---- */
+function wdCalc(){
+  const n = WD.n, P = [...Array(n).keys()];
+  const res = {years:[]};
+  let cash = P.map(i=>+WD.players[i].cash0||0);
+  WD.years.forEach((Y,yi)=>{
+    const prev = yi>0 ? WD.years[yi-1].crop : null;
+    const lv = WD_PRICE[Y.price||"medium"];
+    const plot = Y.crop.map((c,p)=>{
+      const o = WD.own[p]-1, pr = prod(c,Y.wat[p]), inc = pr*lv[c];
+      const est = (c>=2 && (!prev || prev[p]!==c)) ? (+WD.est[c]||0) : 0;
+      return {p, o, c, wat:+Y.wat[p]||0, pr, inc, est};
+    });
+    const pl = P.map(i=>{
+      const mine = plot.filter(x=>x.o===i);
+      const income = mine.reduce((s,x)=>s+x.inc,0), est = mine.reduce((s,x)=>s+x.est,0), wuse = mine.reduce((s,x)=>s+x.wat,0);
+      const loan = +Y.loan[i]||0, adj = +Y.adj[i]||0, repay = loan*(1+(+WD.rate||0)/100);
+      const start = cash[i], end = start + loan - est + income - repay + adj;
+      return {i, start, loan, est, income, repay, adj, end, wuse, nplots:mine.length};
+    });
+    cash = pl.map(x=>x.end);
+    const cropN=[0,0,0,0], cropW=[0,0,0,0];
+    plot.forEach(x=>{ if (x.o<n){ cropN[x.c]++; cropW[x.c]+=x.wat; } });
+    const used = plot.reduce((s,x)=>s+x.wat,0);
+    res.years.push({plot, pl, cropN, cropW, used, active:Y.touched});
+  });
+  return res;
+}
+const fmt = v => (Math.round(v*100)/100).toLocaleString(LANG==="th"?"th-TH":"en-US",{maximumFractionDigits:1});
+const cl = v => v<0 ? `<span class="neg">${fmt(v)}</span>` : fmt(v);
+
+/* ---- views ---- */
+const SUBS = ["about","info","play","sum","obs","setup"];
+function renderWadiga(){
+  if (!document.getElementById("wdview")) return;
+  document.querySelectorAll("[data-w]").forEach(el=>el.textContent = w(el.dataset.w));
+  $("#wdsub").innerHTML = SUBS.map(s=>`<button data-wsub="${s}" aria-pressed="${s===WSUB}">${w("s_"+s)}</button>`).join("");
+  const v = {about:wdAbout, info:wdInfo, play:wdPlay, sum:wdSum, obs:wdObs, setup:wdSetup}[WSUB]();
+  $("#wdview").innerHTML = v;
+}
+const cropName = c => w("c"+c);
+const dot = c => `<span class="cropdot" style="background:${WD_COLORS[c]}"></span>`;
+
+function wdAbout(){
+  return `<div class="grid g2" style="margin-top:14px">
+   <div class="card"><h3 class="wd-h" style="margin-top:0">${w("origin")}</h3><p style="margin:0;color:var(--ink2)">${w("originT")}</p>
+     <h3 class="wd-h">${w("goal")}</h3><p style="margin:0;color:var(--ink2)">${w("goalT")}</p>
+     <div class="card" style="margin-top:14px;background:var(--water-soft);box-shadow:none;border:0"><b>${w("question")}</b><p style="margin:4px 0 0">${w("questionT")}</p></div></div>
+   <div class="card"><h3 class="wd-h" style="margin-top:0">${w("board")}</h3><p style="margin:0;color:var(--ink2)">${w("boardT")}</p>
+     <div class="legend" style="margin-top:10px">${[1,2,3].map(c=>`<span>${dot(c)}${cropName(c)}</span>`).join("")}</div>
+     <h3 class="wd-h">${w("roles")}</h3><table>${WT[LANG].rolesL.map(r=>`<tr><td style="width:40%"><b>${r[0]}</b></td><td style="color:var(--ink2)">${r[1]}</td></tr>`).join("")}</table></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3 class="wd-h" style="margin-top:0">${w("turn")}</h3>
+   <ol class="steps-list">${WT[LANG].turnL.map(s=>`<li><b>${s[0]}</b><span class="muted">${s[1]}</span></li>`).join("")}</ol>
+   <p class="note">${w("turnNote")}</p></div>
+  <div class="card" style="margin-top:16px"><h3 class="wd-h" style="margin-top:0">${w("room")}</h3><p style="margin:0;color:var(--ink2)">${w("roomT")}</p></div>`;
+}
+
+function wdInfo(){
+  const max=40, min=-10, H=170, z = max/(max-min)*H;
+  const groups=[0,1,2,3].map(u=>`<div class="grp">${[1,2,3].map(c=>{const v=WD_PROD[c][u]; const h=Math.abs(v)/(max-min)*H;
+    return v>=0 ? `<i class="b" style="background:${WD_COLORS[c]};height:${h}px;margin-bottom:${H-z}px" data-tip="${cropName(c)} · ${u}${u===3?"+":""} ${w("units")}: ${v}"><em style="bottom:${h+2}px">${v}</em></i>`
+                : `<i class="b negb" style="background:${WD_COLORS[c]};height:${h}px;margin-bottom:${H-z-h}px" data-tip="${cropName(c)} · ${u} ${w("units")}: ${v}"><em style="top:${h+2}px">${v}</em></i>`;}).join("")}</div>`).join("");
+  return `<div class="sec-title"><h2 style="font-size:22px">${w("info_t")}</h2></div>
+  <div class="grid g2">
+   <div class="card"><b>${w("prodT")}</b><div class="legend">${[1,2,3].map(c=>`<span>${dot(c)}${cropName(c)}</span>`).join("")}</div>
+     <div class="gb" style="height:${H+20}px"><div style="position:absolute;left:0;right:0;bottom:${H-z}px;border-top:1px solid var(--line)"></div>${groups}</div>
+     <div class="gbx">${[0,1,2,"3+"].map(u=>`<span>${u} ${w("units")}</span>`).join("")}</div>
+     <div class="tablewrap"><table class="tbl-num" style="margin-top:12px"><tr><th>${w("crop")}</th>${[0,1,2,"3+"].map(u=>`<th>${u}</th>`).join("")}</tr>${[1,2,3].map(c=>`<tr><td>${dot(c)}${cropName(c)}</td>${WD_PROD[c].map(v=>`<td>${cl(v)}</td>`).join("")}</tr>`).join("")}</table></div>
+     <p class="note">${w("prodN")}</p></div>
+   <div class="grid" style="align-content:start">
+    <div class="card"><b>${w("estT")}</b> · <b>${w("needT")}</b><div class="tablewrap"><table class="tbl-num" style="margin-top:8px"><tr><th>${w("crop")}</th><th>${w("est")}</th><th>${w("water")}</th></tr>${[1,2,3].map(c=>`<tr><td>${dot(c)}${cropName(c)}</td><td>${+WD.est[c]||0}</td><td>${WD_NEED[c]}</td></tr>`).join("")}</table></div></div>
+    <div class="card"><b>${w("priceT")}</b><div class="tablewrap"><table class="tbl-num" style="margin-top:8px"><tr><th>${w("level")}</th>${[1,2,3].map(c=>`<th>${cropName(c)}</th>`).join("")}</tr>${["high","medium","low"].map(l=>`<tr><td>${w("p_"+l)}</td>${[1,2,3].map(c=>`<td>×${+WD_PRICE[l][c].toFixed(2)}</td>`).join("")}</tr>`).join("")}</table></div></div>
+    <div class="card"><b>${w("rainT")}</b><div class="tablewrap"><table class="tbl-num" style="margin-top:8px"><tr>${WT[LANG].rainCols.map(h=>`<th>${h}</th>`).join("")}</tr>${["wet","normal","dry"].map(r=>`<tr><td>${w("r_"+r)}</td><td>${WD_RAIN[r].per}</td><td>±${WD_RAIN[r].v}</td><td>${Math.round(WD_RAIN[r].per*32)-WD_RAIN[r].v}–${Math.round(WD_RAIN[r].per*32)+WD_RAIN[r].v}</td></tr>`).join("")}</table></div></div>
+   </div>
+  </div>
+  <div class="card" style="margin-top:16px"><b>${w("rule")}</b><p class="muted" style="margin:4px 0 0">${w("ruleT")}</p></div>`;
+}
+
+function upRows(){ // rows (array of 4 plot indexes, outer-left, inner-left, inner-right, outer-right), upstream first
+  const rows = []; for (let r=0;r<8;r++) rows.push([4*r,4*r+1,4*r+2,4*r+3]);
+  return WD.up==="low" ? rows : rows.reverse();
+}
+function callOrder(){
+  const seen=[], out=[];
+  upRows().forEach(r=>[r[1],r[2],r[0],r[3]].forEach(p=>{ const o=WD.own[p]; if (o<=WD.n && !seen.includes(o)){ seen.push(o); out.push(o);} }));
+  return out;
+}
+
+function wdPlay(){
+  const yi = WD.cur, Y = WD.years[yi], R = wdCalc().years[yi];
+  const cultivated = Y.crop.filter((c,p)=>c>0 && WD.own[p]<=WD.n).length;
+  const avail = Y.water===""||Y.water==null ? null : +Y.water;
+  const left = avail==null ? null : avail - R.used;
+  const pct = avail ? Math.min(100, R.used/avail*100) : 0;
+  const rows = upRows();
+  const cell = p => { const c=Y.crop[p], o=WD.own[p], x=R.plot[p], off=o>WD.n;
+    return `<div class="plot c${c}" ${off?'style="opacity:.45"':''}><div class="ph"><span>#${p+1}</span><span class="ow">${esc(WD.players[o-1]?.name||"P"+o)}</span></div>
+      <select data-wp="crop" data-p="${p}" aria-label="crop plot ${p+1}" ${off?"disabled":""}>${[0,1,2,3].map(k=>`<option value="${k}" ${k===c?"selected":""}>${cropName(k)}</option>`).join("")}</select>
+      <input type="number" min="0" inputmode="numeric" data-wp="wat" data-p="${p}" value="${Y.wat[p]||0}" aria-label="water plot ${p+1}" ${off||c===0?"disabled":""}>
+      <div class="pr">${c?`${fmt(x.inc)}${x.est?` · −${x.est}`:""}`:"&nbsp;"}</div></div>`; };
+  const board = rows.map((r,ri)=>`${cell(r[0])}${cell(r[1])}${ri===0?`<div class="river"><span>${w("river")} ↓</span></div>`:""}${cell(r[2])}${cell(r[3])}`).join("");
+  const order = callOrder().map(o=>esc(WD.players[o-1].name)).join(" → ");
+  const P = R.pl;
+  return `<div class="wd-toolbar" style="justify-content:space-between">
+     <div class="yearchips">${WD.years.map((y,i)=>`<button data-wyear="${i}" aria-pressed="${i===yi}">${w("year")} ${i+1}${y.touched?" ✓":""}</button>`).join("")}</div>
+     <span class="muted" style="font-size:13px">💾 ${w("saved")}</span></div>
+   <div class="wd-grid2">
+    <div>
+     <div class="card" style="padding:14px">
+      <div class="wd-toolbar">
+        <label>${w("rain")} <select data-wy="rain"><option value="">—</option>${["wet","normal","dry"].map(r=>`<option value="${r}" ${Y.rain===r?"selected":""}>${w("r_"+r)}</option>`).join("")}</select></label>
+        <button class="btn sm ghost" data-wact="drawRain">🎲 ${w("draw")}</button>
+        <label>${w("price")} <select data-wy="price"><option value="">—</option>${["high","medium","low"].map(r=>`<option value="${r}" ${Y.price===r?"selected":""}>${w("p_"+r)}</option>`).join("")}</select></label>
+        <button class="btn sm ghost" data-wact="drawPrice">🎲 ${w("draw")}</button>
+      </div>
+      <div class="wd-toolbar">
+        <label>${w("avail")} <input type="number" min="0" data-wy="water" value="${avail??""}" style="width:80px" class="${WD.hide&&avail!=null?"hiddenval":""}" title="${w("reveal")}"></label>
+        <button class="btn sm ghost" data-wact="hide">${WD.hide?"👁":"🙈"}</button>
+        <span style="font-size:14px">${w("used")}: <b>${R.used}</b>${left!=null?` · ${left>=0?w("left"):w("over")}: <b class="${left<0?"neg":""}">${Math.abs(left)}</b>`:""} · ${cultivated} ${w("plots")}</span>
+      </div>
+      <div class="meter ${left!=null&&left<0?"over":""}"><i style="width:${pct}%"></i></div>
+      <div class="wd-toolbar">${yi>0?`<button class="btn sm ghost" data-wact="copyPrev">⤵ ${w("copyPrev")}</button>`:""}<button class="btn sm ghost" data-wact="clearW">${w("clearW")}</button></div>
+      <div class="updown"><span>▲ ${w("upstream")}</span><span class="muted">${WD.up==="low"?w("upA"):w("upB")}</span></div>
+      <div class="board">${board}</div>
+      <div class="updown"><span>▼ ${w("downstream")}</span></div>
+      <p class="note">${w("order")}: ${order}</p>
+     </div>
+    </div>
+    <div class="card" style="padding:14px">
+     <div class="tablewrap"><table class="ptable tbl-num">
+      <tr><th>${w("player")}</th><th>${w("wuse")}</th><th>${w("cashStart")}</th><th>${w("loan")}</th><th>${w("est")}</th><th>${w("income")}</th><th>${w("adj")}</th><th>${w("cashEnd")}</th></tr>
+      ${P.map(x=>`<tr><td><b>${esc(WD.players[x.i].name)}</b> <span class="muted" style="font-size:12px">${x.nplots}</span></td><td>${x.wuse}</td><td>${fmt(x.start)}</td>
+        <td><input type="number" data-wl="loan" data-i="${x.i}" value="${Y.loan[x.i]||0}"></td><td>${x.est?"−"+fmt(x.est):"0"}</td><td>${fmt(x.income)}</td>
+        <td><input type="number" data-wl="adj" data-i="${x.i}" value="${Y.adj[x.i]||0}"></td><td><b>${cl(x.end)}</b></td></tr>`).join("")}
+      <tr><td><b>${w("totals")}</b></td><td>${R.used}</td><td>${fmt(P.reduce((s,x)=>s+x.start,0))}</td><td>${fmt(P.reduce((s,x)=>s+x.loan,0))}</td><td>${fmt(P.reduce((s,x)=>s+x.est,0))}</td><td>${fmt(P.reduce((s,x)=>s+x.income,0))}</td><td>${fmt(P.reduce((s,x)=>s+x.adj,0))}</td><td><b>${fmt(P.reduce((s,x)=>s+x.end,0))}</b></td></tr>
+     </table></div>
+     <p class="note">${w("adjHelp")} · ${w("loan")}: ${WD.rate}%/${w("year")}</p>
+     <p class="note">${w("ruleT")}</p>
+    </div>
+   </div>`;
+}
+
+function stackBars(rows, labels, keys){ // rows: per year array of values per key
+  return `<div class="stacks">${rows.map((vals,i)=>{ const tot=vals.reduce((a,b)=>a+b,0)||1;
+    return `<div><div class="stack">${keys.map((k,j)=>vals[j]?`<i style="height:${vals[j]/tot*100}%;background:${WD_COLORS[k]}" data-tip="${labels[i]} · ${cropName(k)}: ${fmt(vals[j])} (${Math.round(vals[j]/tot*100)}%)">${vals[j]/tot>0.12?`<span style="${k===1||k===0?"color:#1f2a1e":""}">${fmt(vals[j])}</span>`:""}</i>`:"").join("")}</div><div class="lab">${labels[i]}</div></div>`;}).join("")}</div>`;
+}
+
+function wdSum(){
+  const C = wdCalc(), act = C.years.map((y,i)=>i).filter(i=>WD.years[i].touched);
+  if (!act.length) return `<div class="card" style="margin-top:14px"><p class="muted" style="margin:0">${w("noData")}</p></div>`;
+  const yl = act.map(i=>`${w("year")} ${i+1}`);
+  const P = [...Array(WD.n).keys()];
+  const head = `<tr><th>${w("year")}</th>${P.map(i=>`<th>${esc(WD.players[i].name)}</th>`).join("")}<th>${w("totals")}</th></tr>`;
+  const tbl = f => act.map(yi=>`<tr><td>${yi+1}</td>${P.map(i=>`<td>${cl(f(yi,i))}</td>`).join("")}<td><b>${cl(P.reduce((s,i)=>s+f(yi,i),0))}</b></td></tr>`).join("");
+  const cum = {}; P.forEach(i=>{ let s=0; act.forEach(yi=>{ s+=C.years[yi].pl[i].income; cum[yi+"_"+i]=s; }); });
+  const last = act[act.length-1];
+  const finalCash = P.map(i=>C.years[last].pl[i].end), maxc = Math.max(...finalCash.map(Math.abs),1);
+  return `<div class="grid g2" style="margin-top:14px">
+   <div class="card"><b>${w("s_crop")}</b><div class="legend">${[0,1,2,3].map(c=>`<span>${dot(c)}${cropName(c)}</span>`).join("")}</div>
+     ${stackBars(act.map(yi=>C.years[yi].cropN), yl, [0,1,2,3])}
+     <div class="tablewrap"><table class="tbl-num" style="margin-top:10px"><tr><th>${w("year")}</th>${[0,1,2,3].map(c=>`<th>${cropName(c)}</th>`).join("")}</tr>${act.map(yi=>`<tr><td>${yi+1}</td>${C.years[yi].cropN.map(v=>`<td>${v}</td>`).join("")}</tr>`).join("")}</table></div></div>
+   <div class="card"><b>${w("s_wshare")}</b><div class="legend">${[1,2,3].map(c=>`<span>${dot(c)}${cropName(c)}</span>`).join("")}</div>
+     ${stackBars(act.map(yi=>C.years[yi].cropW.slice(1)), yl, [1,2,3])}
+     <div class="tablewrap"><table class="tbl-num" style="margin-top:10px"><tr><th>${w("year")}</th>${[1,2,3].map(c=>`<th>${cropName(c)}</th>`).join("")}<th>${w("totals")}</th></tr>${act.map(yi=>{const cw=C.years[yi].cropW;return `<tr><td>${yi+1}</td>${[1,2,3].map(c=>`<td>${cw[c]}</td>`).join("")}<td>${cw[1]+cw[2]+cw[3]}</td></tr>`}).join("")}</table></div></div>
+  </div>
+  <div class="card" style="margin-top:16px"><b>${w("s_cash")}</b>
+    <div class="bars" style="margin-top:12px">${P.map(i=>`<div class="bar" data-tip="${esc(WD.players[i].name)}: ${fmt(finalCash[i])}"><span>${esc(WD.players[i].name)} <span class="muted" style="font-size:12px">${w("mult")} ×${fmt(finalCash[i]/(+WD.players[i].cash0||1))}</span></span><div class="track"><div class="fill" style="width:${Math.max(0,finalCash[i])/maxc*100}%;${finalCash[i]<0?"background:var(--terra)":""}"></div></div><span class="v">${cl(finalCash[i])}</span></div>`).join("")}</div></div>
+  <div class="card" style="margin-top:16px"><b>${w("s_inc")}</b><div class="tablewrap"><table class="tbl-num ptable" style="margin-top:8px">${head}${tbl((yi,i)=>C.years[yi].pl[i].income)}</table></div>
+    <b style="display:block;margin-top:16px">${w("s_cum")}</b><div class="tablewrap"><table class="tbl-num ptable" style="margin-top:8px">${head}${tbl((yi,i)=>cum[yi+"_"+i])}</table></div>
+    <b style="display:block;margin-top:16px">${w("cashEnd")}</b><div class="tablewrap"><table class="tbl-num ptable" style="margin-top:8px">${head}${tbl((yi,i)=>C.years[yi].pl[i].end)}</table></div>
+    <b style="display:block;margin-top:16px">${w("s_wpl")}</b><div class="tablewrap"><table class="tbl-num ptable" style="margin-top:8px">${head}${tbl((yi,i)=>C.years[yi].pl[i].wuse)}</table></div></div>
+  <div class="wd-toolbar" style="margin-top:14px"><button class="btn sm" data-wact="csv">⬇ ${w("exportCsv")}</button></div>`;
+}
+
+function wdObs(){
+  const box = (h,l)=>`<div class="card"><h3>${w(h)}</h3><ul>${WT[LANG][l].map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
+  return `<div class="sec-title"><h2 style="font-size:22px">${w("obsT")}</h2></div><p class="muted" style="margin-top:-6px">${w("obsLead")}</p>
+   <div class="obs-grid">${box("why","whyL")}${box("what","whatL")}${box("power","powerL")}${box("debrief","debriefL")}</div>
+   <div class="card" style="margin-top:12px"><h3 style="font-size:17px;color:var(--water)">${w("loops")}</h3><p style="margin:4px 0 0;color:var(--ink2)">${w("loopsT")}</p></div>
+   <p class="note">${w("refs")}</p>`;
+}
+
+function wdSetup(){
+  const opts = sel => Array.from({length:WD.n},(_,i)=>`<option value="${i+1}" ${sel===i+1?"selected":""}>${esc(WD.players[i].name)}</option>`).join("") + `<option value="99" ${sel>WD.n?"selected":""}>—</option>`;
+  const own = upRows().map(r=>r.map(p=>`<label style="font-size:11px;color:var(--muted)">#${p+1}<select data-wown="${p}">${opts(WD.own[p])}</select></label>`).join("")).join("");
+  return `<div class="card" style="margin-top:14px"><h3 class="wd-h" style="margin-top:0">${w("setupT")}</h3>
+   <div class="wd-form">
+    <label>${w("sessName")}<input data-ws="name" value="${esc(WD.name)}"></label>
+    <label>${w("nPlayers")}<select data-ws="n">${[6,7,8,9,10,11,12].map(k=>`<option ${k===WD.n?"selected":""}>${k}</option>`).join("")}</select></label>
+    <label>${w("upEnd")}<select data-ws="up"><option value="low" ${WD.up==="low"?"selected":""}>${w("upA")}</option><option value="high" ${WD.up==="high"?"selected":""}>${w("upB")}</option></select></label>
+    <label>${w("estTea")}<input type="number" data-ws="est2" value="${WD.est[2]}"></label>
+    <label>${w("estLy")}<input type="number" data-ws="est3" value="${WD.est[3]}"></label>
+    <label>${w("rate")}<input type="number" data-ws="rate" value="${WD.rate}"></label>
+   </div>
+   <div class="grid g2" style="margin-top:16px">
+    <div><div class="tablewrap"><table class="ptable"><tr><th>#</th><th>${w("nameCol")}</th><th>${w("cash0")}</th><th>${w("plots")}</th></tr>
+     ${WD.players.slice(0,WD.n).map((p,i)=>`<tr><td>P${i+1}</td><td><input style="width:130px" data-wpl="name" data-i="${i}" value="${esc(p.name)}"></td><td><input type="number" data-wpl="cash0" data-i="${i}" value="${p.cash0}"></td><td>${WD.own.filter(o=>o===i+1).length}</td></tr>`).join("")}</table></div></div>
+    <div><b style="font-size:14px">${w("ownT")}</b><div class="updown"><span>▲ ${w("upstream")}</span></div><div class="ownmap">${own}</div><div class="updown"><span>▼ ${w("downstream")}</span></div>
+     <button class="btn sm ghost" data-wact="ownDefault">${w("restoreOwn")}</button></div>
+   </div>
+   <div class="wd-toolbar" style="margin-top:18px;border-top:1px solid var(--line);padding-top:14px">
+    <button class="btn sm" data-wact="json">⬇ ${w("exportJson")}</button>
+    <label class="btn sm ghost" style="cursor:pointer">⬆ ${w("importJson")}<input type="file" accept=".json,application/json" data-wact="import" hidden></label>
+    <button class="btn sm ghost" data-wact="csv">⬇ ${w("exportCsv")}</button>
+    <button class="btn sm ghost" style="border-color:var(--terra);color:var(--terra)" data-wact="reset">${w("reset")}</button>
+   </div></div>`;
+}
+
+/* ---- actions ---- */
+function dl(name, text, type){ const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([text],{type})); a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500); }
+function wdCSV(){
+  const C = wdCalc(), rows=[["year","rain","price","water_available","plot","owner","crop","water_units","production","price_multiplier","income","establishment_cost"]];
+  WD.years.forEach((Y,yi)=>{ if(!Y.touched) return; C.years[yi].plot.forEach(x=>{ if (x.o>=WD.n) return; rows.push([yi+1,Y.rain,Y.price||"medium",Y.water,x.p+1,WD.players[x.o].name,["Fallow","Rice","Tea","Lychee"][x.c],x.wat,x.pr,WD_PRICE[Y.price||"medium"][x.c],x.inc,x.est]); }); });
+  rows.push([]); rows.push(["year","player","start_cash","loan","establishment","income","repay","adjust","end_cash","water_used"]);
+  WD.years.forEach((Y,yi)=>{ if(!Y.touched) return; C.years[yi].pl.forEach(p=>rows.push([yi+1,WD.players[p.i].name,p.start,p.loan,p.est,p.income,p.repay,p.adj,p.end,p.wuse])); });
+  return "﻿"+rows.map(r=>r.map(v=>`"${String(v??"").replace(/"/g,'""')}"`).join(",")).join("\n");
+}
+const rint = (a,b)=>a+Math.floor(Math.random()*(b-a+1));
+function wdAct(a, el){
+  const Y = WD.years[WD.cur];
+  if (a==="drawRain"){ const r=["wet","normal","dry"][rint(0,2)]; Y.rain=r; const n=Y.crop.filter((c,p)=>c>0&&WD.own[p]<=WD.n).length||32; Y.water=Math.max(0,Math.round(WD_RAIN[r].per*n)+rint(-WD_RAIN[r].v,WD_RAIN[r].v)); Y.touched=true; }
+  else if (a==="drawPrice"){ Y.price=["high","medium","low"][rint(0,2)]; Y.touched=true; }
+  else if (a==="hide"){ WD.hide=!WD.hide; }
+  else if (a==="copyPrev"){ Y.crop = WD.years[WD.cur-1].crop.slice(); Y.touched=true; }
+  else if (a==="clearW"){ Y.wat = Array(32).fill(0); }
+  else if (a==="ownDefault"){ WD.own = WD_OWN_DEFAULT.slice(); }
+  else if (a==="csv"){ dl(`WADIGA_${WD.name.replace(/\W+/g,"_")}.csv`, wdCSV(), "text/csv;charset=utf-8"); return; }
+  else if (a==="json"){ dl(`WADIGA_${WD.name.replace(/\W+/g,"_")}.json`, JSON.stringify(WD,null,1), "application/json"); return; }
+  else if (a==="reset"){ if (!confirm(w("resetQ"))) return; WD = wdNew(); }
+  wdSave(); renderWadiga();
+}
+document.addEventListener("click", e=>{
+  const s = e.target.closest("[data-wsub]"); if (s){ WSUB=s.dataset.wsub; renderWadiga(); return; }
+  const y = e.target.closest("[data-wyear]"); if (y){ WD.cur=+y.dataset.wyear; wdSave(); renderWadiga(); return; }
+  const a = e.target.closest("button[data-wact]"); if (a){ wdAct(a.dataset.wact, a); return; }
+  if (e.target.classList && e.target.classList.contains("hiddenval")){ e.target.classList.remove("hiddenval"); }
+});
+document.addEventListener("change", e=>{
+  const t = e.target, Y = WD.years[WD.cur], d = t.dataset;
+  if (d.wact==="import" && t.files && t.files[0]){ t.files[0].text().then(txt=>{ try{ const o=JSON.parse(txt); if (o && o.years){ WD=o; wdSave(); renderWadiga(); } }catch(err){ alert("JSON?"); } }); return; }
+  if (d.wp){ const p=+d.p; if (d.wp==="crop"){ Y.crop[p]=+t.value; if (+t.value===0) Y.wat[p]=0; } else Y.wat[p]=Math.max(0,parseInt(t.value)||0); Y.touched=true; }
+  else if (d.wy){ Y[d.wy] = d.wy==="water" ? (t.value===""?"":Math.max(0,parseInt(t.value)||0)) : t.value; Y.touched=true; }
+  else if (d.wl){ Y[d.wl][+d.i] = parseFloat(t.value)||0; Y.touched=true; }
+  else if (d.ws){ const k=d.ws; if (k==="n") WD.n=+t.value; else if (k==="est2") WD.est[2]=+t.value||0; else if (k==="est3") WD.est[3]=+t.value||0; else if (k==="rate") WD.rate=+t.value||0; else WD[k]=t.value; }
+  else if (d.wpl){ WD.players[+d.i][d.wpl] = d.wpl==="cash0" ? (+t.value||0) : t.value; }
+  else if (d.wown!==undefined){ WD.own[+d.wown]=+t.value; }
+  else return;
+  wdSave(); renderWadiga();
+});
+
 const h = location.hash.slice(1); if (TABS.some(x=>x[0]===h)) TAB=h;
 render();
 setInterval(()=>{ renderNow(); if (TAB==="prog"){ const s=SEL; renderChips(); SEL=s; renderDay(); } }, 60000);
