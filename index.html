@@ -1156,7 +1156,7 @@ const fmt = v => (Math.round(v*100)/100).toLocaleString(LANG==="th"?"th-TH":"en-
 const cl = v => v<0 ? `<span class="neg">${fmt(v)}</span>` : fmt(v);
 
 /* ---- views ---- */
-const SUBS = ["about","info","play","sum","obs","setup"];
+const SUBS = ["about","setup","info","play","sum","obs"];
 function renderWadiga(){
   if (!document.getElementById("wdview")) return;
   document.querySelectorAll("[data-w]").forEach(el=>el.textContent = w(el.dataset.w));
