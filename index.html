@@ -276,6 +276,8 @@ footer .logos{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bot
 .obs-grid ul{margin:0;padding-left:18px;color:var(--ink2);font-size:15px}
 [data-wpar]{font:inherit;font-size:14px;padding:3px 6px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);text-align:right}
 [data-wpar^="names"]{text-align:left;margin:2px 0}
+.osel{--pc:transparent;border-left:6px solid var(--pc)!important;background:color-mix(in srgb,var(--pc) 22%,var(--surface))!important;font-weight:600}
+.pchip{display:inline-block;min-width:34px;text-align:center;color:#fff;font-weight:700;border-radius:7px;padding:1px 6px;font-size:13px}
 .wd-link{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:14px;font-weight:600;color:var(--water);background:var(--water-soft);border:0;border-radius:999px;padding:3px 10px;cursor:pointer}
 </style>
 </head>
@@ -1108,6 +1110,8 @@ const WD_COLORS = ["var(--fallow)","var(--rice)","var(--tea)","var(--lychee)"];
 const WD_OWN_DEFAULT = [1,1,2,2, 1,1,2,2, 4,3,5,6, 4,3,5,6, 4,3,5,6, 7,7,10,12, 9,8,10,12, 9,8,11,11]; // plot 1..32 → player
 const WD_CASH_DEFAULT = [80,80,60,60,60,60,40,40,40,40,40,40];
 const NYEARS = 6;
+const PCOL = ["#e6194b","#2e9e44","#3a5fd6","#f07f1e","#8e2bb0","#16a3a3","#d93fc8","#8b5a2b","#7d7d00","#1f2f8f","#d19a00","#6e6e6e"];
+const pc = o => PCOL[(o-1)%12] || "#999";
 const prod = (c,wat) => +WP().prod[c][Math.min(Math.max(wat|0,0),3)]||0;
 
 function wdNew(){
@@ -1231,7 +1235,7 @@ function wdPlay(){
   const pct = avail ? Math.min(100, R.used/avail*100) : 0;
   const rows = upRows();
   const cell = p => { const c=Y.crop[p], o=WD.own[p], x=R.plot[p], off=o>WD.n;
-    return `<div class="plot c${c}" ${off?'style="opacity:.45"':''}><div class="ph"><span>#${p+1}</span><span class="ow">${esc(WD.players[o-1]?.name||"P"+o)}</span></div>
+    return `<div class="plot c${c}" ${off?'style="opacity:.45"':''}><div class="ph"><span>#${p+1}</span><span class="ow" style="${off?"":`background:${pc(o)};color:#fff`}">${esc(WD.players[o-1]?.name||"P"+o)}</span></div>
       <select data-wp="crop" data-p="${p}" aria-label="crop plot ${p+1}" ${off?"disabled":""}>${[0,1,2,3].map(k=>`<option value="${k}" ${k===c?"selected":""}>${cropName(k)}</option>`).join("")}</select>
       <input type="number" min="0" inputmode="numeric" data-wp="wat" data-p="${p}" value="${Y.wat[p]||0}" aria-label="water plot ${p+1}" ${off||c===0?"disabled":""}>
       <div class="pr">${c?`${fmt(x.inc)}${x.est?` · −${x.est}`:""}`:"&nbsp;"}</div></div>`; };
@@ -1319,7 +1323,7 @@ function wdObs(){
 
 function wdSetup(){
   const opts = sel => Array.from({length:WD.n},(_,i)=>`<option value="${i+1}" ${sel===i+1?"selected":""}>${esc(WD.players[i].name)}</option>`).join("") + `<option value="99" ${sel>WD.n?"selected":""}>—</option>`;
-  const own = upRows().map(r=>r.map(p=>`<label style="font-size:11px;color:var(--muted)">#${p+1}<select data-wown="${p}">${opts(WD.own[p])}</select></label>`).join("")).join("");
+  const own = upRows().map(r=>r.map(p=>`<label style="font-size:11px;color:var(--muted)">#${p+1}<select data-wown="${p}" class="osel" style="${WD.own[p]<=WD.n?`--pc:${pc(WD.own[p])}`:""}">${opts(WD.own[p])}</select></label>`).join("")).join("");
   return `<div class="card" style="margin-top:14px"><h3 class="wd-h" style="margin-top:0">${w("setupT")}</h3>
    <div class="wd-form">
     <label>${w("sessName")}<input data-ws="name" value="${esc(WD.name)}"></label>
@@ -1329,7 +1333,7 @@ function wdSetup(){
    </div>
    <div class="grid g2" style="margin-top:16px">
     <div><div class="tablewrap"><table class="ptable"><tr><th>#</th><th>${w("nameCol")}</th><th>${w("cash0")}</th><th>${w("plots")}</th></tr>
-     ${WD.players.slice(0,WD.n).map((p,i)=>`<tr><td>P${i+1}</td><td><input style="width:130px" data-wpl="name" data-i="${i}" value="${esc(p.name)}"></td><td><input type="number" data-wpl="cash0" data-i="${i}" value="${p.cash0}"></td><td>${WD.own.filter(o=>o===i+1).length}</td></tr>`).join("")}</table></div></div>
+     ${WD.players.slice(0,WD.n).map((p,i)=>`<tr><td><span class="pchip" style="background:${pc(i+1)}">P${i+1}</span></td><td><input style="width:130px" data-wpl="name" data-i="${i}" value="${esc(p.name)}"></td><td><input type="number" data-wpl="cash0" data-i="${i}" value="${p.cash0}"></td><td>${WD.own.filter(o=>o===i+1).length}</td></tr>`).join("")}</table></div></div>
     <div><b style="font-size:14px">${w("ownT")}</b><div class="updown"><span>▲ ${w("upstream")}</span></div><div class="ownmap">${own}</div><div class="updown"><span>▼ ${w("downstream")}</span></div>
      <button class="btn sm ghost" data-wact="ownDefault">${w("restoreOwn")}</button></div>
    </div>
