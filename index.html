@@ -274,6 +274,8 @@ footer .logos{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bot
 .obs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 .obs-grid .card h3{font-size:17px;color:var(--water);margin-bottom:6px}
 .obs-grid ul{margin:0;padding-left:18px;color:var(--ink2);font-size:15px}
+[data-wpar]{font:inherit;font-size:14px;padding:3px 6px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);text-align:right}
+[data-wpar^="names"]{text-align:left;margin:2px 0}
 .wd-link{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:14px;font-weight:600;color:var(--water);background:var(--water-soft);border:0;border-radius:999px;padding:3px 10px;cursor:pointer}
 </style>
 </head>
@@ -1004,7 +1006,7 @@ const WT = {
   roomT:"กระดานและโต๊ะบันทึกอยู่กลางห้อง (เอียงกระดานให้เห็นต้นน้ำ–ปลายน้ำ) · ‘หมู่บ้าน’ สำหรับคุยกันอยู่ห่างจากกระดาน · ‘ธนาคาร’ อยู่มุมที่เป็นส่วนตัว · ป้ายข้อมูลพืชติดไว้มุมหนึ่งของห้อง",
   info_t:"ป้ายข้อมูลสาธารณะสำหรับผู้เล่น",
   estT:"ค่าลงทุนปลูก (จ่ายครั้งเดียวเมื่อเริ่มปลูก)", needT:"ความต้องการน้ำ (หน่วย/แปลง)", prodT:"รายได้ต่อแปลงตามจำนวนหน่วยน้ำที่ได้รับ (ราคาระดับกลาง)",
-  prodN:"น้ำเกินความต้องการไม่ได้เพิ่มผลผลิต · ลิ้นจี่ที่ไม่ได้น้ำเลยขาดทุน",
+  prodN:"น้ำเกินความต้องการไม่ได้เพิ่มผลผลิต · ค่าติดลบ = ขาดทุน",
   priceT:"ตัวคูณราคาตามระดับราคา", rainT:"ปริมาณฝนและน้ำที่ใช้ได้",
   rainCols:["ปีฝน","น้ำต่อแปลงที่ปลูก","ช่วงแปรผัน","สำหรับ 32 แปลง"],
   crop:"พืช", water:"น้ำ (หน่วย)", units:"หน่วย", level:"ระดับราคา",
@@ -1034,6 +1036,8 @@ const WT = {
   loops:"วงจรการเรียนรู้ (ComMod)", loopsT:"วิเคราะห์สถานการณ์เริ่มต้น → ออกแบบแบบจำลอง (เกม/ABM) → จำลองแบบมีส่วนร่วม → ประเมินผล → ปรับโจทย์และกลุ่มผู้เกี่ยวข้อง แล้ววนซ้ำ",
   refs:"อ้างอิง: Trébuil, Le Page & Garcia (2017) WaDiGa & conceptual model (PARDI); Trébuil et al. (2021) Boucles d’apprentissage; Hassenforder, Dray & Daré (2020); Barnaud (2008, 2013)",
   wgo:"เปิดหน้าเกม WADIGA",
+  editP:"แก้ไขพารามิเตอร์", doneEdit:"เสร็จ", resetP:"คืนค่าเริ่มต้น", resetPQ:"คืนค่าพารามิเตอร์ทั้งหมดเป็นค่าเริ่มต้น?",
+  editNote:"แก้ชื่อพืช (ไทย/อังกฤษ) และตัวเลขได้ในตาราง ค่าใหม่ใช้คำนวณทุกปีในเกมนี้ทันที และบันทึกอัตโนมัติ (สำรอง/ย้ายเครื่องด้วย JSON ในหน้าตั้งค่า)",
  },
  en:{
   lead:"A role-playing game on sharing irrigation water in a small upland watershed. 6–12 players act as farmers who choose crops, share water and invest under uncertain rainfall and prices.",
@@ -1054,7 +1058,7 @@ const WT = {
   roomT:"Board and recording desk in the centre (board tilted to show upstream–downstream) · ‘Village’ meeting space away from the board · ‘Bank’ in a more private corner · Crop information posted on a wall.",
   info_t:"Public information board for players",
   estT:"Crop establishment cost (paid once when planted)", needT:"Water needs (units/plot)", prodT:"Income per plot by water units received (medium price)",
-  prodN:"Excess water does not raise output · lychee with no water makes a loss",
+  prodN:"Excess water does not raise output · negative values = a loss",
   priceT:"Price multipliers by price level", rainT:"Rainfall and available water",
   rainCols:["Rain year","Water per cultivated plot","Variation","For 32 plots"],
   crop:"Crop", water:"Water (units)", units:"units", level:"Price level",
@@ -1084,31 +1088,39 @@ const WT = {
   loops:"Learning loops (ComMod)", loopsT:"Analyse the initial situation → design the model (game/ABM) → participatory simulations → evaluate effects → reframe the problem and the panel of stakeholders, then iterate.",
   refs:"References: Trébuil, Le Page & Garcia (2017) WaDiGa & conceptual model (PARDI); Trébuil et al. (2021) Boucles d’apprentissage; Hassenforder, Dray & Daré (2020); Barnaud (2008, 2013)",
   wgo:"Open the WADIGA game page",
+  editP:"Edit parameters", doneEdit:"Done", resetP:"Restore defaults", resetPQ:"Restore all parameters to defaults?",
+  editNote:"Edit crop names (Thai/English) and any number in the tables. New values apply to every year of this game immediately and are auto-saved (back up or move with JSON in Setup).",
  }
 };
 const w = k => (WT[LANG]||WT.en)[k] ?? k;
 
 /* ---- model (from WaDiGa-game session_Template / ADAPT) ---- */
-const WD_PROD = [[0,0,0,0],[5,10,10,10],[0,5,20,30],[-10,0,15,40]];   // [crop][water 0,1,2,>=3]  (calProduction)
-const WD_PRICE = {high:[1,1,4/3,1.6], medium:[1,1,1,1], low:[1,1,2/3,0.4]};
-const WD_RAIN = {wet:{per:2,v:6}, normal:{per:1,v:4}, dry:{per:0.75,v:2}};
-const WD_NEED = [0,1,3,3];
+const WD_DEFAULT = {   // from WaDiGa-game session_Template (calProduction) + ADAPT Parameters
+  names:[{th:"พักดิน",en:"Fallow"},{th:"ข้าว",en:"Rice"},{th:"ชา",en:"Tea"},{th:"ลิ้นจี่",en:"Lychee"}],
+  prod:[[0,0,0,0],[5,10,10,10],[0,5,20,30],[-10,0,15,40]],   // [crop][water 0,1,2,>=3]
+  price:{high:[1,1,1.3333,1.6], medium:[1,1,1,1], low:[1,1,0.6667,0.4]},
+  rain:{wet:{per:2,v:6}, normal:{per:1,v:4}, dry:{per:0.75,v:2}},
+  need:[0,1,3,3], est:[0,0,40,60]};
+const clone = o => JSON.parse(JSON.stringify(o));
+const WP = () => WD.params;
+let WEDIT = false;
 const WD_COLORS = ["var(--fallow)","var(--rice)","var(--tea)","var(--lychee)"];
 const WD_OWN_DEFAULT = [1,1,2,2, 1,1,2,2, 4,3,5,6, 4,3,5,6, 4,3,5,6, 7,7,10,12, 9,8,10,12, 9,8,11,11]; // plot 1..32 → player
 const WD_CASH_DEFAULT = [80,80,60,60,60,60,40,40,40,40,40,40];
 const NYEARS = 6;
-const prod = (c,wat) => WD_PROD[c][Math.min(Math.max(wat|0,0),3)];
+const prod = (c,wat) => +WP().prod[c][Math.min(Math.max(wat|0,0),3)]||0;
 
 function wdNew(){
   return {v:2, name:"ADAPT-Nan 2026", n:12, up:"high",
     players: WD_CASH_DEFAULT.map((c,i)=>({name:"P"+(i+1), cash0:c})),
-    own: WD_OWN_DEFAULT.slice(), est:[0,0,40,60], rate:10,
+    own: WD_OWN_DEFAULT.slice(), params: clone(WD_DEFAULT), rate:10,
     years: Array.from({length:NYEARS},()=>({rain:"", water:"", price:"", crop:Array(32).fill(0), wat:Array(32).fill(0), loan:Array(12).fill(0), adj:Array(12).fill(0), touched:false})),
     cur:0, hide:true};
 }
 let WD; try{ WD = JSON.parse(localStorage.getItem("an_wadiga")||"null"); }catch(e){ WD=null; }
 if (!WD || !WD.years) WD = wdNew();
 if (!WD.v){ WD.up="high"; WD.v=2; }
+if (!WD.params){ WD.params = clone(WD_DEFAULT); if (WD.est){ WD.params.est[2]=+WD.est[2]; WD.params.est[3]=+WD.est[3]; } delete WD.est; }
 let WSUB = "about";
 function wdSave(){ try{ localStorage.setItem("an_wadiga", JSON.stringify(WD)); }catch(e){} }
 
@@ -1119,10 +1131,10 @@ function wdCalc(){
   let cash = P.map(i=>+WD.players[i].cash0||0);
   WD.years.forEach((Y,yi)=>{
     const prev = yi>0 ? WD.years[yi-1].crop : null;
-    const lv = WD_PRICE[Y.price||"medium"];
+    const lv = WP().price[Y.price||"medium"].map(Number);
     const plot = Y.crop.map((c,p)=>{
       const o = WD.own[p]-1, pr = prod(c,Y.wat[p]), inc = pr*lv[c];
-      const est = (c>=2 && (!prev || prev[p]!==c)) ? (+WD.est[c]||0) : 0;
+      const est = (c>=2 && (!prev || prev[p]!==c)) ? (+WP().est[c]||0) : 0;
       return {p, o, c, wat:+Y.wat[p]||0, pr, inc, est};
     });
     const pl = P.map(i=>{
@@ -1152,7 +1164,7 @@ function renderWadiga(){
   const v = {about:wdAbout, info:wdInfo, play:wdPlay, sum:wdSum, obs:wdObs, setup:wdSetup}[WSUB]();
   $("#wdview").innerHTML = v;
 }
-const cropName = c => w("c"+c);
+const cropName = c => { const n=WP().names[c]||{}; return n[LANG]||n.en||w("c"+c); };
 const dot = c => `<span class="cropdot" style="background:${WD_COLORS[c]}"></span>`;
 
 function wdAbout(){
@@ -1171,21 +1183,31 @@ function wdAbout(){
 }
 
 function wdInfo(){
-  const max=40, min=-10, H=170, z = max/(max-min)*H;
-  const groups=[0,1,2,3].map(u=>`<div class="grp">${[1,2,3].map(c=>{const v=WD_PROD[c][u]; const h=Math.abs(v)/(max-min)*H;
-    return v>=0 ? `<i class="b" style="background:${WD_COLORS[c]};height:${h}px;margin-bottom:${H-z}px" data-tip="${cropName(c)} · ${u}${u===3?"+":""} ${w("units")}: ${v}"><em style="bottom:${h+2}px">${v}</em></i>`
-                : `<i class="b negb" style="background:${WD_COLORS[c]};height:${h}px;margin-bottom:${H-z-h}px" data-tip="${cropName(c)} · ${u} ${w("units")}: ${v}"><em style="top:${h+2}px">${v}</em></i>`;}).join("")}</div>`).join("");
-  return `<div class="sec-title"><h2 style="font-size:22px">${w("info_t")}</h2></div>
+  const Pm = WP(), E = WEDIT, CR=[1,2,3];
+  const num = (path, v, step="any", wdt=64) => E ? `<input type="number" step="${step}" data-wpar="${path}" value="${v}" style="width:${wdt}px">` : null;
+  const vals = CR.flatMap(c=>Pm.prod[c].map(Number));
+  const max=Math.max(1,...vals), min=Math.min(0,...vals), H=170, z = max/(max-min)*H;
+  const groups=[0,1,2,3].map(u=>`<div class="grp">${CR.map(c=>{const v=+Pm.prod[c][u]||0; const h=Math.abs(v)/(max-min)*H;
+    return v>=0 ? `<i class="b" style="background:${WD_COLORS[c]};height:${h}px;margin-bottom:${H-z}px" data-tip="${esc(cropName(c))} · ${u}${u===3?"+":""} ${w("units")}: ${v}"><em style="bottom:${h+2}px">${v}</em></i>`
+                : `<i class="b negb" style="background:${WD_COLORS[c]};height:${h}px;margin-bottom:${H-z-h}px" data-tip="${esc(cropName(c))} · ${u} ${w("units")}: ${v}"><em style="top:${h+2}px">${v}</em></i>`;}).join("")}</div>`).join("");
+  const nameCell = c => E ? `<td style="text-align:left">${dot(c)}<input data-wpar="names.${c}.th" value="${esc(Pm.names[c].th)}" style="width:90px" aria-label="TH"> <input data-wpar="names.${c}.en" value="${esc(Pm.names[c].en)}" style="width:90px" aria-label="EN"></td>` : `<td>${dot(c)}${esc(cropName(c))}</td>`;
+  const cell = (path,v,fmtv) => `<td>${num(path,v) ?? fmtv}</td>`;
+  const r32 = r => { const R=Pm.rain[r]; const m=Math.round(+R.per*32); return `${m-(+R.v)}–${m+(+R.v)}`; };
+  return `<div class="sec-title" style="flex-wrap:wrap"><h2 style="font-size:22px">${w("info_t")}</h2>
+     <span style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn sm ${E?"":"ghost"}" data-wact="edit">${E?"✓ "+w("doneEdit"):"✏️ "+w("editP")}</button>
+      ${E?`<button class="btn sm ghost" style="border-color:var(--terra);color:var(--terra)" data-wact="resetP">${w("resetP")}</button>`:""}</span></div>
+  ${E?`<p class="note" style="margin-top:-4px">${w("editNote")}</p>`:""}
   <div class="grid g2">
-   <div class="card"><b>${w("prodT")}</b><div class="legend">${[1,2,3].map(c=>`<span>${dot(c)}${cropName(c)}</span>`).join("")}</div>
+   <div class="card"><b>${w("prodT")}</b><div class="legend">${CR.map(c=>`<span>${dot(c)}${esc(cropName(c))}</span>`).join("")}</div>
      <div class="gb" style="height:${H+20}px"><div style="position:absolute;left:0;right:0;bottom:${H-z}px;border-top:1px solid var(--line)"></div>${groups}</div>
      <div class="gbx">${[0,1,2,"3+"].map(u=>`<span>${u} ${w("units")}</span>`).join("")}</div>
-     <div class="tablewrap"><table class="tbl-num" style="margin-top:12px"><tr><th>${w("crop")}</th>${[0,1,2,"3+"].map(u=>`<th>${u}</th>`).join("")}</tr>${[1,2,3].map(c=>`<tr><td>${dot(c)}${cropName(c)}</td>${WD_PROD[c].map(v=>`<td>${cl(v)}</td>`).join("")}</tr>`).join("")}</table></div>
+     <div class="tablewrap"><table class="tbl-num" style="margin-top:12px"><tr><th>${w("crop")}${E?" (TH / EN)":""}</th>${[0,1,2,"3+"].map(u=>`<th>${u}</th>`).join("")}</tr>${CR.map(c=>`<tr>${nameCell(c)}${Pm.prod[c].map((v,u)=>cell(`prod.${c}.${u}`,v,cl(+v))).join("")}</tr>`).join("")}</table></div>
      <p class="note">${w("prodN")}</p></div>
    <div class="grid" style="align-content:start">
-    <div class="card"><b>${w("estT")}</b> · <b>${w("needT")}</b><div class="tablewrap"><table class="tbl-num" style="margin-top:8px"><tr><th>${w("crop")}</th><th>${w("est")}</th><th>${w("water")}</th></tr>${[1,2,3].map(c=>`<tr><td>${dot(c)}${cropName(c)}</td><td>${+WD.est[c]||0}</td><td>${WD_NEED[c]}</td></tr>`).join("")}</table></div></div>
-    <div class="card"><b>${w("priceT")}</b><div class="tablewrap"><table class="tbl-num" style="margin-top:8px"><tr><th>${w("level")}</th>${[1,2,3].map(c=>`<th>${cropName(c)}</th>`).join("")}</tr>${["high","medium","low"].map(l=>`<tr><td>${w("p_"+l)}</td>${[1,2,3].map(c=>`<td>×${+WD_PRICE[l][c].toFixed(2)}</td>`).join("")}</tr>`).join("")}</table></div></div>
-    <div class="card"><b>${w("rainT")}</b><div class="tablewrap"><table class="tbl-num" style="margin-top:8px"><tr>${WT[LANG].rainCols.map(h=>`<th>${h}</th>`).join("")}</tr>${["wet","normal","dry"].map(r=>`<tr><td>${w("r_"+r)}</td><td>${WD_RAIN[r].per}</td><td>±${WD_RAIN[r].v}</td><td>${Math.round(WD_RAIN[r].per*32)-WD_RAIN[r].v}–${Math.round(WD_RAIN[r].per*32)+WD_RAIN[r].v}</td></tr>`).join("")}</table></div></div>
+    <div class="card"><b>${w("estT")}</b> · <b>${w("needT")}</b><div class="tablewrap"><table class="tbl-num" style="margin-top:8px"><tr><th>${w("crop")}</th><th>${w("est")}</th><th>${w("water")}</th></tr>${CR.map(c=>`<tr><td>${dot(c)}${esc(cropName(c))}</td>${cell(`est.${c}`,Pm.est[c],+Pm.est[c]||0)}${cell(`need.${c}`,Pm.need[c],Pm.need[c])}</tr>`).join("")}</table></div></div>
+    <div class="card"><b>${w("priceT")}</b><div class="tablewrap"><table class="tbl-num" style="margin-top:8px"><tr><th>${w("level")}</th>${CR.map(c=>`<th>${esc(cropName(c))}</th>`).join("")}</tr>${["high","medium","low"].map(l=>`<tr><td>${w("p_"+l)}</td>${CR.map(c=>cell(`price.${l}.${c}`,Pm.price[l][c],"×"+(+(+Pm.price[l][c]).toFixed(2)))).join("")}</tr>`).join("")}</table></div></div>
+    <div class="card"><b>${w("rainT")}</b><div class="tablewrap"><table class="tbl-num" style="margin-top:8px"><tr>${WT[LANG].rainCols.map(h=>`<th>${h}</th>`).join("")}</tr>${["wet","normal","dry"].map(r=>`<tr><td>${w("r_"+r)}</td>${cell(`rain.${r}.per`,Pm.rain[r].per,Pm.rain[r].per)}${cell(`rain.${r}.v`,Pm.rain[r].v,"±"+Pm.rain[r].v)}<td>${r32(r)}</td></tr>`).join("")}</table></div></div>
    </div>
   </div>
   <div class="card" style="margin-top:16px"><b>${w("rule")}</b><p class="muted" style="margin:4px 0 0">${w("ruleT")}</p></div>`;
@@ -1303,8 +1325,6 @@ function wdSetup(){
     <label>${w("sessName")}<input data-ws="name" value="${esc(WD.name)}"></label>
     <label>${w("nPlayers")}<select data-ws="n">${[6,7,8,9,10,11,12].map(k=>`<option ${k===WD.n?"selected":""}>${k}</option>`).join("")}</select></label>
     <label>${w("upEnd")}<select data-ws="up"><option value="low" ${WD.up==="low"?"selected":""}>${w("upA")}</option><option value="high" ${WD.up==="high"?"selected":""}>${w("upB")}</option></select></label>
-    <label>${w("estTea")}<input type="number" data-ws="est2" value="${WD.est[2]}"></label>
-    <label>${w("estLy")}<input type="number" data-ws="est3" value="${WD.est[3]}"></label>
     <label>${w("rate")}<input type="number" data-ws="rate" value="${WD.rate}"></label>
    </div>
    <div class="grid g2" style="margin-top:16px">
@@ -1325,7 +1345,7 @@ function wdSetup(){
 function dl(name, text, type){ const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([text],{type})); a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500); }
 function wdCSV(){
   const C = wdCalc(), rows=[["year","rain","price","water_available","plot","owner","crop","water_units","production","price_multiplier","income","establishment_cost"]];
-  WD.years.forEach((Y,yi)=>{ if(!Y.touched) return; C.years[yi].plot.forEach(x=>{ if (x.o>=WD.n) return; rows.push([yi+1,Y.rain,Y.price||"medium",Y.water,x.p+1,WD.players[x.o].name,["Fallow","Rice","Tea","Lychee"][x.c],x.wat,x.pr,WD_PRICE[Y.price||"medium"][x.c],x.inc,x.est]); }); });
+  WD.years.forEach((Y,yi)=>{ if(!Y.touched) return; C.years[yi].plot.forEach(x=>{ if (x.o>=WD.n) return; rows.push([yi+1,Y.rain,Y.price||"medium",Y.water,x.p+1,WD.players[x.o].name,WP().names[x.c].en,x.wat,x.pr,WP().price[Y.price||"medium"][x.c],x.inc,x.est]); }); });
   rows.push([]); rows.push(["year","player","start_cash","loan","establishment","income","repay","adjust","end_cash","water_used"]);
   WD.years.forEach((Y,yi)=>{ if(!Y.touched) return; C.years[yi].pl.forEach(p=>rows.push([yi+1,WD.players[p.i].name,p.start,p.loan,p.est,p.income,p.repay,p.adj,p.end,p.wuse])); });
   return "﻿"+rows.map(r=>r.map(v=>`"${String(v??"").replace(/"/g,'""')}"`).join(",")).join("\n");
@@ -1333,9 +1353,11 @@ function wdCSV(){
 const rint = (a,b)=>a+Math.floor(Math.random()*(b-a+1));
 function wdAct(a, el){
   const Y = WD.years[WD.cur];
-  if (a==="drawRain"){ const r=["wet","normal","dry"][rint(0,2)]; Y.rain=r; const n=Y.crop.filter((c,p)=>c>0&&WD.own[p]<=WD.n).length||32; Y.water=Math.max(0,Math.round(WD_RAIN[r].per*n)+rint(-WD_RAIN[r].v,WD_RAIN[r].v)); Y.touched=true; }
+  if (a==="drawRain"){ const r=["wet","normal","dry"][rint(0,2)]; Y.rain=r; const n=Y.crop.filter((c,p)=>c>0&&WD.own[p]<=WD.n).length||32; const R=WP().rain[r]; Y.water=Math.max(0,Math.round((+R.per)*n)+rint(-(+R.v),+R.v)); Y.touched=true; }
   else if (a==="drawPrice"){ Y.price=["high","medium","low"][rint(0,2)]; Y.touched=true; }
   else if (a==="hide"){ WD.hide=!WD.hide; }
+  else if (a==="edit"){ WEDIT=!WEDIT; renderWadiga(); return; }
+  else if (a==="resetP"){ if (!confirm(w("resetPQ"))) return; WD.params = clone(WD_DEFAULT); }
   else if (a==="copyPrev"){ Y.crop = WD.years[WD.cur-1].crop.slice(); Y.touched=true; }
   else if (a==="clearW"){ Y.wat = Array(32).fill(0); }
   else if (a==="ownDefault"){ WD.own = WD_OWN_DEFAULT.slice(); }
@@ -1356,9 +1378,11 @@ document.addEventListener("change", e=>{
   if (d.wp){ const p=+d.p; if (d.wp==="crop"){ Y.crop[p]=+t.value; if (+t.value===0) Y.wat[p]=0; } else Y.wat[p]=Math.max(0,parseInt(t.value)||0); Y.touched=true; }
   else if (d.wy){ Y[d.wy] = d.wy==="water" ? (t.value===""?"":Math.max(0,parseInt(t.value)||0)) : t.value; Y.touched=true; }
   else if (d.wl){ Y[d.wl][+d.i] = parseFloat(t.value)||0; Y.touched=true; }
-  else if (d.ws){ const k=d.ws; if (k==="n") WD.n=+t.value; else if (k==="est2") WD.est[2]=+t.value||0; else if (k==="est3") WD.est[3]=+t.value||0; else if (k==="rate") WD.rate=+t.value||0; else WD[k]=t.value; }
+  else if (d.ws){ const k=d.ws; if (k==="n") WD.n=+t.value; else if (k==="rate") WD.rate=+t.value||0; else WD[k]=t.value; }
   else if (d.wpl){ WD.players[+d.i][d.wpl] = d.wpl==="cash0" ? (+t.value||0) : t.value; }
   else if (d.wown!==undefined){ WD.own[+d.wown]=+t.value; }
+  else if (d.wpar){ const k=d.wpar.split("."); let o=WD.params; for (let q=0;q<k.length-1;q++) o=o[k[q]]; const last=k[k.length-1];
+    o[last] = k[0]==="names" ? (t.value.trim()||o[last]) : (t.value===""?0:parseFloat(t.value)); }
   else return;
   wdSave(); renderWadiga();
 });
