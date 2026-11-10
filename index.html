@@ -1038,6 +1038,8 @@ const WT = {
   loops:"วงจรการเรียนรู้ (ComMod)", loopsT:"วิเคราะห์สถานการณ์เริ่มต้น → ออกแบบแบบจำลอง (เกม/ABM) → จำลองแบบมีส่วนร่วม → ประเมินผล → ปรับโจทย์และกลุ่มผู้เกี่ยวข้อง แล้ววนซ้ำ",
   refs:"อ้างอิง: Trébuil, Le Page & Garcia (2017) WaDiGa & conceptual model (PARDI); Trébuil et al. (2021) Boucles d’apprentissage; Hassenforder, Dray & Daré (2020); Barnaud (2008, 2013)",
   wgo:"เปิดหน้าเกม WADIGA",
+  p_custom:"กำหนดเอง", autoEst:"หักค่าลงทุนปลูกอัตโนมัติ", loadEx:"โหลดตัวอย่าง (เกม 10 พ.ย. 2569)", loadExQ:"ข้อมูลเกมปัจจุบันจะถูกแทนที่ — สำรอง JSON ไว้ก่อนหรือยัง? กด OK เพื่อโหลดตัวอย่าง",
+  exNote:"ตัวอย่างจากไฟล์ WaDiGa-game session_Template_ADAPT (เล่น 4 ปี, 9 ผู้เล่น) · ปี 1 ราคาลิ้นจี่ต่ำ (×0.4) ชาปกติ (×1) · ปี 2 ฝนปกติ · ปี 3–4 ราคาสูง · ไฟล์ไม่ได้บันทึกปริมาณฝนปี 1, 3, 4 และค่าลงทุนปลูก จึงปิด ‘หักค่าลงทุนอัตโนมัติ’ ไว้ เพื่อให้ตัวเลขตรงกับ Excel · ลองแก้หรือเล่นต่อปี 5–6 ได้ หรือกด ‘เริ่มเกมใหม่’ ในหน้าตั้งค่า",
   editP:"แก้ไขพารามิเตอร์", doneEdit:"เสร็จ", resetP:"คืนค่าเริ่มต้น", resetPQ:"คืนค่าพารามิเตอร์ทั้งหมดเป็นค่าเริ่มต้น?",
   editNote:"แก้ชื่อพืช (ไทย/อังกฤษ) และตัวเลขได้ในตาราง ค่าใหม่ใช้คำนวณทุกปีในเกมนี้ทันที และบันทึกอัตโนมัติ (สำรอง/ย้ายเครื่องด้วย JSON ในหน้าตั้งค่า)",
  },
@@ -1090,6 +1092,8 @@ const WT = {
   loops:"Learning loops (ComMod)", loopsT:"Analyse the initial situation → design the model (game/ABM) → participatory simulations → evaluate effects → reframe the problem and the panel of stakeholders, then iterate.",
   refs:"References: Trébuil, Le Page & Garcia (2017) WaDiGa & conceptual model (PARDI); Trébuil et al. (2021) Boucles d’apprentissage; Hassenforder, Dray & Daré (2020); Barnaud (2008, 2013)",
   wgo:"Open the WADIGA game page",
+  p_custom:"Custom", autoEst:"Charge establishment costs automatically", loadEx:"Load example (game of 10 Nov 2026)", loadExQ:"The current game will be replaced — have you backed it up as JSON? Press OK to load the example.",
+  exNote:"Example from WaDiGa-game session_Template_ADAPT (4 years played, 9 players) · Year 1: lychee price low (×0.4), tea normal (×1) · Year 2: normal rain · Years 3–4: high prices · The file did not record rainfall for years 1, 3, 4 or establishment costs, so ‘charge establishment automatically’ is off to match the Excel figures · Edit or continue with years 5–6, or press ‘New game’ in Setup.",
   editP:"Edit parameters", doneEdit:"Done", resetP:"Restore defaults", resetPQ:"Restore all parameters to defaults?",
   editNote:"Edit crop names (Thai/English) and any number in the tables. New values apply to every year of this game immediately and are auto-saved (back up or move with JSON in Setup).",
  }
@@ -1104,12 +1108,14 @@ const WD_DEFAULT = {   // from WaDiGa-game session_Template (calProduction) + AD
   rain:{wet:{per:2,v:6}, normal:{per:1,v:4}, dry:{per:0.75,v:2}},
   need:[0,1,3,3], est:[0,0,40,60]};
 const clone = o => JSON.parse(JSON.stringify(o));
+const pmult = Y => (Y.price==="custom" && Y.pm ? Y.pm : WD.params.price[Y.price||"medium"]).map(Number);
 const WP = () => WD.params;
 let WEDIT = false;
 const WD_COLORS = ["var(--fallow)","var(--rice)","var(--tea)","var(--lychee)"];
 const WD_OWN_DEFAULT = [1,1,2,2, 1,1,2,2, 4,3,5,6, 4,3,5,6, 4,3,5,6, 7,7,10,12, 9,8,10,12, 9,8,11,11]; // plot 1..32 → player
 const WD_CASH_DEFAULT = [80,80,60,60,60,60,40,40,40,40,40,40];
 const NYEARS = 6;
+const WD_EXAMPLE = {"v":2,"name":"ADAPT-Nan \u00b7 10 Nov 2026 (example)","n":9,"up":"high","players":[{"name":"P1","cash0":80},{"name":"P2","cash0":80},{"name":"P3","cash0":60},{"name":"P4","cash0":60},{"name":"P5","cash0":60},{"name":"P6","cash0":60},{"name":"P7","cash0":40},{"name":"P8","cash0":40},{"name":"P9","cash0":40},{"name":"P10","cash0":40},{"name":"P11","cash0":40},{"name":"P12","cash0":40}],"own":[1,1,8,8,3,6,2,2,99,9,9,99,99,6,7,7,99,3,5,99,4,4,5,5,99,4,3,6,1,1,2,2],"rate":10,"autoEst":false,"years":[{"rain":"","water":"","price":"custom","crop":[0,0,1,2,1,1,2,0,0,1,2,0,0,2,2,1,0,2,1,0,1,3,1,2,0,1,1,1,1,3,2,1],"wat":[0,0,1,3,2,1,3,0,0,2,3,0,0,3,3,1,0,3,1,0,1,3,1,3,0,1,1,2,1,3,3,2],"loan":[0,0,0,0,0,0,0,0,0,0,0,0],"adj":[0,0,0,0,0,0,0,0,0,0,0,0],"touched":true,"pm":[1,1,1,0.4]},{"rain":"normal","water":"","price":"medium","crop":[1,1,1,1,1,1,2,1,0,2,1,0,0,1,1,1,0,1,1,0,1,3,1,2,0,1,3,1,2,3,1,1],"wat":[1,1,0,0,1,1,0,0,0,0,0,0,0,1,1,0,0,1,2,0,1,3,1,3,0,1,3,2,2,3,1,1],"loan":[0,0,0,0,0,0,0,0,0,0,0,0],"adj":[0,0,0,0,0,0,0,0,0,0,0,0],"touched":true},{"rain":"","water":"","price":"high","crop":[1,1,1,1,1,1,1,1,0,1,1,0,0,1,1,1,0,1,1,0,1,3,1,3,0,1,3,3,1,3,1,1],"wat":[1,0,1,1,1,1,1,1,0,1,1,0,0,1,1,1,0,0,1,0,0,3,1,3,0,0,3,3,1,2,1,1],"loan":[0,0,0,0,0,0,0,0,0,0,0,0],"adj":[0,0,0,0,0,0,0,0,0,0,0,0],"touched":true},{"rain":"","water":"","price":"high","crop":[1,1,1,1,3,1,1,1,0,3,1,0,0,1,1,1,0,1,1,0,1,3,1,3,0,1,3,3,2,3,1,1],"wat":[0,0,1,1,3,0,1,1,0,3,1,0,0,0,0,0,0,0,0,0,0,3,0,3,0,0,3,3,2,2,1,1],"loan":[0,0,0,0,0,0,0,0,0,0,0,0],"adj":[0,0,0,0,0,0,0,0,0,0,0,0],"touched":true},{"rain":"","water":"","price":"","crop":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"wat":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"loan":[0,0,0,0,0,0,0,0,0,0,0,0],"adj":[0,0,0,0,0,0,0,0,0,0,0,0],"touched":false},{"rain":"","water":"","price":"","crop":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"wat":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"loan":[0,0,0,0,0,0,0,0,0,0,0,0],"adj":[0,0,0,0,0,0,0,0,0,0,0,0],"touched":false}],"cur":3,"hide":false};
 const PCOL = ["#e6194b","#2e9e44","#3a5fd6","#f07f1e","#8e2bb0","#16a3a3","#d93fc8","#8b5a2b","#7d7d00","#1f2f8f","#d19a00","#6e6e6e"];
 const pc = o => PCOL[(o-1)%12] || "#999";
 const prod = (c,wat) => +WP().prod[c][Math.min(Math.max(wat|0,0),3)]||0;
@@ -1135,10 +1141,10 @@ function wdCalc(){
   let cash = P.map(i=>+WD.players[i].cash0||0);
   WD.years.forEach((Y,yi)=>{
     const prev = yi>0 ? WD.years[yi-1].crop : null;
-    const lv = WP().price[Y.price||"medium"].map(Number);
+    const lv = pmult(Y);
     const plot = Y.crop.map((c,p)=>{
       const o = WD.own[p]-1, pr = prod(c,Y.wat[p]), inc = pr*lv[c];
-      const est = (c>=2 && (!prev || prev[p]!==c)) ? (+WP().est[c]||0) : 0;
+      const est = (WD.autoEst!==false && c>=2 && (!prev || prev[p]!==c)) ? (+WP().est[c]||0) : 0;
       return {p, o, c, wat:+Y.wat[p]||0, pr, inc, est};
     });
     const pl = P.map(i=>{
@@ -1242,7 +1248,7 @@ function wdPlay(){
   const board = rows.map((r,ri)=>`${cell(r[0])}${cell(r[1])}${ri===0?`<div class="river"><span>${w("river")} ↓</span></div>`:""}${cell(r[2])}${cell(r[3])}`).join("");
   const order = callOrder().map(o=>esc(WD.players[o-1].name)).join(" → ");
   const P = R.pl;
-  return `<div class="wd-toolbar" style="justify-content:space-between">
+  return `${exBanner()}<div class="wd-toolbar" style="justify-content:space-between">
      <div class="yearchips">${WD.years.map((y,i)=>`<button data-wyear="${i}" aria-pressed="${i===yi}">${w("year")} ${i+1}${y.touched?" ✓":""}</button>`).join("")}</div>
      <span class="muted" style="font-size:13px">💾 ${w("saved")}</span></div>
    <div class="wd-grid2">
@@ -1251,7 +1257,8 @@ function wdPlay(){
       <div class="wd-toolbar">
         <label>${w("rain")} <select data-wy="rain"><option value="">—</option>${["wet","normal","dry"].map(r=>`<option value="${r}" ${Y.rain===r?"selected":""}>${w("r_"+r)}</option>`).join("")}</select></label>
         <button class="btn sm ghost" data-wact="drawRain">🎲 ${w("draw")}</button>
-        <label>${w("price")} <select data-wy="price"><option value="">—</option>${["high","medium","low"].map(r=>`<option value="${r}" ${Y.price===r?"selected":""}>${w("p_"+r)}</option>`).join("")}</select></label>
+        <label>${w("price")} <select data-wy="price"><option value="">—</option>${["high","medium","low","custom"].map(r=>`<option value="${r}" ${Y.price===r?"selected":""}>${w("p_"+r)}</option>`).join("")}</select></label>
+        ${Y.price==="custom"?[2,3].map(c=>`<label style="font-size:13px">${esc(cropName(c))} ×<input type="number" step="any" data-wpm="${c}" value="${(Y.pm||pmult({price:"medium"}))[c]}" style="width:70px"></label>`).join(""):""}
         <button class="btn sm ghost" data-wact="drawPrice">🎲 ${w("draw")}</button>
       </div>
       <div class="wd-toolbar">
@@ -1286,9 +1293,10 @@ function stackBars(rows, labels, keys){ // rows: per year array of values per ke
     return `<div><div class="stack">${keys.map((k,j)=>vals[j]?`<i style="height:${vals[j]/tot*100}%;background:${WD_COLORS[k]}" data-tip="${labels[i]} · ${cropName(k)}: ${fmt(vals[j])} (${Math.round(vals[j]/tot*100)}%)">${vals[j]/tot>0.12?`<span style="${k===1||k===0?"color:#1f2a1e":""}">${fmt(vals[j])}</span>`:""}</i>`:"").join("")}</div><div class="lab">${labels[i]}</div></div>`;}).join("")}</div>`;
 }
 
+const exBanner = () => WD.isExample ? `<div class="card" style="margin-top:12px;padding:12px 16px;background:var(--water-soft);box-shadow:none;border:0;font-size:14px">📂 ${w("exNote")}</div>` : "";
 function wdSum(){
   const C = wdCalc(), act = C.years.map((y,i)=>i).filter(i=>WD.years[i].touched);
-  if (!act.length) return `<div class="card" style="margin-top:14px"><p class="muted" style="margin:0">${w("noData")}</p></div>`;
+  if (!act.length) return `<div class="card" style="margin-top:14px"><p class="muted" style="margin:0 0 10px">${w("noData")}</p><button class="btn sm ghost" data-wact="example">📂 ${w("loadEx")}</button></div>`;
   const yl = act.map(i=>`${w("year")} ${i+1}`);
   const P = [...Array(WD.n).keys()];
   const head = `<tr><th>${w("year")}</th>${P.map(i=>`<th>${esc(WD.players[i].name)}</th>`).join("")}<th>${w("totals")}</th></tr>`;
@@ -1296,7 +1304,7 @@ function wdSum(){
   const cum = {}; P.forEach(i=>{ let s=0; act.forEach(yi=>{ s+=C.years[yi].pl[i].income; cum[yi+"_"+i]=s; }); });
   const last = act[act.length-1];
   const finalCash = P.map(i=>C.years[last].pl[i].end), maxc = Math.max(...finalCash.map(Math.abs),1);
-  return `<div class="grid g2" style="margin-top:14px">
+  return `${exBanner()}<div class="grid g2" style="margin-top:14px">
    <div class="card"><b>${w("s_crop")}</b><div class="legend">${[0,1,2,3].map(c=>`<span>${dot(c)}${cropName(c)}</span>`).join("")}</div>
      ${stackBars(act.map(yi=>C.years[yi].cropN), yl, [0,1,2,3])}
      <div class="tablewrap"><table class="tbl-num" style="margin-top:10px"><tr><th>${w("year")}</th>${[0,1,2,3].map(c=>`<th>${cropName(c)}</th>`).join("")}</tr>${act.map(yi=>`<tr><td>${yi+1}</td>${C.years[yi].cropN.map(v=>`<td>${v}</td>`).join("")}</tr>`).join("")}</table></div></div>
@@ -1330,6 +1338,7 @@ function wdSetup(){
     <label>${w("nPlayers")}<select data-ws="n">${[6,7,8,9,10,11,12].map(k=>`<option ${k===WD.n?"selected":""}>${k}</option>`).join("")}</select></label>
     <label>${w("upEnd")}<select data-ws="up"><option value="low" ${WD.up==="low"?"selected":""}>${w("upA")}</option><option value="high" ${WD.up==="high"?"selected":""}>${w("upB")}</option></select></label>
     <label>${w("rate")}<input type="number" data-ws="rate" value="${WD.rate}"></label>
+    <label style="flex-direction:row;align-items:center;gap:8px"><input type="checkbox" data-ws="autoEst" ${WD.autoEst!==false?"checked":""} style="width:20px;height:20px">${w("autoEst")}</label>
    </div>
    <div class="grid g2" style="margin-top:16px">
     <div><div class="tablewrap"><table class="ptable"><tr><th>#</th><th>${w("nameCol")}</th><th>${w("cash0")}</th><th>${w("plots")}</th></tr>
@@ -1341,6 +1350,7 @@ function wdSetup(){
     <button class="btn sm" data-wact="json">⬇ ${w("exportJson")}</button>
     <label class="btn sm ghost" style="cursor:pointer">⬆ ${w("importJson")}<input type="file" accept=".json,application/json" data-wact="import" hidden></label>
     <button class="btn sm ghost" data-wact="csv">⬇ ${w("exportCsv")}</button>
+    <button class="btn sm ghost" data-wact="example">📂 ${w("loadEx")}</button>
     <button class="btn sm ghost" style="border-color:var(--terra);color:var(--terra)" data-wact="reset">${w("reset")}</button>
    </div></div>`;
 }
@@ -1349,7 +1359,7 @@ function wdSetup(){
 function dl(name, text, type){ const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([text],{type})); a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500); }
 function wdCSV(){
   const C = wdCalc(), rows=[["year","rain","price","water_available","plot","owner","crop","water_units","production","price_multiplier","income","establishment_cost"]];
-  WD.years.forEach((Y,yi)=>{ if(!Y.touched) return; C.years[yi].plot.forEach(x=>{ if (x.o>=WD.n) return; rows.push([yi+1,Y.rain,Y.price||"medium",Y.water,x.p+1,WD.players[x.o].name,WP().names[x.c].en,x.wat,x.pr,WP().price[Y.price||"medium"][x.c],x.inc,x.est]); }); });
+  WD.years.forEach((Y,yi)=>{ if(!Y.touched) return; C.years[yi].plot.forEach(x=>{ if (x.o>=WD.n) return; rows.push([yi+1,Y.rain,Y.price||"medium",Y.water,x.p+1,WD.players[x.o].name,WP().names[x.c].en,x.wat,x.pr,pmult(Y)[x.c],x.inc,x.est]); }); });
   rows.push([]); rows.push(["year","player","start_cash","loan","establishment","income","repay","adjust","end_cash","water_used"]);
   WD.years.forEach((Y,yi)=>{ if(!Y.touched) return; C.years[yi].pl.forEach(p=>rows.push([yi+1,WD.players[p.i].name,p.start,p.loan,p.est,p.income,p.repay,p.adj,p.end,p.wuse])); });
   return "﻿"+rows.map(r=>r.map(v=>`"${String(v??"").replace(/"/g,'""')}"`).join(",")).join("\n");
@@ -1367,6 +1377,7 @@ function wdAct(a, el){
   else if (a==="ownDefault"){ WD.own = WD_OWN_DEFAULT.slice(); }
   else if (a==="csv"){ dl(`WADIGA_${WD.name.replace(/\W+/g,"_")}.csv`, wdCSV(), "text/csv;charset=utf-8"); return; }
   else if (a==="json"){ dl(`WADIGA_${WD.name.replace(/\W+/g,"_")}.json`, JSON.stringify(WD,null,1), "application/json"); return; }
+  else if (a==="example"){ if (WD.years.some(y=>y.touched) && !WD.isExample && !confirm(w("loadExQ"))) return; WD = Object.assign(clone(WD_EXAMPLE), {params: clone(WD_DEFAULT), isExample:true}); WSUB="sum"; }
   else if (a==="reset"){ if (!confirm(w("resetQ"))) return; WD = wdNew(); }
   wdSave(); renderWadiga();
 }
@@ -1380,9 +1391,10 @@ document.addEventListener("change", e=>{
   const t = e.target, Y = WD.years[WD.cur], d = t.dataset;
   if (d.wact==="import" && t.files && t.files[0]){ t.files[0].text().then(txt=>{ try{ const o=JSON.parse(txt); if (o && o.years){ WD=o; wdSave(); renderWadiga(); } }catch(err){ alert("JSON?"); } }); return; }
   if (d.wp){ const p=+d.p; if (d.wp==="crop"){ Y.crop[p]=+t.value; if (+t.value===0) Y.wat[p]=0; } else Y.wat[p]=Math.max(0,parseInt(t.value)||0); Y.touched=true; }
+  else if (d.wpm){ if (!Y.pm) Y.pm = pmult({price:"medium"}).slice(); Y.pm[+d.wpm] = parseFloat(t.value)||0; Y.touched=true; }
   else if (d.wy){ Y[d.wy] = d.wy==="water" ? (t.value===""?"":Math.max(0,parseInt(t.value)||0)) : t.value; Y.touched=true; }
   else if (d.wl){ Y[d.wl][+d.i] = parseFloat(t.value)||0; Y.touched=true; }
-  else if (d.ws){ const k=d.ws; if (k==="n") WD.n=+t.value; else if (k==="rate") WD.rate=+t.value||0; else WD[k]=t.value; }
+  else if (d.ws){ const k=d.ws; if (k==="n") WD.n=+t.value; else if (k==="autoEst") WD.autoEst=t.checked; else if (k==="rate") WD.rate=+t.value||0; else WD[k]=t.value; }
   else if (d.wpl){ WD.players[+d.i][d.wpl] = d.wpl==="cash0" ? (+t.value||0) : t.value; }
   else if (d.wown!==undefined){ WD.own[+d.wown]=+t.value; }
   else if (d.wpar){ const k=d.wpar.split("."); let o=WD.params; for (let q=0;q<k.length-1;q++) o=o[k[q]]; const last=k[k.length-1];
