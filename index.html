@@ -278,6 +278,12 @@ footer .logos{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bot
 [data-wpar^="names"]{text-align:left;margin:2px 0}
 .osel{--pc:transparent;border-left:6px solid var(--pc)!important;background:color-mix(in srgb,var(--pc) 22%,var(--surface))!important;font-weight:600}
 .pchip{display:inline-block;min-width:34px;text-align:center;color:#fff;font-weight:700;border-radius:7px;padding:1px 6px;font-size:13px}
+.wdgraphs .grid.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:760px){.wdgraphs .grid.g2{grid-template-columns:1fr}}
+.wdgraphs:fullscreen{background:var(--bg);padding:24px 32px;overflow:auto}
+.wdgraphs:fullscreen .grid.g2{grid-template-columns:1fr 1fr}
+.wdgraphs:fullscreen [data-wact="printg"]{display:none}
+@media print{body.print-graphs *{visibility:hidden}body.print-graphs #wdgraphs,body.print-graphs #wdgraphs *{visibility:visible}body.print-graphs #wdgraphs{position:absolute;left:0;top:0;width:100%}body.print-graphs #wdgraphs button{display:none}.card{box-shadow:none}.gcard2{break-inside:avoid}}
 .wd-link{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:14px;font-weight:600;color:var(--water);background:var(--water-soft);border:0;border-radius:999px;padding:3px 10px;cursor:pointer}
 </style>
 </head>
@@ -1038,6 +1044,12 @@ const WT = {
   loops:"วงจรการเรียนรู้ (ComMod)", loopsT:"วิเคราะห์สถานการณ์เริ่มต้น → ออกแบบแบบจำลอง (เกม/ABM) → จำลองแบบมีส่วนร่วม → ประเมินผล → ปรับโจทย์และกลุ่มผู้เกี่ยวข้อง แล้ววนซ้ำ",
   refs:"อ้างอิง: Trébuil, Le Page & Garcia (2017) WaDiGa & conceptual model (PARDI); Trébuil et al. (2021) Boucles d’apprentissage; Hassenforder, Dray & Daré (2020); Barnaud (2008, 2013)",
   wgo:"เปิดหน้าเกม WADIGA",
+  g_title:"กราฟนำเสนอผล", g_present:"นำเสนอเต็มจอ", g_print:"พิมพ์ / PDF", g_tables:"ตารางสรุป",
+  g_crop:"การใช้แปลง (Crop allocation)", g_cropS:"จำนวนแปลงที่ปลูกแต่ละพืชในแต่ละปี",
+  g_wshare:"สัดส่วนน้ำตามพืช (Water shares per crop)", g_wshareS:"% ของน้ำที่ใช้ทั้งหมดในปีนั้น",
+  g_cum:"รายได้สะสม (Gross income)", g_cumS:"รายได้รวมสะสมของผู้เล่นแต่ละคน",
+  g_type:"รายได้เฉลี่ยตามขนาดฟาร์ม", g_typeS:"รายได้ต่อปีเฉลี่ย จัดกลุ่มตามจำนวนแปลงที่ถือครอง (เทียบความเหลื่อมล้ำ)", g_avg:"เฉลี่ยทุกครอบครัว",
+  g_wpl:"ส่วนแบ่งน้ำเทียบส่วนแบ่งที่ดิน", g_wplS:"ส่วนแบ่งน้ำเฉลี่ยทุกปี (แถบสีฟ้า) เทียบสัดส่วนแปลงที่ถือครอง (แถบเทา) — ใครได้น้ำมากกว่า/น้อยกว่าที่ดินที่มี?", g_wsh:"ส่วนแบ่งน้ำ", g_lsh:"ส่วนแบ่งที่ดิน",
   p_custom:"กำหนดเอง", autoEst:"หักค่าลงทุนปลูกอัตโนมัติ", loadEx:"โหลดตัวอย่าง (เกม 10 พ.ย. 2569)", loadExQ:"ข้อมูลเกมปัจจุบันจะถูกแทนที่ — สำรอง JSON ไว้ก่อนหรือยัง? กด OK เพื่อโหลดตัวอย่าง",
   exNote:"ตัวอย่างจากไฟล์ WaDiGa-game session_Template_ADAPT (เล่น 4 ปี, 9 ผู้เล่น) · ปี 1 ราคาลิ้นจี่ต่ำ (×0.4) ชาปกติ (×1) · ปี 2 ฝนปกติ · ปี 3–4 ราคาสูง · ไฟล์ไม่ได้บันทึกปริมาณฝนปี 1, 3, 4 และค่าลงทุนปลูก จึงปิด ‘หักค่าลงทุนอัตโนมัติ’ ไว้ เพื่อให้ตัวเลขตรงกับ Excel · ลองแก้หรือเล่นต่อปี 5–6 ได้ หรือกด ‘เริ่มเกมใหม่’ ในหน้าตั้งค่า",
   editP:"แก้ไขพารามิเตอร์", doneEdit:"เสร็จ", resetP:"คืนค่าเริ่มต้น", resetPQ:"คืนค่าพารามิเตอร์ทั้งหมดเป็นค่าเริ่มต้น?",
@@ -1092,6 +1104,12 @@ const WT = {
   loops:"Learning loops (ComMod)", loopsT:"Analyse the initial situation → design the model (game/ABM) → participatory simulations → evaluate effects → reframe the problem and the panel of stakeholders, then iterate.",
   refs:"References: Trébuil, Le Page & Garcia (2017) WaDiGa & conceptual model (PARDI); Trébuil et al. (2021) Boucles d’apprentissage; Hassenforder, Dray & Daré (2020); Barnaud (2008, 2013)",
   wgo:"Open the WADIGA game page",
+  g_title:"Presentation graphs", g_present:"Present full screen", g_print:"Print / PDF", g_tables:"Summary tables",
+  g_crop:"Crop allocation", g_cropS:"Number of plots under each crop per year",
+  g_wshare:"Water shares per crop", g_wshareS:"% of total water used that year",
+  g_cum:"Gross income (cumulated)", g_cumS:"Cumulated gross income of each player",
+  g_type:"Average income by farm size", g_typeS:"Average yearly income grouped by number of plots held (inequality)", g_avg:"Average per family",
+  g_wpl:"Water share vs land share", g_wplS:"Average share of water over the years (blue) vs share of plots held (grey) — who gets more or less water than their land?", g_wsh:"Water share", g_lsh:"Land share",
   p_custom:"Custom", autoEst:"Charge establishment costs automatically", loadEx:"Load example (game of 10 Nov 2026)", loadExQ:"The current game will be replaced — have you backed it up as JSON? Press OK to load the example.",
   exNote:"Example from WaDiGa-game session_Template_ADAPT (4 years played, 9 players) · Year 1: lychee price low (×0.4), tea normal (×1) · Year 2: normal rain · Years 3–4: high prices · The file did not record rainfall for years 1, 3, 4 or establishment costs, so ‘charge establishment automatically’ is off to match the Excel figures · Edit or continue with years 5–6, or press ‘New game’ in Setup.",
   editP:"Edit parameters", doneEdit:"Done", resetP:"Restore defaults", resetPQ:"Restore all parameters to defaults?",
@@ -1293,6 +1311,65 @@ function stackBars(rows, labels, keys){ // rows: per year array of values per ke
     return `<div><div class="stack">${keys.map((k,j)=>vals[j]?`<i style="height:${vals[j]/tot*100}%;background:${WD_COLORS[k]}" data-tip="${labels[i]} · ${cropName(k)}: ${fmt(vals[j])} (${Math.round(vals[j]/tot*100)}%)">${vals[j]/tot>0.12?`<span style="${k===1||k===0?"color:#1f2a1e":""}">${fmt(vals[j])}</span>`:""}</i>`:"").join("")}</div><div class="lab">${labels[i]}</div></div>`;}).join("")}</div>`;
 }
 
+/* ---- presentation graphs (from Summary & Graphs sheets) ---- */
+const LINEC = ["#9a9a9a","#6fae2e","#00863d","#d8728a"];
+function lineChart(o){ // o: {labels, series:[{name,color,values}], yfmt, pct, direct}
+  const W=560,H=300,L=46,R=o.direct?110:16,T=16,B=34, iw=W-L-R, ih=H-T-B;
+  const all=o.series.flatMap(s=>s.values).filter(v=>v!=null&&isFinite(v));
+  let ymax=Math.max(0,...all), ymin=Math.min(0,...all); if (ymax===ymin) ymax=ymin+1;
+  const step=niceStep((ymax-ymin)/5); ymax=Math.ceil(ymax/step)*step; ymin=Math.floor(ymin/step)*step;
+  const n=o.labels.length, x=i=> L + (n===1? iw/2 : i*iw/(n-1)), y=v=> T + (ymax-v)/(ymax-ymin)*ih;
+  const f=o.yfmt||(v=>fmt(v));
+  let g=""; for (let v=ymin; v<=ymax+1e-9; v+=step){ g+=`<line x1="${L}" x2="${L+iw}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" ${Math.abs(v)<1e-9?'stroke-width="1.5" stroke="var(--muted)"':''}/><text x="${L-8}" y="${y(v)+4}" text-anchor="end" font-size="13" fill="var(--muted)">${f(v)}</text>`; }
+  const xl=o.labels.map((l,i)=>`<text x="${x(i)}" y="${H-12}" text-anchor="middle" font-size="13" fill="var(--muted)">${esc(l)}</text>`).join("");
+  // end labels with collision avoidance
+  let ends=o.series.map((s,si)=>({si, y:y(s.values[n-1]??0), name:s.name, v:s.values[n-1]})).sort((a,b)=>a.y-b.y);
+  for (let k=1;k<ends.length;k++) if (ends[k].y-ends[k-1].y<15) ends[k].y=ends[k-1].y+15;
+  const lines=o.series.map((s,si)=>{ const pts=s.values.map((v,i)=>v==null?null:[x(i),y(v)]).filter(Boolean);
+    return `<g><polyline points="${pts.map(p=>p.join(",")).join(" ")}" fill="none" stroke="${s.color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      ${s.values.map((v,i)=>v==null?"":`<circle cx="${x(i)}" cy="${y(v)}" r="4.5" fill="${s.color}" stroke="var(--surface)" stroke-width="2"/><circle cx="${x(i)}" cy="${y(v)}" r="12" fill="transparent" data-tip="${esc(s.name)} · ${esc(o.labels[i])}: ${f(v)}"/>`).join("")}</g>`; }).join("");
+  const el = o.direct ? ends.map(e=>`<text x="${L+iw+8}" y="${e.y+4}" font-size="12.5" fill="var(--ink2)"><tspan font-weight="700" fill="${o.series[e.si].color}">■</tspan> ${esc(e.name)} ${f(e.v)}</text>`).join("") : "";
+  const leg = `<div class="legend">${o.series.map(s=>`<span><span class="cropdot" style="background:${s.color}"></span>${esc(s.name)}</span>`).join("")}</div>`;
+  return `${leg}<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${esc(o.title||"")}" style="display:block;overflow:visible">${g}${xl}${lines}${el}</svg>`;
+}
+function niceStep(r){ const p=Math.pow(10,Math.floor(Math.log10(r||1))), m=r/p; return (m<=1?1:m<=2?2:m<=2.5?2.5:m<=5?5:10)*p; }
+
+function wdGraphs(C, act){
+  const labels = act.map(i=>`${w("year")} ${i+1}`), P=[...Array(WD.n).keys()];
+  const pct = v => Math.round(v*100)+"%";
+  const crops=[1,2,3];
+  const g1 = lineChart({title:w("g_crop"), labels, direct:true, series: crops.map(c=>({name:cropName(c), color:LINEC[c], values:act.map(yi=>C.years[yi].cropN[c])}))});
+  const g2 = lineChart({title:w("g_wshare"), labels, direct:true, yfmt:pct, series: crops.map(c=>({name:cropName(c), color:LINEC[c], values:act.map(yi=>{const W=C.years[yi].cropW; const t=W[1]+W[2]+W[3]; return t? W[c]/t : null;})}))});
+  const cum = P.map(i=>{ let s=0; return act.map(yi=> s+=C.years[yi].pl[i].income); });
+  const g3 = lineChart({title:w("g_cum"), labels, direct:P.length<=12, series: P.map(i=>({name:WD.players[i].name, color:pc(i+1), values:cum[i]}))});
+  // farm types by number of plots
+  const types=[...new Set(P.map(i=>C.years[act[0]].pl[i].nplots))].filter(k=>k>0).sort((a,b)=>b-a);
+  const tcol=["#1f4f6e","#2f7fb8","#7fb8e0","#a5432a","#c8902e"];
+  const g4 = lineChart({title:w("g_type"), labels, direct:true, series: types.map((k,ti)=>{ const mem=P.filter(i=>C.years[act[0]].pl[i].nplots===k);
+     return {name:`${k} ${w("plots")} (n=${mem.length})`, color:tcol[ti%tcol.length], values:act.map(yi=>mem.reduce((s,i)=>s+C.years[yi].pl[i].income,0)/mem.length)}; })
+     .concat([{name:w("g_avg"), color:"var(--ink)", values:act.map(yi=>P.reduce((s,i)=>s+C.years[yi].pl[i].income,0)/P.length)}])});
+  // water share per player (avg over played years)
+  const share = P.map(i=>{ const v=act.map(yi=>{const u=C.years[yi].used; return u? C.years[yi].pl[i].wuse/u : 0;}); return v.reduce((a,b)=>a+b,0)/v.length; });
+  const plotShare = P.map(i=>C.years[act[0]].pl[i].nplots/ P.reduce((s,j)=>s+C.years[act[0]].pl[j].nplots,0));
+  const mx=Math.max(...share,...plotShare,0.01);
+  const g5 = `<div class="legend"><span><span class="cropdot" style="background:var(--water)"></span>${w("g_wsh")}</span><span><span class="cropdot" style="background:var(--line);outline:1px solid var(--muted)"></span>${w("g_lsh")}</span></div>
+    <div class="bars" style="margin-top:10px">${P.map(i=>`<div class="bar" data-tip="${esc(WD.players[i].name)}: ${w("g_wsh")} ${pct(share[i])} · ${w("g_lsh")} ${pct(plotShare[i])}"><span><span class="pchip" style="background:${pc(i+1)}">${esc(WD.players[i].name)}</span></span>
+      <div class="track" style="height:18px;display:flex;flex-direction:column;gap:2px"><div class="fill" style="height:10px;width:${share[i]/mx*100}%;background:var(--water)"></div><div style="height:6px;width:${plotShare[i]/mx*100}%;background:var(--line);border-radius:0 3px 3px 0"></div></div>
+      <span class="v">${pct(share[i])}</span></div>`).join("")}</div>`;
+  const card=(t,sub,body)=>`<div class="card gcard2"><b>${t}</b>${sub?`<div class="muted" style="font-size:13px">${sub}</div>`:""}${body}</div>`;
+  return `<div id="wdgraphs" class="wdgraphs">
+    <div class="sec-title" style="flex-wrap:wrap"><h2 style="font-size:22px">${w("g_title")}</h2><small>${esc(WD.name)}</small>
+      <span style="margin-left:auto;display:flex;gap:8px"><button class="btn sm" data-wact="present">📽 ${w("g_present")}</button><button class="btn sm ghost" data-wact="printg">🖨 ${w("g_print")}</button></span></div>
+    <div class="grid g2">
+      ${card(w("g_crop"), w("g_cropS"), g1)}
+      ${card(w("g_wshare"), w("g_wshareS"), g2)}
+      ${card(w("g_cum"), w("g_cumS"), g3)}
+      ${card(w("g_type"), w("g_typeS"), g4)}
+    </div>
+    <div style="margin-top:16px">${card(w("g_wpl"), w("g_wplS"), g5)}</div>
+  </div>`;
+}
+
 const exBanner = () => WD.isExample ? `<div class="card" style="margin-top:12px;padding:12px 16px;background:var(--water-soft);box-shadow:none;border:0;font-size:14px">📂 ${w("exNote")}</div>` : "";
 function wdSum(){
   const C = wdCalc(), act = C.years.map((y,i)=>i).filter(i=>WD.years[i].touched);
@@ -1304,7 +1381,7 @@ function wdSum(){
   const cum = {}; P.forEach(i=>{ let s=0; act.forEach(yi=>{ s+=C.years[yi].pl[i].income; cum[yi+"_"+i]=s; }); });
   const last = act[act.length-1];
   const finalCash = P.map(i=>C.years[last].pl[i].end), maxc = Math.max(...finalCash.map(Math.abs),1);
-  return `${exBanner()}<div class="grid g2" style="margin-top:14px">
+  return `${exBanner()}${wdGraphs(C, act)}<div class="sec-title"><h2 style="font-size:22px">${w("g_tables")}</h2></div><div class="grid g2" style="margin-top:14px">
    <div class="card"><b>${w("s_crop")}</b><div class="legend">${[0,1,2,3].map(c=>`<span>${dot(c)}${cropName(c)}</span>`).join("")}</div>
      ${stackBars(act.map(yi=>C.years[yi].cropN), yl, [0,1,2,3])}
      <div class="tablewrap"><table class="tbl-num" style="margin-top:10px"><tr><th>${w("year")}</th>${[0,1,2,3].map(c=>`<th>${cropName(c)}</th>`).join("")}</tr>${act.map(yi=>`<tr><td>${yi+1}</td>${C.years[yi].cropN.map(v=>`<td>${v}</td>`).join("")}</tr>`).join("")}</table></div></div>
@@ -1378,6 +1455,8 @@ function wdAct(a, el){
   else if (a==="csv"){ dl(`WADIGA_${WD.name.replace(/\W+/g,"_")}.csv`, wdCSV(), "text/csv;charset=utf-8"); return; }
   else if (a==="json"){ dl(`WADIGA_${WD.name.replace(/\W+/g,"_")}.json`, JSON.stringify(WD,null,1), "application/json"); return; }
   else if (a==="example"){ if (WD.years.some(y=>y.touched) && !WD.isExample && !confirm(w("loadExQ"))) return; WD = Object.assign(clone(WD_EXAMPLE), {params: clone(WD_DEFAULT), isExample:true}); WSUB="sum"; }
+  else if (a==="present"){ const g=document.getElementById("wdgraphs"); if (document.fullscreenElement) document.exitFullscreen(); else if (g && g.requestFullscreen) g.requestFullscreen().catch(()=>{}); return; }
+  else if (a==="printg"){ document.body.classList.add("print-graphs"); window.print(); setTimeout(()=>document.body.classList.remove("print-graphs"),500); return; }
   else if (a==="reset"){ if (!confirm(w("resetQ"))) return; WD = wdNew(); }
   wdSave(); renderWadiga();
 }
