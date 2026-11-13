@@ -295,6 +295,12 @@ footer .logos{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bot
 .cchip.sel{background:var(--lc);color:#fff}.cchip.sel b{color:#fff}
 .cbadge{color:#fff;font-weight:800;border-radius:10px;padding:2px 10px;font-size:18px}
 .cldpanel{margin-top:8px}.cldpanel ul{margin:6px 0 10px;padding-left:20px;color:var(--ink2);font-size:15px}
+.umlsvg{display:block;width:100%;min-width:1100px;height:auto}
+.umlsvg .off{opacity:.18;transition:opacity .2s}
+.umlsvg .uc:hover rect:first-child{stroke-width:2.6}
+.unot{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:6px;font-size:13px;color:var(--ink2)}
+.unot>span{display:inline-flex;align-items:center;gap:6px}
+ul.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
 .wd-link{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:14px;font-weight:600;color:var(--water);background:var(--water-soft);border:0;border-radius:999px;padding:3px 10px;cursor:pointer}
 </style>
 </head>
@@ -393,6 +399,8 @@ footer .logos{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bot
 
   <!-- CLD -->
   <section class="panel" id="p-cld">
+    <div class="seg wd-sub" style="margin-bottom:10px"><button data-cview="cld" data-u="vCld"></button><button data-cview="uml" data-u="vUml"></button></div>
+    <div id="cldpart">
     <div class="sec-title"><h2 data-c="title"></h2></div>
     <p class="muted" style="margin-top:-4px" data-c="lead"></p>
     <div class="grid g2" style="margin-bottom:12px">
@@ -404,6 +412,23 @@ footer .logos{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bot
     <div id="cldview"></div>
     <div class="card" style="margin-top:14px"><b data-c="activity"></b><ol id="cldact" style="margin:8px 0 0;padding-left:22px;color:var(--ink2)"></ol></div>
     <p class="note" data-c="note"></p><p class="note" data-c="src"></p>
+    </div>
+    <div id="umlpart" style="display:none">
+      <div class="sec-title"><h2 data-u="title"></h2></div>
+      <p class="muted" style="margin-top:-4px" data-u="lead"></p>
+      <div class="card" style="padding:14px 16px;margin-bottom:10px"><b data-u="notation"></b>
+        <div class="unot">
+          <span><svg width="56" height="14"><line x1="2" y1="7" x2="54" y2="7" stroke="currentColor" stroke-width="1.4"/><text x="2" y="5" font-size="8" fill="currentColor">1</text><text x="44" y="5" font-size="8" fill="currentColor">*</text></svg><span data-u="nAssoc"></span></span>
+          <span><svg width="56" height="14"><path d="M2,7 L10,2 L18,7 L10,12 z" fill="currentColor"/><line x1="18" y1="7" x2="54" y2="7" stroke="currentColor" stroke-width="1.4"/></svg><span data-u="nComp"></span></span>
+          <span><svg width="56" height="14"><path d="M2,7 L10,2 L18,7 L10,12 z" fill="none" stroke="currentColor"/><line x1="18" y1="7" x2="54" y2="7" stroke="currentColor" stroke-width="1.4"/></svg><span data-u="nAgg"></span></span>
+          <span><svg width="56" height="14"><line x1="2" y1="7" x2="42" y2="7" stroke="currentColor" stroke-width="1.4"/><path d="M42,1 L54,7 L42,13 z" fill="none" stroke="currentColor"/></svg><span data-u="nGen"></span></span>
+          <span><svg width="56" height="14"><line x1="2" y1="7" x2="52" y2="7" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 3"/><path d="M44,2 L54,7 L44,12" fill="none" stroke="currentColor"/></svg><span data-u="nDep"></span></span>
+          <span><i style="font-family:ui-monospace,monospace;font-weight:700">Crop</i> <span data-u="nAbs"></span></span>
+        </div></div>
+      <div id="umlview"></div>
+      <div class="card" style="margin-top:14px"><b data-u="q"></b><ol id="umlq" style="margin:8px 0 0;padding-left:22px;color:var(--ink2)"></ol></div>
+      <p class="note" data-u="note"></p><p class="note" data-c="src"></p>
+    </div>
   </section>
   <section class="panel" id="p-map">
     <div class="sec-title"><h2 data-i="whereWeGo"></h2><small data-i="mapNote"></small></div>
@@ -499,7 +524,7 @@ const I18N = {
   title:"คู่มือภาคสนาม",
   subtitle:"7 วันแห่งการเรียนรู้เชิงลึกในจังหวัดน่าน — โครงการวิจัย ADAPT-Nan: Advancing Development of Agroecology in Nan Province in Thailand · หลักสูตรระดับปริญญาตรี",
   dates:"8 – 15 พฤศจิกายน 2569",
-  tab_home:"หน้าแรก", tab_prog:"กำหนดการ", tab_groups:"กลุ่ม", tab_wadiga:"WADIGA", tab_cld:"ผังวงจร", tab_map:"แผนที่", tab_prep:"เตรียมตัว", tab_facts:"ข้อมูลน่าน",
+  tab_home:"หน้าแรก", tab_prog:"กำหนดการ", tab_groups:"กลุ่ม", tab_wadiga:"WADIGA", tab_cld:"แบบจำลอง", tab_map:"แผนที่", tab_prep:"เตรียมตัว", tab_facts:"ข้อมูลน่าน",
   intensive:"การเรียนรู้ภาคสนามแบบเข้มข้น", intensiveSub:"พักที่ศูนย์ CU-ผาสิงห์ และออกภาคสนามทุกวัน",
   intro:"ช่วงภาคสนามทำให้การเตรียมความพร้อมผ่านระบบออนไลน์เกิดขึ้นจริง ในแต่ละวันผู้เข้าร่วมจะได้ทำงานร่วมกับเกษตรกร พระสงฆ์ ผู้ประกอบการ และผู้จัดกิจกรรมชุมชน ผู้ริเริ่มและพัฒนาทางเลือกด้านเกษตรนิเวศในพื้นที่ลุ่มน้ำของจังหวัดน่าน พร้อมเรียนรู้ความเชื่อมโยงระหว่างการเปลี่ยนแปลงสภาพภูมิอากาศ ความมั่นคงทางอาหาร และวิถีชีวิตชนบท สัปดาห์นี้จะปิดท้ายด้วยการนำเสนอข้อเสนอของคุณเองต่อคณะผู้มีส่วนได้ส่วนเสียในท้องถิ่น",
   s1:"วันที่น่าน", s2:"พื้นที่เรียนรู้", s3:"กลุ่มต่อพื้นที่", s4:"ชั่วโมงภาคสนาม",
@@ -553,7 +578,7 @@ const I18N = {
   title:"Field Block Guide",
   subtitle:"Seven days of immersive learning in Nan Province, Thailand — ADAPT-Nan: Advancing Development of Agroecology in Nan Province in Thailand · Bachelor's programme",
   dates:"8 – 15 November 2026",
-  tab_home:"Home", tab_prog:"Programme", tab_groups:"Groups", tab_wadiga:"WADIGA", tab_cld:"Loops", tab_map:"Map", tab_prep:"Prepare", tab_facts:"Nan facts",
+  tab_home:"Home", tab_prog:"Programme", tab_groups:"Groups", tab_wadiga:"WADIGA", tab_cld:"Models", tab_map:"Map", tab_prep:"Prepare", tab_facts:"Nan facts",
   intensive:"Intensive Field Block", intensiveSub:"Based at CU-Phasing Center with daily excursions",
   intro:"The field block brings the online preparation to life. Each day you will work alongside farmers, monks, entrepreneurs and community organisers who have built agroecological alternatives in Nan's watersheds, and learn to trace the links between climate change, food security and rural livelihoods. The week ends with your own proposals, presented to a panel of local stakeholders.",
   s1:"days in Nan", s2:"host sites", s3:"groups per site", s4:"field hours",
@@ -828,7 +853,7 @@ function renderStatic(){
 }
 
 function render(){
-  renderStatic(); renderNow(); renderGlance(); renderChips(); renderDay(); renderGroups(); renderSites(); renderPrep(); renderFacts(); renderWadiga(); renderCLD(); const ca=document.getElementById("cldact"); if (ca) ca.innerHTML=CT[LANG].activityL.map(x=>`<li style="margin:4px 0">${x}</li>`).join("");
+  renderStatic(); renderNow(); renderGlance(); renderChips(); renderDay(); renderGroups(); renderSites(); renderPrep(); renderFacts(); renderWadiga(); renderModels(); const ca=document.getElementById("cldact"); if (ca) ca.innerHTML=CT[LANG].activityL.map(x=>`<li style="margin:4px 0">${x}</li>`).join("");
   document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on", p.id==="p-"+TAB));
 }
 
@@ -1667,6 +1692,180 @@ function renderCLD(){
 document.addEventListener("click", e=>{
   const l = e.target.closest("[data-cloop]"); if (l){ CSEL = l.dataset.cloop || null; CNODE=null; renderCLD(); return; }
   const n = e.target.closest("[data-cnode]"); if (n){ CNODE = CNODE===n.dataset.cnode ? null : n.dataset.cnode; CSEL=null; renderCLD(); return; }
+});
+
+/* ================= UML class diagram: agroecology system in Nan ================= */
+const UT = {
+ th:{ title:"UML class diagram ของระบบเกษตรนิเวศในน่าน", lead:"แบบจำลองเชิงโครงสร้าง (ว่ามีอะไรอยู่ในระบบ แต่ละส่วนมีคุณสมบัติและพฤติกรรมอะไร และเกี่ยวข้องกันอย่างไร) — ใช้คู่กับผังวงจรเหตุผล (ซึ่งแสดงพลวัต) จัดกลุ่มเป็น 3 package ตามประเด็นวิจัย ADAPT-Nan และระบุองค์ประกอบ FAO ด้วย stereotype «FAO» · คลิกคลาสเพื่อดูคำอธิบาย",
+  vCld:"ผังวงจรเหตุผล (CLD)", vUml:"UML class diagram",
+  notation:"สัญลักษณ์ UML", nAssoc:"ความสัมพันธ์ (association) + จำนวน (multiplicity)", nComp:"ส่วนประกอบ (composition) — ส่วนย่อยอยู่ไม่ได้ถ้าไม่มีส่วนรวม", nAgg:"การรวม (aggregation) — ส่วนย่อยอยู่ได้เอง", nGen:"การสืบทอด (generalization) — ‘เป็นชนิดหนึ่งของ’", nDep:"การพึ่งพา (dependency) — ‘ส่งผล/ใช้’", nAbs:"ตัวเอียง = abstract class",
+  attrs:"คุณสมบัติ (attributes)", ops:"พฤติกรรม (operations)", rels:"ความสัมพันธ์", fao:"องค์ประกอบ FAO", cld:"ตัวแปรในผังวงจร", ex:"ตัวอย่างในน่าน", goCld:"ดูในผังวงจร",
+  note:"แบบจำลองแนวคิดเพื่อการเรียนรู้ ชื่อคลาสและคุณสมบัติใช้ภาษาอังกฤษตามธรรมเนียม UML · ใช้เป็นจุดตั้งต้นสำหรับเกม/แบบจำลองเชิงตัวแทน (ABM) เช่น WADIGA",
+  q:"คำถามชวนคิด", qL:["คลาสใดที่ศูนย์เรียนรู้ที่คุณไปเยือนเน้นมากที่สุด?","ควรเพิ่มคลาสหรือความสัมพันธ์อะไร (เช่น ผู้บริโภค หน่วยงานรัฐ บริษัทเมล็ดพันธุ์)?","คุณสมบัติใดที่วัดได้จริงในภาคสนาม และวัดอย่างไร?"] },
+ en:{ title:"UML class diagram of the agroecological system in Nan", lead:"A structural model (what exists in the system, the attributes and behaviours of each part, and how they relate), complementing the causal-loop diagram (which shows dynamics). Grouped into 3 packages by ADAPT-Nan research theme, with FAO elements marked by the «FAO» stereotype. Click a class for details.",
+  vCld:"Causal-loop diagram (CLD)", vUml:"UML class diagram",
+  notation:"UML notation", nAssoc:"Association + multiplicity", nComp:"Composition — the part cannot exist without the whole", nAgg:"Aggregation — the part can exist on its own", nGen:"Generalization — ‘is a kind of’", nDep:"Dependency — ‘affects / uses’", nAbs:"Italic = abstract class",
+  attrs:"Attributes", ops:"Operations", rels:"Relationships", fao:"FAO element", cld:"CLD variables", ex:"Examples in Nan", goCld:"Show in the CLD",
+  note:"A conceptual model for learning. Class and attribute names follow the UML convention in English. It can seed a game or agent-based model such as WADIGA.",
+  q:"Questions to discuss", qL:["Which class does the learning centre you visited focus on most?","What classes or relationships should be added (e.g. consumers, government agencies, seed companies)?","Which attributes can be measured in the field, and how?"] }
+};
+const u_ = k => (UT[LANG]||UT.en)[k] ?? k;
+const UPK = [ // packages
+ {id:1, x:15, y:22, w:742, h:585, name:"Agrarian change", th:"การเปลี่ยนแปลงภาคเกษตร"},
+ {id:2, x:770, y:22, w:822, h:585, name:"Social engagement", th:"การมีส่วนร่วมทางสังคม"},
+ {id:3, x:15, y:625, w:1577, h:545, name:"Agroecology emergence", th:"การก่อตัวของเกษตรนิเวศ"},
+];
+// id: {n, st, abs, p, x, y, w, a[], o[], th, fao, cld[], d{th,en}, ex{th,en}}
+const UC = {
+ Watershed:{p:1,x:35,y:62,w:200,st:"landscape",a:["name: String","area_km2: Float","forestCover_pct: Float","runoffShare_pct: Float"],o:["regulateWater(rain): Water","erode(slope): Soil"],th:"ลุ่มน้ำ",cld:["forest","water"],
+  d:{th:"ลุ่มน้ำน่านเป็นหน่วยภูมิทัศน์ที่รวมแปลงเกษตรทั้งหมด ป่าต้นน้ำควบคุมการไหลของน้ำ",en:"The Nan watershed is the landscape unit containing all plots; headwater forest regulates water flow."},
+  ex:{th:"ป่า 61% (2568) · น้ำท่า ≈40% ของเจ้าพระยา · พื้นที่ 11,472 km²",en:"Forest 61% (2025) · ≈40% of Chao Phraya runoff · 11,472 km²"}},
+ Plot:{p:1,x:285,y:62,w:205,a:["id: Int","area_rai: Float","slope: Float","position: {up, down}"],o:["plant(c: Crop)","irrigate(units: Int)"],th:"แปลงเกษตร",cld:["mono"],
+  d:{th:"แปลงที่ครัวเรือนทำกิน ตำแหน่งต้นน้ำ/ปลายน้ำกำหนดการเข้าถึงน้ำ (เหมือนกระดาน WADIGA 32 แปลง)",en:"A plot farmed by a household; upstream/downstream position shapes access to water (like the 32-plot WADIGA board)."},
+  ex:{th:"ผู้ถือครองเฉลี่ย 16.3 ไร่ · 2.70 ล้านไร่เป็นพื้นที่เกษตร (GISTDA 2567)",en:"Average holding 16.3 rai · 2.70 M rai mapped as farmland (GISTDA 2024)"}},
+ Crop:{p:1,x:520,y:62,w:210,abs:true,a:["name: String","waterNeed: Int","establishCost: Baht"],o:["production(water: Int): Float"],th:"พืช",cld:["mono","hort"],
+  d:{th:"คลาสนามธรรมของพืช ผลผลิตขึ้นกับน้ำที่ได้รับ (ฟังก์ชัน calProduction ในเกม WADIGA)",en:"Abstract crop class; output depends on water received (the calProduction function in WADIGA)."},
+  ex:{th:"ข้าวโพด 484,052 ไร่ · ข้าวนาปี 332,059 ไร่ · ยางพารา 329,606 ไร่ (2567)",en:"Maize 484,052 rai · lowland rice 332,059 · rubber 329,606 (2024)"}},
+ AnnualCrop:{p:1,x:515,y:318,w:112,a:["season: Season"],o:[],th:"พืชล้มลุก",cld:["mono"],d:{th:"ข้าว ข้าวโพด ผัก",en:"Rice, maize, vegetables"},ex:{th:"ข้าวต้องการน้ำ 1 หน่วย (WADIGA)",en:"Rice needs 1 water unit (WADIGA)"}},
+ PerennialCrop:{p:1,x:633,y:318,w:112,a:["maturity: Int"],o:[],th:"ไม้ยืนต้น",cld:["hort"],d:{th:"ชา ลิ้นจี่ กาแฟ ลำไย ไม้สัก",en:"Tea, lychee, coffee, longan, teak"},ex:{th:"ลิ้นจี่/ชาต้องการน้ำ 3 หน่วย · ค่าลงทุน 60/40",en:"Lychee/tea need 3 water units · establishment 60/40"}},
+ Shock:{p:1,x:35,y:330,w:230,st:"event",a:["type: {Drought|Flood|Haze|Price}","severity: Level","year: Int"],o:["impact(h: Household): Loss"],th:"ภัยและความเสี่ยง",cld:["shock"],
+  d:{th:"เหตุการณ์ภายนอกที่กระทบครัวเรือน: แล้ง น้ำท่วม หมอกควัน ราคาตก",en:"External events hitting households: drought, flood, haze, price drops."},
+  ex:{th:"PM2.5 สูงสุด 122.9 µg/m³ (24 มี.ค. 68) · หมู่บ้านเสี่ยงน้ำท่วม 51 แห่ง",en:"PM2.5 peak 122.9 µg/m³ (24 Mar 2025) · 51 villages at very high flood risk"}},
+ Household:{p:1,x:300,y:295,w:200,a:["members: Int","cash: Baht","debt: Baht","income: Baht"],o:["chooseCrops()","borrow(amount: Baht)","sell(p: Product): Baht"],th:"ครัวเรือนเกษตรกร",cld:["income","debt"],
+  d:{th:"หน่วยตัดสินใจหลัก: เลือกพืช กู้เงิน ขายผลผลิต",en:"The main decision unit: chooses crops, borrows, sells."},
+  ex:{th:"107,796 ครัวเรือนเกษตร · 73% เป็นหนี้ เฉลี่ย 209,359 บาท",en:"107,796 farm holdings · 73% in debt, avg 209,359 baht"}},
+ Farmer:{p:2,x:785,y:62,w:200,st:"person",a:["name: String","age: Int","role: {member, leader, monk}"],o:["learn(k: Knowledge)","share(k: Knowledge)"],th:"เกษตรกร",cld:["net","know"],fao:"Human & social values",
+  d:{th:"สมาชิกครัวเรือนที่ทำเกษตร เรียนรู้และแบ่งปันความรู้ บางคนเป็นผู้นำหรือพระนักพัฒนา",en:"Farming household members who learn and share; some are leaders or development monks."},
+  ex:{th:"คุณกุล (ChTN) · พ่อชิน (โรงสี) · พระครูสมคิด (วัดโป่งคำ)",en:"Khun Kul (ChTN) · Pho Chin (rice mill) · Phrakhru Somkid (Wat Pong Kham)"}},
+ Youth:{p:2,x:785,y:300,w:200,st:"person",a:["school: String","interest: Level"],o:["succeed(h: Household)","monitorForest()"],th:"เยาวชน",cld:["youth"],
+  d:{th:"นักเรียน/นิสิตและผู้สืบทอดฟาร์ม",en:"Students and farm successors."},
+  ex:{th:"หลักสูตรข้าว โรงเรียนสัทธาศิลาเพชร · La-on Nan · ประชากร 60+ = 26.4%",en:"Sattha Silaphet rice curriculum · La-on Nan · 60+ = 26.4% of population"}},
+ CulturalHeritage:{p:2,x:1040,y:450,w:250,a:["localVarieties: String[]","foodTraditions: String[]","ethnicGroup: EthnicGroup"],o:["transmit(y: Youth)"],th:"มรดกวัฒนธรรม",cld:["cult"],fao:"Culture & food traditions",
+  d:{th:"พันธุ์พื้นเมือง วิถีอาหาร และความรู้ของกลุ่มชาติพันธุ์",en:"Local varieties, food ways and ethnic knowledge."},
+  ex:{th:"พันธุ์ข้าวพื้นเมือง (ฮักเมืองน่าน) · วัวแดงน่าน · ไทลื้อ",en:"Local rice varieties (Hug Muang Nan) · Nan red cattle · Tai Lue"}},
+ FarmerNetwork:{p:2,x:1040,y:62,w:215,abs:true,a:["name: String","members: Int","trust: Level"],o:["guarantee(p: Product)","poolResources()"],th:"เครือข่ายเกษตรกร",cld:["net","solid"],fao:"Human & social values",
+  d:{th:"คลาสนามธรรมของการรวมกลุ่มเกษตรกร",en:"Abstract class for farmer collectives."},
+  ex:{th:"PGS Nan · สหกรณ์โรงสีข้าวพระราชทาน · คลัสเตอร์ OrigiNan · เครือข่ายวัดโป่งคำ",en:"PGS Nan · Royal Rice Mill co-op · OrigiNan cluster · Wat Pong Kham network"}},
+ PGSGroup:{p:2,x:1015,y:318,w:122,a:["standard: String"],o:["peerInspect()"],th:"กลุ่ม PGS",cld:["net"],d:{th:"ระบบรับรองแบบมีส่วนร่วม สมาชิกตรวจรับรองกันเอง",en:"Participatory Guarantee System — members certify each other"},ex:{th:"PGS Nan 35 → 46 ครัวเรือน · รับรองโดย Lemon Farm (มี.ค. 2561)",en:"PGS Nan 35 → 46 households · Lemon Farm certified (Mar 2018)"}},
+ Cooperative:{p:2,x:1142,y:318,w:122,a:["premium: Baht/kg"],o:["collectPaddy()"],th:"สหกรณ์",cld:["solid"],fao:"Circular & solidarity economy",faoS:"Solidarity econ.",d:{th:"สหกรณ์โรงสีข้าวพระราชทาน รับซื้อสูงกว่าตลาด",en:"Royal Rice Mill co-op buying above market price"},ex:{th:"+0.50–1 บาท/กก. · แบรนด์ ‘ข้าวน่าน’",en:"+0.50–1 baht/kg · ‘Khao Nan’ brand"}},
+ ProducerCluster:{p:2,x:1269,y:318,w:122,a:["groups: Int"],o:["addValue()"],th:"คลัสเตอร์ผู้ผลิต",cld:["solid"],fao:"Circular & solidarity economy",faoS:"Solidarity econ.",d:{th:"คลัสเตอร์เกษตรแปรรูป OrigiNan",en:"OrigiNan processed-agriculture cluster"},ex:{th:"66 กลุ่ม 390 คน 10 อำเภอ",en:"66 groups, 390 people, 10 districts"}},
+ Market:{p:2,x:1305,y:62,w:195,a:["channel: SalesChannel","demand: Float","premium_pct: Float"],o:["buy(p: Product): Baht"],th:"ตลาด",cld:["solid","surplus"],fao:"Circular & solidarity economy",
+  d:{th:"ช่องทางจำหน่าย ความต้องการที่จำกัดทำให้เกิดคอขวด (วงจร B3)",en:"Sales channels; limited demand creates the bottleneck (loop B3)."},
+  ex:{th:"Lemon Farm ซื้อทีละน้อย · ราคาพรีเมียมลดหลังโควิด",en:"Lemon Farm buys small lots · premiums fell after COVID"}},
+ Product:{p:2,x:1400,y:300,w:185,a:["name: String","cert: {PGS, GAP, organic}","brand: String"],o:["price(level): Baht"],th:"ผลิตภัณฑ์",cld:["solid","surplus"],
+  d:{th:"ผลผลิตและผลิตภัณฑ์แปรรูปที่ขายได้",en:"Farm produce and processed goods for sale."},
+  ex:{th:"ข้าวอินทรีย์ ‘กระซิบรักษ์’ · แชมพูมะกรูด ChTN · ส้มสีทอง (GI)",en:"‘Krasib-Raks’ organic rice · ChTN kaffir-lime shampoo · Som Si Thong orange (GI)"}},
+ FarmingSystem:{p:3,x:295,y:668,w:260,a:["type: {Mono, Integrated, Agroforest}","diversityIndex: Float","chemicalUse: Level","onFarmInputs_pct: Float"],o:["recycleBiomass()","resilience(): Level"],th:"ระบบการทำฟาร์ม",cld:["div","syn","rec","res","chem","soil"],fao:"Diversity · Synergies · Recycling · Efficiency · Resilience",
+  d:{th:"วิธีที่ครัวเรือนจัดการฟาร์ม — รวม 5 องค์ประกอบเชิงนิเวศของ FAO",en:"How a household runs its farm — bundles FAO's five ecological elements."},
+  ex:{th:"โคก หนอง นา (30:30:30:10) · ป่า 5 ระดับ · นาข้าว–ปลา",en:"Khok Nong Na (30:30:30:10) · five-level forest · rice–fish"}},
+ Practice:{n:"AgroecologicalPractice",p:3,x:575,y:668,w:240,a:["name: String","faoElement: Element","principle: String"],o:["apply(fs: FarmingSystem)"],th:"แนวปฏิบัติเกษตรนิเวศ",cld:["div","rec","syn"],
+  d:{th:"เทคนิค/หลักการที่นำไปใช้ในฟาร์ม",en:"A technique or principle applied on farms."},
+  ex:{th:"ปุ๋ยหมักและน้ำหมักสมุนไพร 7 สูตร · เก็บเมล็ดพันธุ์ · ปักดำต้นเดียว · ฝายชะลอน้ำ",en:"Compost & 7 herbal ferments · seed saving · single-seedling transplanting · check dams"}},
+ LearningCenter:{p:3,x:835,y:668,w:220,a:["name: String","model: String","host: Farmer","district: String"],o:["demonstrate(p: Practice)","train(group)"],th:"ศูนย์เรียนรู้",cld:["know"],fao:"Co-creation & sharing of knowledge",
+  d:{th:"พื้นที่สาธิตและเรียนรู้ ‘เกาะแห่งความสอดคล้องของเกษตรนิเวศ’",en:"Demonstration and learning sites — ‘islands of agroecological coherence’."},
+  ex:{th:"ChTN · โรงเรียนชาวนา · โรงสีข้าวพระราชทาน · วัดโป่งคำ · OrigiNan (+ 15 ศูนย์หลัก 176 ศูนย์เครือข่ายในน่าน)",en:"ChTN · Farmers' School · Royal Rice Mill · Wat Pong Kham · OrigiNan (+15 main, 176 network centres in Nan)"}},
+ KnowledgeExchange:{p:3,x:1100,y:668,w:240,a:["format: {visit, course, FFS, game}","date: Date","participants: Int"],o:["coCreate(): Knowledge"],th:"การแลกเปลี่ยนเรียนรู้",cld:["know"],fao:"Co-creation & sharing of knowledge",
+  d:{th:"กิจกรรมเรียนรู้ร่วมกัน รวมถึงภาคสนามนี้และเกม WADIGA",en:"Shared learning events, including this field block and the WADIGA game."},
+  ex:{th:"อบรม 5 วัน 4 คืน (ChTN) · Mini Nan Forum · เกม WADIGA",en:"5-day course (ChTN) · Mini Nan Forum · WADIGA game"}},
+ Governance:{p:3,x:35,y:668,w:250,abs:true,st:"institution",a:["level: {community, tambon, province}","actors: String[]"],o:["negotiate()","enforce()"],th:"ธรรมาภิบาล",cld:["gov"],fao:"Responsible governance",
+  d:{th:"กติกาและสถาบันที่กำกับการใช้ที่ดิน น้ำ และป่า",en:"Rules and institutions governing land, water and forest."},
+  ex:{th:"น่านแซนด์บ็อกซ์ · แผนพัฒนาจังหวัด 2566–2570",en:"Nan Sandbox · Provincial Development Plan 2023–2027"}},
+ WaterRule:{p:3,x:35,y:960,w:170,a:["allocationOrder","storage_m3: Float"],o:["allocate(water)"],th:"กติกาการแบ่งน้ำ",cld:["gov","wconf"],d:{th:"กติกาแบ่งน้ำร่วม (WADIGA)",en:"Collective water-sharing rules (WADIGA)"},ex:{th:"อ่างเก็บน้ำ 83 แห่ง 68.7 ล้าน ม³",en:"83 reservoirs, 68.7 M m³"}},
+ LandTenure:{p:3,x:220,y:960,w:200,a:["document: {title, CTC, none}","secure: Bool"],o:["enableCertification()"],th:"สิทธิในที่ดิน",cld:["gov"],d:{th:"ไม่มีเอกสารสิทธิ์ = ขอรับรอง PGS/GAP ไม่ได้",en:"No land document = no PGS/GAP certification"},ex:{th:"139,522 รายทำกินในเขตป่า · คทช. 84,429 ไร่",en:"139,522 farmers inside forest land · CTC 84,429 rai"}},
+ CommunityForest:{p:3,x:435,y:960,w:170,a:["area_rai: Float","registered: Bool"],o:["monitor()"],th:"ป่าชุมชน",cld:["gov","forest"],d:{th:"ป่าที่ชุมชนดูแล บวชป่า",en:"Community-managed forest, tree ordination"},ex:{th:"ป่าชุมชน 301 แห่ง 14 อำเภอ",en:"301 community forests in 14 districts"}},
+};
+// [from, to, kind, label, multFrom, multTo, via?]  kind: assoc | comp (diamond at from) | agg (diamond at from) | gen (triangle at to) | dep (dashed arrow to)
+const UR = [
+ ["Watershed","Plot","comp","contains","1","1..*"],
+ ["Household","Plot","assoc","cultivates","1","1..*"],
+ ["Plot","Crop","assoc","grows","*","0..1"],
+ ["AnnualCrop","Crop","gen"],["PerennialCrop","Crop","gen"],
+ ["Shock","Household","dep","affects"],
+ ["Household","Farmer","comp","members","1","1..*",[[600,272],[770,272]]],
+ ["Household","Youth","comp","","1","0..*",[[560,445],[790,445]]],
+ ["Household","FarmingSystem","assoc","operates","1","1"],
+ ["Household","Product","assoc","produces","1","0..*",[[430,590],[700,590],[1540,590]]],
+ ["Farmer","FarmerNetwork","assoc","member of","*","*"],
+ ["PGSGroup","FarmerNetwork","gen"],["Cooperative","FarmerNetwork","gen"],["ProducerCluster","FarmerNetwork","gen"],
+ ["FarmerNetwork","Market","assoc","sells through","1..*","1..*"],
+ ["Market","Product","assoc","trades","*","*"],
+ ["PGSGroup","Product","dep","certifies",null,null,[[1076,425],[1440,425]]],
+ ["FarmingSystem","Practice","agg","applies","1","0..*"],
+ ["LearningCenter","Practice","assoc","demonstrates","1","1..*"],
+ ["LearningCenter","KnowledgeExchange","comp","hosts","1","0..*"],
+ ["Farmer","KnowledgeExchange","assoc","participates","*","*",[[777,140],[777,612],[1190,612]]],
+ ["Youth","KnowledgeExchange","assoc","","*","*",[[920,640],[1150,650]]],
+ ["CulturalHeritage","Practice","dep","inspires",null,null,[[1150,572],[690,572]]],
+ ["CulturalHeritage","Youth","dep","transmitted to"],
+ ["WaterRule","Governance","gen"],["LandTenure","Governance","gen"],["CommunityForest","Governance","gen"],
+ ["Governance","Watershed","assoc","governs","*","1",[[24,700],[24,140]]],
+ ["LandTenure","Product","dep","enables certification",null,null,[[320,1135],[1595,1135],[1595,350]]],
+ ["Shock","FarmingSystem","dep","buffered by",null,null,[[275,500],[275,700]]],
+];
+let UVIEW = "cld", USEL = null;
+const uFont = "10.5px";
+function uSize(id){ const c=UC[id], hh = 22 + (c.st?14:0) + (LANG==="th"?14:0) + (c.fao?13:0); return {h: hh + 8 + c.a.length*15 + 8 + c.o.length*15 + (c.o.length?6:0), hh}; }
+function uClip(c, s, tx, ty){ const cx=c.x+c.w/2, cy=c.y+s.h/2, dx=tx-cx, dy=ty-cy; const k=Math.min(dx? (c.w/2)/Math.abs(dx):1e9, dy? (s.h/2)/Math.abs(dy):1e9); return [cx+dx*k, cy+dy*k]; }
+function renderUML(){
+  const host=document.getElementById("umlview"); if (!host) return;
+  document.querySelectorAll("[data-u]").forEach(el=>el.textContent=u_(el.dataset.u));
+  const S={}; Object.keys(UC).forEach(k=>S[k]=uSize(k));
+  const rel = r => USEL ? (r[0]===USEL||r[1]===USEL) : true;
+  const pk = UPK.map(p=>`<g><rect x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" rx="6" fill="color-mix(in srgb, ${THC[p.id]} 5%, transparent)" stroke="${THC[p.id]}" stroke-width="1.3" stroke-dasharray="0"/>
+     <path d="M${p.x},${p.y} h${Math.max(180,(LANG==="th"?p.th:p.name).length*8+70)} v-0 l0,0" /><rect x="${p.x}" y="${p.y-20}" width="${Math.max(190,(LANG==="th"?p.th:p.name).length*7.6+80)}" height="20" fill="color-mix(in srgb, ${THC[p.id]} 16%, var(--surface))" stroke="${THC[p.id]}" stroke-width="1.3"/>
+     <text x="${p.x+8}" y="${p.y-6}" font-size="12" font-weight="700" fill="${THC[p.id]}">«package» ${p.id} · ${esc(LANG==="th"?p.th:p.name)}</text></g>`).join("");
+  const edges = UR.map((r,i)=>{ const A=UC[r[0]], B=UC[r[1]], sa=S[r[0]], sb=S[r[1]], via=r[6]||[];
+    const first = via[0] || [B.x+B.w/2, B.y+sb.h/2], last = via[via.length-1] || [A.x+A.w/2, A.y+sa.h/2];
+    const p1 = uClip(A,sa,first[0],first[1]), p2 = uClip(B,sb,last[0],last[1]);
+    const pts=[p1,...via,p2]; const on=rel(r); const col = on&&USEL ? "var(--ink)" : "var(--ink2)";
+    const kind=r[2], dash = kind==="dep" ? 'stroke-dasharray="6 4"' : "";
+    const mEnd = kind==="gen" ? "url(#uTri)" : kind==="dep" ? "url(#uOpen)" : "";
+    const mStart = kind==="comp" ? "url(#uDiaF)" : kind==="agg" ? "url(#uDiaH)" : "";
+    // label at middle segment
+    const mi = Math.floor((pts.length-1)/2), a=pts[mi], b=pts[mi+1], lx=(a[0]+b[0])/2, ly=(a[1]+b[1])/2;
+    const mult = (pt, nx, txt) => txt ? (()=>{ const dx=nx[0]-pt[0], dy=nx[1]-pt[1], d=Math.hypot(dx,dy)||1; const ux=dx/d, uy=dy/d; return `<text x="${pt[0]+ux*20-uy*10}" y="${pt[1]+uy*20+ux*10+4}" font-size="11" fill="${col}" text-anchor="middle">${txt}</text>`; })() : "";
+    return `<g class="ur ${on?"on":"off"}"><polyline points="${pts.map(p=>p.join(",")).join(" ")}" fill="none" stroke="${col}" stroke-width="${on&&USEL?2:1.3}" ${dash} marker-end="${mEnd}" marker-start="${mStart}"/>
+      ${r[3]?`<text x="${lx}" y="${ly-5}" font-size="11.5" font-style="italic" text-anchor="middle" fill="${col}" paint-order="stroke" stroke="var(--surface)" stroke-width="4">${esc(r[3])}${kind==="assoc"?" ▸":""}</text>`:""}
+      ${mult(p1,pts[1],r[4])}${mult(p2,pts[pts.length-2],r[5])}</g>`; }).join("");
+  const cls = Object.entries(UC).map(([id,c])=>{ const s=S[id], on = !USEL || USEL===id || UR.some(r=>(r[0]===USEL&&r[1]===id)||(r[1]===USEL&&r[0]===id)); const col=THC[c.p];
+    let y=c.y+16, t="";
+    if (c.st){ t+=`<text x="${c.x+c.w/2}" y="${y}" text-anchor="middle" font-size="10.5" fill="var(--muted)">«${c.st}»</text>`; y+=14; }
+    t+=`<text x="${c.x+c.w/2}" y="${y}" text-anchor="middle" font-size="13.5" font-weight="700" ${c.abs?'font-style="italic"':""} fill="var(--ink)">${c.n||id}</text>`;
+    if (LANG==="th"){ y+=14; t+=`<text x="${c.x+c.w/2}" y="${y}" text-anchor="middle" font-size="11" fill="var(--ink2)">${esc(c.th)}</text>`; }
+    if (c.fao){ y+=13; t+=`<text x="${c.x+c.w/2}" y="${y}" text-anchor="middle" font-size="9.5" font-weight="700" fill="${col}">«FAO» ${esc(c.faoS || (c.fao.length>34?c.fao.split(" · ")[0]+" …":c.fao))}</text>`; }
+    const y1=c.y+s.hh; let ya=y1+15; const at=c.a.map(a=>{const r=`<text x="${c.x+7}" y="${ya}" font-size="${uFont}" font-family="ui-monospace,Menlo,Consolas,monospace" fill="var(--ink)">− ${esc(a)}</text>`; ya+=15; return r;}).join("");
+    const y2=ya-7; let yo=y2+15; const op=c.o.map(o=>{const r=`<text x="${c.x+7}" y="${yo}" font-size="${uFont}" font-family="ui-monospace,Menlo,Consolas,monospace" fill="var(--ink)">+ ${esc(o)}</text>`; yo+=15; return r;}).join("");
+    return `<g class="uc ${on?"on":"off"}" data-ucls="${id}" style="cursor:pointer"><rect x="${c.x}" y="${c.y}" width="${c.w}" height="${s.h}" fill="var(--surface)" stroke="${col}" stroke-width="${USEL===id?3:1.6}"/>
+      <rect x="${c.x}" y="${c.y}" width="${c.w}" height="${s.hh}" fill="color-mix(in srgb, ${col} 14%, var(--surface))" stroke="${col}" stroke-width="1.2"/>
+      <line x1="${c.x}" x2="${c.x+c.w}" y1="${y2}" y2="${y2}" stroke="${col}" stroke-width="1"/>${t}${at}${op}</g>`; }).join("");
+  const svg = `<svg viewBox="-12 -10 1612 1185" class="umlsvg" role="img" aria-label="${esc(u_("title"))}"><defs>
+     <marker id="uTri" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="13" markerHeight="13" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="var(--surface)" stroke="var(--ink2)" stroke-width="1.2"/></marker>
+     <marker id="uOpen" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L12,6 L0,12" fill="none" stroke="var(--ink2)" stroke-width="1.4"/></marker>
+     <marker id="uDiaF" viewBox="0 0 16 10" refX="1" refY="5" markerWidth="16" markerHeight="10" orient="auto-start-reverse"><path d="M0,5 L8,0 L16,5 L8,10 z" fill="var(--ink2)"/></marker>
+     <marker id="uDiaH" viewBox="0 0 16 10" refX="1" refY="5" markerWidth="16" markerHeight="10" orient="auto-start-reverse"><path d="M0,5 L8,0 L16,5 L8,10 z" fill="var(--surface)" stroke="var(--ink2)" stroke-width="1.2"/></marker></defs>
+     ${pk}${edges}${cls}</svg>`;
+  let panel="";
+  if (USEL){ const c=UC[USEL], col=THC[c.p];
+    const rs = UR.filter(r=>r[0]===USEL||r[1]===USEL).map(r=>{ const other = r[0]===USEL? r[1]:r[0]; const nm=UC[other].n||other;
+      const k={assoc:"—",comp:"◆—",agg:"◇—",gen:"—▷",dep:"⇢"}[r[2]]; return `<li><code>${esc(UC[r[0]].n||r[0])} ${k} ${esc(UC[r[1]].n||r[1])}</code>${r[3]?` <i>${esc(r[3])}</i>`:""}${r[4]?` (${r[4]} : ${r[5]})`:""} · <a href="#" data-ucls="${other}">${esc(nm)}</a></li>`; }).join("");
+    panel = `<div class="card cldpanel" style="border-top:6px solid ${col}"><div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap"><h3 style="font-size:20px;font-family:ui-monospace,Menlo,monospace">${c.abs?"<i>":""}${esc(c.n||USEL)}${c.abs?"</i>":""}</h3><span class="muted">${esc(c.th)} · package ${c.p}</span>${c.fao?`<span class="pill">«FAO» ${esc(c.fao)}</span>`:""}</div>
+      <p style="color:var(--ink2);margin:8px 0">${esc(c.d[LANG])}</p><p style="margin:0 0 10px"><b>${u_("ex")}:</b> ${esc(c.ex[LANG])}</p>
+      <div class="grid g2"><div><b>${u_("attrs")}</b><ul class="mono">${c.a.map(a=>`<li>${esc(a)}</li>`).join("")}</ul><b>${u_("ops")}</b><ul class="mono">${c.o.map(o=>`<li>${esc(o)}</li>`).join("")||"<li>—</li>"}</ul></div>
+      <div><b>${u_("rels")}</b><ul>${rs}</ul>${c.cld&&c.cld.length?`<b>${u_("cld")}</b><div class="cldchips">${c.cld.map(n=>`<button class="cchip" data-gocld="${n}" style="--lc:${THC[CN[n][2]]}">${esc(CN[n][LANG==="th"?3:4].replace(/\n/g," "))}</button>`).join("")}</div>`:""}</div></div></div>`; }
+  host.innerHTML = `${panel}<div class="cldwrap">${svg}</div>`;
+}
+function renderModels(){
+  const v = UVIEW;
+  document.querySelectorAll("[data-cview]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.cview===v));
+  const a=document.getElementById("cldpart"), b=document.getElementById("umlpart"); if (!a||!b) return;
+  a.style.display = v==="cld" ? "" : "none"; b.style.display = v==="uml" ? "" : "none";
+  renderCLD(); renderUML();
+  const q=document.getElementById("umlq"); if (q) q.innerHTML = UT[LANG].qL.map(x=>`<li style="margin:4px 0">${x}</li>`).join("");
+}
+document.addEventListener("click", e=>{
+  const v = e.target.closest("[data-cview]"); if (v){ UVIEW=v.dataset.cview; renderModels(); return; }
+  const u = e.target.closest("[data-ucls]"); if (u){ e.preventDefault(); USEL = USEL===u.dataset.ucls && u.tagName!=="A" ? null : u.dataset.ucls; renderUML(); return; }
+  const g = e.target.closest("[data-gocld]"); if (g){ UVIEW="cld"; CNODE=g.dataset.gocld; CSEL=null; renderModels(); document.getElementById("cldview").scrollIntoView({behavior:"smooth",block:"start"}); return; }
 });
 
 const h = location.hash.slice(1); if (TABS.some(x=>x[0]===h)) TAB=h;
