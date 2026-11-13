@@ -284,6 +284,17 @@ footer .logos{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bot
 .wdgraphs:fullscreen .grid.g2{grid-template-columns:1fr 1fr}
 .wdgraphs:fullscreen [data-wact="printg"]{display:none}
 @media print{body.print-graphs *{visibility:hidden}body.print-graphs #wdgraphs,body.print-graphs #wdgraphs *{visibility:visible}body.print-graphs #wdgraphs{position:absolute;left:0;top:0;width:100%}body.print-graphs #wdgraphs button{display:none}.card{box-shadow:none}.gcard2{break-inside:avoid}}
+.cldwrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:10px}
+.cldsvg{display:block;width:100%;min-width:860px;height:auto}
+.cldsvg .off{opacity:.16;transition:opacity .2s}
+.cldsvg .on{transition:opacity .2s}
+.cldsvg .cn:hover rect{stroke-width:3}
+.cldchips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.cchip{--lc:var(--green);border:1.5px solid var(--lc);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 11px;font-size:13px;cursor:pointer}
+.cchip b{color:var(--lc)}
+.cchip.sel{background:var(--lc);color:#fff}.cchip.sel b{color:#fff}
+.cbadge{color:#fff;font-weight:800;border-radius:10px;padding:2px 10px;font-size:18px}
+.cldpanel{margin-top:8px}.cldpanel ul{margin:6px 0 10px;padding-left:20px;color:var(--ink2);font-size:15px}
 .wd-link{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:14px;font-weight:600;color:var(--water);background:var(--water-soft);border:0;border-radius:999px;padding:3px 10px;cursor:pointer}
 </style>
 </head>
@@ -380,6 +391,20 @@ footer .logos{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bot
     <div id="wdview"></div>
   </section>
 
+  <!-- CLD -->
+  <section class="panel" id="p-cld">
+    <div class="sec-title"><h2 data-c="title"></h2></div>
+    <p class="muted" style="margin-top:-4px" data-c="lead"></p>
+    <div class="grid g2" style="margin-bottom:12px">
+      <div class="card" style="padding:14px 16px"><b data-c="how"></b><p class="muted" style="margin:4px 0 0;font-size:14px" data-c="howT"></p></div>
+      <div class="card" style="padding:14px 16px"><b data-c="themes"></b>
+        <div class="legend"><span><span class="cropdot" style="background:#a5432a"></span><span data-c="t1"></span></span><span><span class="cropdot" style="background:#b07d1e"></span><span data-c="t2"></span></span><span><span class="cropdot" style="background:#3f6e31"></span><span data-c="t3"></span></span></div>
+        <b data-c="fao" style="font-size:14px"></b> <span class="muted" style="font-size:13px" data-c="dash"></span></div>
+    </div>
+    <div id="cldview"></div>
+    <div class="card" style="margin-top:14px"><b data-c="activity"></b><ol id="cldact" style="margin:8px 0 0;padding-left:22px;color:var(--ink2)"></ol></div>
+    <p class="note" data-c="note"></p><p class="note" data-c="src"></p>
+  </section>
   <section class="panel" id="p-map">
     <div class="sec-title"><h2 data-i="whereWeGo"></h2><small data-i="mapNote"></small></div>
     <div class="mapgrid">
@@ -474,7 +499,7 @@ const I18N = {
   title:"คู่มือภาคสนาม",
   subtitle:"7 วันแห่งการเรียนรู้เชิงลึกในจังหวัดน่าน — โครงการวิจัย ADAPT-Nan: Advancing Development of Agroecology in Nan Province in Thailand · หลักสูตรระดับปริญญาตรี",
   dates:"8 – 15 พฤศจิกายน 2569",
-  tab_home:"หน้าแรก", tab_prog:"กำหนดการ", tab_groups:"กลุ่ม", tab_wadiga:"WADIGA", tab_map:"แผนที่", tab_prep:"เตรียมตัว", tab_facts:"ข้อมูลน่าน",
+  tab_home:"หน้าแรก", tab_prog:"กำหนดการ", tab_groups:"กลุ่ม", tab_wadiga:"WADIGA", tab_cld:"ผังวงจร", tab_map:"แผนที่", tab_prep:"เตรียมตัว", tab_facts:"ข้อมูลน่าน",
   intensive:"การเรียนรู้ภาคสนามแบบเข้มข้น", intensiveSub:"พักที่ศูนย์ CU-ผาสิงห์ และออกภาคสนามทุกวัน",
   intro:"ช่วงภาคสนามทำให้การเตรียมความพร้อมผ่านระบบออนไลน์เกิดขึ้นจริง ในแต่ละวันผู้เข้าร่วมจะได้ทำงานร่วมกับเกษตรกร พระสงฆ์ ผู้ประกอบการ และผู้จัดกิจกรรมชุมชน ผู้ริเริ่มและพัฒนาทางเลือกด้านเกษตรนิเวศในพื้นที่ลุ่มน้ำของจังหวัดน่าน พร้อมเรียนรู้ความเชื่อมโยงระหว่างการเปลี่ยนแปลงสภาพภูมิอากาศ ความมั่นคงทางอาหาร และวิถีชีวิตชนบท สัปดาห์นี้จะปิดท้ายด้วยการนำเสนอข้อเสนอของคุณเองต่อคณะผู้มีส่วนได้ส่วนเสียในท้องถิ่น",
   s1:"วันที่น่าน", s2:"พื้นที่เรียนรู้", s3:"กลุ่มต่อพื้นที่", s4:"ชั่วโมงภาคสนาม",
@@ -528,7 +553,7 @@ const I18N = {
   title:"Field Block Guide",
   subtitle:"Seven days of immersive learning in Nan Province, Thailand — ADAPT-Nan: Advancing Development of Agroecology in Nan Province in Thailand · Bachelor's programme",
   dates:"8 – 15 November 2026",
-  tab_home:"Home", tab_prog:"Programme", tab_groups:"Groups", tab_wadiga:"WADIGA", tab_map:"Map", tab_prep:"Prepare", tab_facts:"Nan facts",
+  tab_home:"Home", tab_prog:"Programme", tab_groups:"Groups", tab_wadiga:"WADIGA", tab_cld:"Loops", tab_map:"Map", tab_prep:"Prepare", tab_facts:"Nan facts",
   intensive:"Intensive Field Block", intensiveSub:"Based at CU-Phasing Center with daily excursions",
   intro:"The field block brings the online preparation to life. Each day you will work alongside farmers, monks, entrepreneurs and community organisers who have built agroecological alternatives in Nan's watersheds, and learn to trace the links between climate change, food security and rural livelihoods. The week ends with your own proposals, presented to a panel of local stakeholders.",
   s1:"days in Nan", s2:"host sites", s3:"groups per site", s4:"field hours",
@@ -772,6 +797,7 @@ const TABS = [
  ["home",'<path d="M3 11 12 3l9 8"/><path d="M5 10v10h14V10"/>'],
  ["prog",'<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/>'],
  ["groups",'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M15 15c3 0 6 1.5 6 4"/>'],
+ ["cld",'<path d="M7 7a5 5 0 1 1 0 10"/><path d="M17 17a5 5 0 1 1 0-10"/><path d="M5 5l2 2-2 2"/><path d="M19 19l-2-2 2-2"/>'],
  ["wadiga",'<path d="M12 2.5C9 7 6 10.5 6 14a6 6 0 0 0 12 0c0-3.5-3-7-6-11.5z"/>'],
  ["map",'<path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/>'],
  ["prep",'<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/>'],
@@ -802,7 +828,7 @@ function renderStatic(){
 }
 
 function render(){
-  renderStatic(); renderNow(); renderGlance(); renderChips(); renderDay(); renderGroups(); renderSites(); renderPrep(); renderFacts(); renderWadiga();
+  renderStatic(); renderNow(); renderGlance(); renderChips(); renderDay(); renderGroups(); renderSites(); renderPrep(); renderFacts(); renderWadiga(); renderCLD(); const ca=document.getElementById("cldact"); if (ca) ca.innerHTML=CT[LANG].activityL.map(x=>`<li style="margin:4px 0">${x}</li>`).join("");
   document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on", p.id==="p-"+TAB));
 }
 
@@ -1480,6 +1506,167 @@ document.addEventListener("change", e=>{
     o[last] = k[0]==="names" ? (t.value.trim()||o[last]) : (t.value===""?0:parseFloat(t.value)); }
   else return;
   wdSave(); renderWadiga();
+});
+
+/* ================= Causal-loop diagram: agroecology components ================= */
+const CT = {
+ th:{
+  title:"ผังวงจรเหตุและผล (Causal-loop diagram) ขององค์ประกอบเกษตรนิเวศในน่าน",
+  lead:"ผังนี้เชื่อมโยง 10 องค์ประกอบเกษตรนิเวศของ FAO เข้ากับ 3 ประเด็นวิจัยของ ADAPT-Nan โดยใช้ข้อมูลจากเอกสารหลักสูตร ข้อมูลศูนย์เรียนรู้ 5 แห่ง ข้อมูลจังหวัดน่าน และเกม WADIGA — คลิกวงจรหรือกล่องเพื่อดูคำอธิบายและหลักฐาน",
+  how:"วิธีอ่าน", howT:"ลูกศร + = เปลี่ยนไปทิศทางเดียวกัน (เพิ่ม→เพิ่ม) · ลูกศร − = เปลี่ยนไปทิศทางตรงข้าม (เพิ่ม→ลด) · R = วงจรเสริมแรง (ขยายตัวเองต่อเนื่อง ทั้งวงจรดีและวงจรร้าย) · B = วงจรสมดุล (ดึงระบบกลับ/จำกัดการเติบโต)",
+  loops:"วงจร", all:"แสดงทั้งหมด", themes:"ประเด็นวิจัย ADAPT-Nan (สีกล่อง)", fao:"องค์ประกอบ FAO (ป้ายในกล่อง)",
+  t1:"1 · การเปลี่ยนแปลงภาคเกษตร", t2:"2 · การมีส่วนร่วมทางสังคม", t3:"3 · การก่อตัวของเกษตรนิเวศ",
+  story:"เรื่องราวของวงจร", evidence:"หลักฐานจากน่าน", lever:"จุดคานงัด (leverage)", see:"ดูในภาคสนาม",
+  nodeIn:"ได้รับผลจาก", nodeOut:"ส่งผลต่อ", faoEl:"องค์ประกอบ FAO", theme:"ประเด็นวิจัย",
+  src:"แหล่งข้อมูล: ADAPT-Nan BSc Curriculum (2026) — โครงการ งานวิจัย และศูนย์เรียนรู้ 5 แห่ง · Nan Province Fact Brochure (ต.ค. 2569) · WaDiGa conceptual model (PARDI) · FAO (2018) The 10 Elements of Agroecology",
+  note:"เป็นแบบจำลองเชิงคุณภาพเพื่อการเรียนรู้และอภิปราย ไม่ใช่ผลการวัดเชิงปริมาณ — ให้นิสิตตรวจสอบ เพิ่ม หรือโต้แย้งลูกศรจากสิ่งที่พบในภาคสนาม",
+  dash:"· เส้นประ = ความเชื่อมโยงนอกวงจรหลัก",
+  activity:"กิจกรรมกลุ่ม", activityL:["เลือก 1 วงจรที่กลุ่มเห็นชัดที่สุดในพื้นที่ที่ไปเยือน และหาหลักฐาน 2–3 ข้อ","มีลูกศรใดที่ขาดหายไป หรือทิศทาง/เครื่องหมายควรต่างไปจากนี้?","ศูนย์เรียนรู้แห่งนั้นกำลัง ‘ตัด’ วงจรร้ายหรือ ‘เร่ง’ วงจรดีตรงจุดไหน?","ข้อเสนอของกลุ่มในวันที่ 14 พ.ย. ใช้จุดคานงัดใด?"],
+ },
+ en:{
+  title:"Causal-loop diagram of agroecology components in Nan",
+  lead:"This diagram links FAO's 10 Elements of Agroecology with ADAPT-Nan's 3 research themes, drawing on the curriculum handbook, the five learning-centre profiles, the Nan fact brochure and the WADIGA game. Click a loop or a box for explanations and evidence.",
+  how:"How to read", howT:"+ arrow = change in the same direction (more→more) · − arrow = change in the opposite direction (more→less) · R = reinforcing loop (self-amplifying, vicious or virtuous) · B = balancing loop (pulls the system back / limits growth)",
+  loops:"Loops", all:"Show all", themes:"ADAPT-Nan research themes (box colour)", fao:"FAO elements (badge in box)",
+  t1:"1 · Agrarian change", t2:"2 · Social engagement", t3:"3 · Agroecology emergence",
+  story:"Story of the loop", evidence:"Evidence from Nan", lever:"Leverage points", see:"See in the field",
+  nodeIn:"Affected by", nodeOut:"Affects", faoEl:"FAO element", theme:"Research theme",
+  src:"Sources: ADAPT-Nan BSc Curriculum (2026) — project, research and five learning-centre profiles · Nan Province Fact Brochure (Oct 2026) · WaDiGa conceptual model (PARDI) · FAO (2018) The 10 Elements of Agroecology",
+  note:"A qualitative model for learning and discussion, not a quantitative measurement — students should test, add or challenge arrows based on what they find in the field.",
+  dash:"· dashed = link outside the named loops",
+  activity:"Group activity", activityL:["Pick the loop your group saw most clearly at a site and find 2–3 pieces of evidence","Which arrows are missing, or should have a different direction or sign?","Where is that learning centre ‘cutting’ a vicious loop or ‘accelerating’ a virtuous one?","Which leverage point does your group's proposal on 14 Nov use?"],
+ }
+};
+const c_ = k => (CT[LANG]||CT.en)[k] ?? k;
+const THC = {1:"#a5432a", 2:"#b07d1e", 3:"#3f6e31"};
+const FAO = {know:"Co-creation & sharing of knowledge", rec:"Recycling · Efficiency", div:"Diversity", syn:"Synergies", res:"Resilience", gov:"Responsible governance", cult:"Culture & food traditions", net:"Human & social values", solid:"Circular & solidarity economy"};
+const FAO_TH = {know:"การร่วมสร้างและแบ่งปันความรู้", rec:"การหมุนเวียน · ประสิทธิภาพ", div:"ความหลากหลาย", syn:"การเกื้อกูลกัน", res:"ความยืดหยุ่น", gov:"ธรรมาภิบาลที่รับผิดชอบ", cult:"วัฒนธรรมและวิถีอาหาร", net:"คุณค่าของมนุษย์และสังคม", solid:"เศรษฐกิจหมุนเวียนและเกื้อกูล"};
+const CN = { // id: [x,y,theme, th, en]
+ mono:[130,85,1,"พื้นที่ข้าวโพด\nพืชเชิงเดี่ยว","Maize &\nmonoculture area"],
+ debt:[420,85,1,"หนี้ครัวเรือน\nและต้นทุนปัจจัยการผลิต","Household debt\n& input costs"],
+ chem:[300,220,1,"การใช้สารเคมีเกษตร","Agrochemical use"],
+ health:[590,215,1,"ความเสี่ยงสุขภาพ\nจากสารเคมี","Health risks\nfrom chemicals"],
+ forest:[100,385,1,"พื้นที่ป่าไม้","Forest cover"],
+ water:[100,545,1,"การควบคุมน้ำ\nของลุ่มน้ำ","Watershed\nwater regulation"],
+ shock:[500,660,1,"ความเสียหายจากแล้ง\nน้ำท่วม หมอกควัน","Drought, flood\n& haze damage"],
+ hort:[110,720,1,"พืชสวนมูลค่าสูง\nที่ต้องใช้น้ำชลประทาน","Irrigated high-value\nperennials"],
+ wconf:[380,735,1,"การขาดแคลนน้ำ\nและความขัดแย้ง","Water scarcity\n& conflict"],
+ income:[740,600,1,"รายได้และความมั่นคง\nของครัวเรือน","Farm income\n& stability"],
+ know:[725,85,3,"การร่วมสร้าง\nและแบ่งปันความรู้","Co-creation &\nsharing of knowledge"],
+ rec:[720,330,3,"การหมุนเวียนทรัพยากร\nและใช้อย่างมีประสิทธิภาพ","Recycling\n& efficiency"],
+ div:[905,240,3,"ความหลากหลาย\nในฟาร์มและภูมิทัศน์","Farm & landscape\ndiversity"],
+ soil:[520,425,3,"สุขภาพดิน\nและความอุดมสมบูรณ์","Soil health\n& fertility"],
+ syn:[1090,335,3,"การเกื้อกูลกัน\n(เกษตรผสมผสาน)","Synergies\n(integrated farming)"],
+ res:[935,465,3,"ความยืดหยุ่น\nต่อความเสี่ยง","Resilience\nto shocks"],
+ gov:[300,480,3,"ธรรมาภิบาล: สิทธิที่ดิน\nกติกาน้ำ ป่าชุมชน","Governance: tenure,\nwater rules, forests"],
+ youth:[985,70,2,"การมีส่วนร่วมของเยาวชน\nและผู้สืบทอด","Youth engagement\n& succession"],
+ cult:[1125,190,2,"วัฒนธรรมและ\nวิถีอาหารท้องถิ่น","Culture &\nfood traditions"],
+ net:[905,695,2,"เครือข่ายเกษตรกร\nและคุณค่าทางสังคม","Farmer networks\n& social values"],
+ solid:[1100,560,2,"เศรษฐกิจเกื้อกูล\n(PGS สหกรณ์ คลัสเตอร์)","Solidarity economy\n(PGS, co-op, cluster)"],
+ surplus:[1110,700,2,"ผลผลิตอินทรีย์\nล้นตลาด","Unsold organic\nsurplus"],
+};
+// [from,to,sign,loops[],curvature]
+const CE = [
+ ["debt","mono","+",["R1","R2"],0.12],["mono","chem","+",["R1"],0.1],["chem","soil","−",["R1"],0.08],["soil","income","+",["R1"],0.05],["income","debt","−",["R1","R2"],-0.12],
+ ["mono","forest","−",["R2","B1"],0.1],["forest","water","+",["R2"],0.1],["water","shock","−",["R2"],0.1],["shock","income","−",["R2","R3"],0.08],
+ ["forest","gov","−",["B1"],-0.1],["gov","mono","−",["B1"],0.12],["gov","forest","+",["B1"],0.12],
+ ["chem","health","+",["B2"],0.1],["health","know","+",["B2"],0.1],["know","rec","+",["B2"],0.1],["rec","chem","−",["B2"],0.12],
+ ["know","div","+",["R3"],0.1],["div","syn","+",["R3"],0.1],["syn","income","+",["R3"],0.08],["income","net","+",["R3","R5","B3"],0.1],["net","know","+",["R3"],-0.1],
+ ["div","res","+",["R3"],0.08],["res","shock","−",["R3"],0.06],
+ ["div","rec","+",["R4"],-0.1],["rec","soil","+",["R4"],0.1],["soil","div","+",["R4"],0.1],
+ ["net","solid","+",["R5"],0.1],["solid","income","+",["R5","B3"],0.08],
+ ["net","surplus","+",["B3"],0.12],["surplus","solid","−",["B3"],0.12],
+ ["cult","youth","+",["R6"],-0.1],["youth","know","+",["R6"],-0.08],["know","cult","+",["R6"],0.08],
+ ["hort","wconf","+",["B4"],0.1],["wconf","gov","+",["B4"],0.12],["gov","wconf","−",["B4"],0.12],
+ ["cult","div","+",[],0.1],
+];
+const CL = {
+ R1:{type:"R",pos:[405,330],day:3,col:"#a5432a",
+  th:{t:"กับดักหนี้–พืชเชิงเดี่ยว",s:"หนี้ทำให้เกษตรกรต้องปลูกข้าวโพดที่บริษัทให้เมล็ดพันธุ์และสารเคมีเป็นเครดิต การใช้สารเคมีมากขึ้นทำให้ดินเสื่อม ผลผลิตและรายได้สุทธิลดลง หนี้จึงเพิ่มขึ้นอีก — วงจรร้ายที่ขยายตัวเอง",e:["บริษัทให้เมล็ดพันธุ์และสารเคมีเป็นเครดิต ใช้หนี้ตอนเก็บเกี่ยว ผลผลิตไม่ได้มาตรฐาน → หนี้พอกพูน (ศูนย์เรียนรู้วัดโป่งคำ)","73% ของผู้ถือครองที่ดินเกษตรเป็นหนี้ เฉลี่ย 209,359 บาท · 70% ระบุว่าราคาปุ๋ย ยา น้ำมันสูงขึ้นเป็นปัญหาอันดับ 1 (สำมะโนเกษตร 2566)","‘วงจรหนี้ที่เพิ่มขึ้น ใช้สารเคมีเกินขนาด’ ในหุบน้ำน่าน (เครือข่ายข้าวอินทรีย์และโรงสีข้าวพระราชทาน)"],l:["ลดต้นทุนด้วยปัจจัยการผลิตในฟาร์ม (R4)","กองทุนออมทรัพย์/สินเชื่อดอกเบี้ยต่ำของสหกรณ์แทนเครดิตบริษัท","ตลาดที่ให้ราคาพรีเมียม (R5)"]},
+  en:{t:"Debt–monoculture trap",s:"Debt pushes farmers to grow maize with seed and chemicals supplied on company credit. More chemicals degrade the soil, so yields and net income fall and debt grows again — a self-amplifying vicious loop.",e:["Companies supply seed and agrochemicals on credit repaid at harvest; when crops fall short of standards, debts mount (Wat Pong Kham)","73% of farm holders are in debt, averaging 209,359 baht · 70% cite rising fertiliser, pesticide and fuel prices as their top problem (Ag. Census 2023)","‘A cycle of growing debts, overusing agrochemicals’ in the Nan valley (Organic Rice Network & Royal Rice Mill)"],l:["Cut costs with on-farm inputs (R4)","Co-op savings / low-interest credit instead of company credit","Premium markets (R5)"]}},
+ R2:{type:"R",pos:[250,585],day:3,col:"#a5432a",
+  th:{t:"ป่าหาย–น้ำแปรปรวน",s:"ข้าวโพดขยายขึ้นไปบนที่ลาดชันทำให้ป่าลดลง ลุ่มน้ำกักเก็บน้ำได้น้อยลง ภัยแล้งและน้ำท่วมรุนแรงขึ้น รายได้เสียหาย หนี้เพิ่ม และผลักให้ถางป่าปลูกพืชเชิงเดี่ยวมากขึ้นอีก",e:["ป่าจากดาวเทียมลดลง 8,534 → 7,621 km² (1990–2019) ขณะที่ข้าวโพดเพิ่ม ×7.8 (Kruasilp et al. 2023)","ลุ่มน้ำน่านให้น้ำท่า ≈40% และตะกอน ≈57% ของเจ้าพระยา · หมู่บ้านเสี่ยงน้ำท่วม 51 แห่ง ภัยแล้ง 43 แห่ง","ภัยแล้งเป็นปัญหาอันดับ 2 ของเกษตรกร (57.1%) · ‘ภูเขาหัวโล้น → ดินพังทลาย น้ำท่วมหนักขึ้น แล้งรุนแรงขึ้น’ (วัดโป่งคำ, ChTN)"],l:["ปลูกป่าบนยอดเขา ทำเกษตรที่เชิงเขา (‘สวมหมวกให้ภูเขา’)","โคก หนอง นา: เก็บน้ำฝน 100% ในพื้นที่","ไม้ยืนต้น/วนเกษตรเพิ่มการซึมน้ำ (ความหลากหลาย → น้ำ)"]},
+  en:{t:"Forest loss–water instability",s:"Maize spreading up steep slopes cuts forest cover, the watershed holds less water, droughts and floods get worse, incomes suffer, debt rises and pushes even more forest clearing for monocultures.",e:["Satellite forest fell 8,534 → 7,621 km² (1990–2019) while maize grew ×7.8 (Kruasilp et al. 2023)","The Nan basin supplies ≈40% of Chao Phraya runoff and ≈57% of its sediment · 51 villages at very high flood risk, 43 for drought","Drought is farmers' 2nd problem (57.1%) · ‘bare slopes bring erosion, worse floods and harsher droughts’ (Wat Pong Kham, ChTN)"],l:["Forest on hilltops, farming on foothills (‘a hat for the mountain’)","Khok Nong Na: capture 100% of rainfall on site","Trees/agroforestry raise infiltration (diversity → water)"]}},
+ B1:{type:"B",pos:[170,290],day:3,col:"#6b5b95",
+  th:{t:"การตอบสนองเชิงนโยบายต่อป่า",s:"เมื่อป่าลดลง แรงกดดันให้มีการกำกับดูแลเพิ่มขึ้น (น่านแซนด์บ็อกซ์ ป่าชุมชน จัดที่ดินทำกิน) ซึ่งจำกัดการขยายพืชเชิงเดี่ยวและฟื้นฟูป่า — วงจรสมดุลที่ดึงระบบกลับ",e:["โมเดลน่านแซนด์บ็อกซ์: 72% เป็นป่าต้นน้ำ · 18% ฟื้นฟูเป็นไม้ใหญ่ปลูกพืชใต้ร่ม · 10% พืชเศรษฐกิจ","ป่าชุมชนขึ้นทะเบียน 301 แห่ง · จัดที่ดิน คทช. 84,429 ไร่","พื้นที่ข้าวโพดขึ้นทะเบียนลดลง 54% (2558–2568) · ป่าปี 2568 = 61.0%","เกษตรกร 139,522 รายทำกินในเขตป่า — ความไม่มั่นคงด้านสิทธิที่ดินยังเป็นอุปสรรค"],l:["เชื่อมสิทธิที่ดินกับการรับรอง PGS/GAP (ธรรมาภิบาล → เศรษฐกิจเกื้อกูล)","ให้ชุมชนมีส่วนร่วมในการติดตามป่า (La-on Nan)"]},
+  en:{t:"Policy response to forest loss",s:"As forest declines, pressure for governance grows (Nan Sandbox, community forests, land allocation), which limits monoculture expansion and restores forest — a balancing loop pulling the system back.",e:["Nan Sandbox: 72% watershed forest · 18% restored to large trees with crops beneath · 10% economic crops","301 registered community forests · 84,429 rai allocated under the national land policy (CTC)","Registered maize area −54% (2015–2025) · forest 61.0% in 2025","139,522 farmers cultivate inside forest land — insecure tenure remains a barrier"],l:["Link tenure to PGS/GAP certification (governance → solidarity economy)","Community forest monitoring by youth (La-on Nan)"]}},
+ B2:{type:"B",pos:[455,150],day:1,col:"#6b5b95",
+  th:{t:"สุขภาพจุดประกายการเรียนรู้",s:"สารเคมีเพิ่มความเสี่ยงต่อสุขภาพ เมื่อชุมชนรับรู้ (เช่น ผลตรวจเลือด) จึงเกิดการเรียนรู้ร่วมกัน หันมาใช้ปุ๋ยหมักและปัจจัยการผลิตในท้องถิ่น ทำให้การใช้สารเคมีลดลง",e:["ตรวจโคลีนเอสเตอเรสในเลือดทุกหมู่บ้านใน ต.ศิลาเพชร พบการสัมผัสสารสูงมาก → รณรงค์ลดสารเคมี → เกิดโรงเรียนชาวนา (Farmer Field School)","กลุ่มผลิตผักปลอดภัย ร่วมกับ รพ.สต. และเกษตรตำบล","ChTN: ดินเดิมพบสารหนูและสารตกค้าง → ฟื้นฟูด้วยวัสดุอินทรีย์และสูตรหมักสมุนไพร 7 สูตร"],l:["ตรวจสุขภาพ/สารตกค้างเป็นเครื่องมือเรียนรู้ร่วม","เชื่อมโรงเรียน โรงพยาบาล และเกษตรตำบล"]},
+  en:{t:"Health sparks learning",s:"Chemicals raise health risks; once communities see the evidence (e.g. blood tests), shared learning follows, farmers switch to compost and local inputs, and chemical use falls.",e:["Blood cholinesterase tests in every village of Silaphet revealed very high exposure → anti-chemical campaign → Rice Farmer Field School","A ‘safe vegetables’ group supported by the sub-district hospital and agriculture office","ChTN: arsenic and residues found in the soil → remediation with organic materials and 7 herbal fermentation formulas"],l:["Use health/residue testing as a shared learning tool","Link schools, hospitals and the agriculture office"]}},
+ R3:{type:"R",pos:[830,505],day:1,col:"#3f6e31",
+  th:{t:"ความรู้–ความหลากหลาย–เครือข่าย (วงจรดี)",s:"การเรียนรู้ร่วมกันทำให้เกษตรกรเพิ่มความหลากหลายและระบบผสมผสาน ลดต้นทุน มีรายได้หลายทาง และทนต่อแล้ง/น้ำท่วม เมื่อเห็นผลจริง เครือข่ายขยาย ความรู้ก็ถูกแบ่งปันมากขึ้นอีก",e:["ChTN: 3 รูปแบบการเรียนรู้ (ดูงาน อบรม 5 วัน อาสาสมัคร) ‘การเปลี่ยนแปลงยั่งยืนเมื่อคนเห็นว่าทำได้จริง’ · ป่า 5 ระดับ","PGS: สมาชิกเรียนรู้จากกันเอง อาจารย์เปลี่ยนเป็นผู้อำนวยความสะดวก","ศูนย์เรียนรู้หลัก 15 แห่ง และเครือข่าย 176 แห่งในน่าน"],l:["ศูนย์เรียนรู้เป็น ‘แปลงสาธิต’ ให้เห็นผลจริง","ระบบพี่เลี้ยงเกษตรกร–เกษตรกร"]},
+  en:{t:"Knowledge–diversity–network (virtuous)",s:"Shared learning leads farmers to diversify and integrate, lowering costs, multiplying income sources and buffering droughts and floods. Visible success grows the network, which shares even more knowledge.",e:["ChTN: three learning modes (visits, 5-day course, volunteering) — ‘lasting change comes when people see it work’ · five-level forest","PGS: members learn from each other; the teacher becomes a facilitator","15 main and 176 network farmer learning centres in Nan"],l:["Learning centres as visible demonstration sites","Farmer-to-farmer mentoring"]}},
+ R4:{type:"R",pos:[660,420],day:1,col:"#3f6e31",
+  th:{t:"ดิน–ชีวมวล–การหมุนเวียน",s:"ความหลากหลายของพืชและไม้ให้ชีวมวลสำหรับปุ๋ยหมักและวัสดุคลุมดิน ดินดีขึ้น ปลูกพืชได้หลากหลายขึ้นอีก",e:["ChTN: ใช้ใบไม้ ฟางข้าว ไผ่ ซังข้าวโพดทำปุ๋ย · หยุดยาฆ่าหญ้า 1 ปี ไม้กลับมาเอง 22 ชนิด · นก 20 → 100+ ชนิด","อาหารปลูกในศูนย์ เศษอาหารทำปุ๋ย ใช้ถ่านชีวภาพ (ขยะเป็นศูนย์)"],l:["ปุ๋ยหมัก/น้ำหมักจากวัสดุท้องถิ่น","ปล่อยให้ป่าฟื้นตัวเอง (‘ปลูกป่าโดยไม่ต้องปลูก’)"]},
+  en:{t:"Soil–biomass–recycling",s:"Diverse crops and trees supply biomass for compost and mulch; healthier soil supports even more diversity.",e:["ChTN: leaf litter, rice straw, bamboo, corn husks composted · 22 tree species returned within a year of stopping herbicides · birds 20 → 100+ species","Food grown on site, leftovers composted, bio-charcoal used (zero waste)"],l:["Compost and ferments from local materials","Let forest regenerate (‘planting forest without planting’)"]}},
+ R5:{type:"R",pos:[855,630],day:2,col:"#b07d1e",
+  th:{t:"ตลาดเกื้อกูล",s:"เครือข่ายเกษตรกรสร้างช่องทางตลาดที่เป็นธรรม (PGS สหกรณ์โรงสี คลัสเตอร์แปรรูป) ให้ราคาดีกว่าตลาด รายได้เพิ่ม ดึงสมาชิกใหม่เข้าเครือข่าย",e:["โรงสีข้าวพระราชทานรับซื้อสูงกว่าราคาตลาด 0.50–1 บาท/กก. · ‘ขายข้าวอินทรีย์ให้โรงสีได้ราคาดีกว่าตลาด’ (พ่อชิน)","PGS Nan: 35 → 46 ครัวเรือนใน 9 อำเภอ · แบรนด์ ‘กระซิบรักษ์’ และขายออนไลน์","OrigiNan: สมาชิก 66 กลุ่ม 390 คน ใน 10 จาก 15 อำเภอ ใช้วัตถุดิบน่าน 240 ตัน/ปี"],l:["สร้างแบรนด์อัตลักษณ์น่าน","เชื่อมผู้ผลิตต้นน้ำ–กลางน้ำ–ปลายน้ำ"]},
+  en:{t:"Solidarity market",s:"Farmer networks build fair market channels (PGS, the cooperative mill, the processing cluster) paying above market prices; higher incomes attract new members.",e:["The Royal Rice Mill pays 0.50–1 baht/kg above market · ‘I get a better price than the market’ (Pho Chin)","PGS Nan: 35 → 46 households in 9 districts · ‘Krasib-Raks’ brand and online sales","OrigiNan: 66 member groups, 390 people in 10 of 15 districts, 240 t of Nan raw materials a year"],l:["Build a Nan identity brand","Connect upstream, midstream and downstream producers"]}},
+ B3:{type:"B",pos:[1030,640],day:2,col:"#6b5b95",
+  th:{t:"คอขวดตลาดอินทรีย์ (ขีดจำกัดการเติบโต)",s:"เมื่อสมาชิกเพิ่ม ผลผลิตอินทรีย์มากกว่าความต้องการของตลาด สต็อกค้าง ราคาพรีเมียมลด รายได้ลด สมาชิกบางส่วนถอนตัว — จำกัดการเติบโตของวงจร R5",e:["PGS โตจาก 35 ครัวเรือน แต่ Lemon Farm ซื้อทีละน้อย ข้าวอินทรีย์ค้างสต็อกกดดันโรงสี","หลังโควิด ผู้บริโภคจ่ายราคาพรีเมียมไม่ไหว สมาชิกหลายรายถอนตัวไปปลูกข้าวสี ‘มาตรฐานปลอดภัย’"],l:["กระจายช่องทางตลาด (ออนไลน์ ท่องเที่ยว โรงเรียน/โรงพยาบาล)","แปรรูปเพิ่มมูลค่า (OrigiNan)","วางแผนการผลิตร่วมกันตามความต้องการ"]},
+  en:{t:"Organic market bottleneck (limits to growth)",s:"As membership grows, organic supply outpaces demand; stock builds up, premiums shrink, incomes fall and some members leave — limiting the growth of R5.",e:["PGS grew from 35 households but Lemon Farm buys in small lots; unsold organic rice piled up at the mill","After COVID consumers could not afford premiums; many members withdrew to ‘safe-standard’ coloured rice"],l:["Diversify outlets (online, tourism, schools/hospitals)","Add value through processing (OrigiNan)","Plan production collectively against demand"]}},
+ R6:{type:"R",pos:[990,165],day:1,col:"#b07d1e",
+  th:{t:"เยาวชน–วัฒนธรรม–ความรู้",s:"วัฒนธรรมและวิถีอาหารท้องถิ่นดึงเยาวชนเข้ามาเรียนรู้ เยาวชนร่วมสร้างความรู้ใหม่ ซึ่งช่วยรักษาและฟื้นฟูวัฒนธรรมและพันธุ์พื้นเมือง",e:["หลักสูตรข้าวของโรงเรียนสัทธาศิลาเพชร พัฒนาร่วมกับเกษตรกร เก็บรักษาพันธุ์ข้าวพื้นเมือง (ร่วมกับมูลนิธิฮักเมืองน่าน)","นักเรียนเรียนรู้ห่วงโซ่ข้าวถึงโรงสี แล้วนำโมเดลสหกรณ์ไปใช้ในโรงเรียน","ปัญหาผู้สืบทอด: ลูกหลานไม่ทำนา สมาชิกสหกรณ์สูงวัย · ผู้มีอายุ 60+ = 26.4% (2568)","La-on Nan: เกมจำลองและการติดตามป่าชุมชน ส่งต่อความรู้เรื่องป่าสู่เยาวชน"],l:["หลักสูตรท้องถิ่นในโรงเรียน","บทบาทของเยาวชนในเครือข่ายและคณะกรรมการ"]},
+  en:{t:"Youth–culture–knowledge",s:"Local culture and food traditions draw young people into learning; youth co-create new knowledge, which keeps culture and local varieties alive.",e:["Sattha Silaphet School's rice curriculum built with farmers; local rice varieties conserved (with Hug Muang Nan Foundation)","Students learn the rice chain up to the mill, then apply the co-op model at school","Succession gap: children not farming, ageing co-op members · 60+ = 26.4% of population (2025)","La-on Nan: gaming and community forest monitoring pass forest knowledge to youth"],l:["Place-based school curricula","Seats for youth in networks and boards"]}},
+ B4:{type:"B",pos:[240,680],day:1,col:"#6b5b95",
+  th:{t:"การแบ่งปันน้ำร่วมกัน (WADIGA)",s:"พืชสวนมูลค่าสูง (ลิ้นจี่ ชา) ต้องการน้ำมาก ทำให้ขาดแคลนน้ำและเกิดความขัดแย้งระหว่างต้นน้ำ–ปลายน้ำ ซึ่งกระตุ้นให้เกิดกติกาการจัดการน้ำร่วม แล้วลดความขัดแย้งลง",e:["WADIGA: ลิ้นจี่และชาอูหลงต้องการน้ำ 3 หน่วย/แปลง ข้าวต้องการ 1 · ปีแล้งเหลือน้ำ 0.75/แปลง","แม่สลาบ: การขยายสวนไม้ยืนต้นทำให้ความตึงเครียดเรื่องการแบ่งน้ำเพิ่มขึ้น → ทดลองกติกาและโครงสร้างกักเก็บน้ำ","เกมตัวอย่าง 10 พ.ย.: ส่วนแบ่งน้ำของลิ้นจี่เพิ่มจาก 13% → 69% ในปีที่ 4"],l:["ตั้งกติกาการแบ่งน้ำก่อนฤดูแล้ง","ผู้จัดการชลประทานที่ทุกฝ่ายยอมรับ","ระบบกักเก็บน้ำร่วม"]},
+  en:{t:"Collective water sharing (WADIGA)",s:"Irrigated high-value perennials (lychee, tea) need much more water, creating scarcity and upstream–downstream conflict, which triggers collective water rules that reduce the conflict.",e:["WADIGA: lychee and Oolong tea need 3 water units per plot, rice 1 · a dry year gives only 0.75 per plot","Mae Salaep: expanding perennial orchards raised tensions over water sharing → rules and storage tested","Example game of 10 Nov: lychee's share of water rose from 13% to 69% by year 4"],l:["Agree water rules before the dry season","An irrigation manager accepted by all","Shared water storage"]}},
+};
+const DAYLINK = {1:{th:"9–10 พ.ย. ChTN · โรงเรียนชาวนา · เกม WADIGA",en:"9–10 Nov ChTN · Farmers' School · WADIGA"},2:{th:"10 & 12 พ.ย. โรงสีข้าว · OrigiNan",en:"10 & 12 Nov rice mill · OrigiNan"},3:{th:"11 พ.ย. วัดโป่งคำ · แท็บข้อมูลน่าน",en:"11 Nov Wat Pong Kham · Nan facts tab"}};
+const DAYIDX = {1:1,2:2,3:3};
+let CSEL = null, CNODE = null;
+
+function boxSize(id){ const lines = CN[id][LANG==="th"?3:4].split("\n"); const ft = FAO[id] ? ("FAO · "+(LANG==="th"?FAO_TH[id]:FAO[id])).length*(LANG==="th"?5.4:5.6)+30 : 0; const w = Math.max(130, ft, Math.max(...lines.map(l=>l.length))*(LANG==="th"?7.6:7.4)+26); return {w:Math.min(w,240), h:lines.length*17+(FAO[id]?30:16), lines}; }
+function clip(cx,cy,w,h,dx,dy){ const sx = dx? (w/2)/Math.abs(dx) : Infinity, sy = dy? (h/2)/Math.abs(dy) : Infinity, s=Math.min(sx,sy); return [cx+dx*s, cy+dy*s]; }
+function renderCLD(){
+  const host = document.getElementById("cldview"); if (!host) return;
+  document.querySelectorAll("[data-c]").forEach(el=>el.textContent=c_(el.dataset.c));
+  const hiE = e => CSEL ? e[3].includes(CSEL) : CNODE ? (e[0]===CNODE||e[1]===CNODE) : true;
+  const hiN = id => CSEL ? CE.some(e=>e[3].includes(CSEL)&&(e[0]===id||e[1]===id)) : CNODE ? (id===CNODE || CE.some(e=>(e[0]===CNODE&&e[1]===id)||(e[1]===CNODE&&e[0]===id))) : true;
+  const S = {}; Object.keys(CN).forEach(id=>S[id]=boxSize(id));
+  const edges = CE.map((e,i)=>{ const [a,b,sg]=e, A=CN[a], B=CN[b], dx=B[0]-A[0], dy=B[1]-A[1], d=Math.hypot(dx,dy);
+    const mx=(A[0]+B[0])/2 - dy*e[4], my=(A[1]+B[1])/2 + dx*e[4];
+    const p1 = clip(A[0],A[1],S[a].w+8,S[a].h+8, mx-A[0], my-A[1]), p2 = clip(B[0],B[1],S[b].w+14,S[b].h+14, mx-B[0], my-B[1]);
+    const t=0.72, lx=(1-t)*(1-t)*p1[0]+2*(1-t)*t*mx+t*t*p2[0], ly=(1-t)*(1-t)*p1[1]+2*(1-t)*t*my+t*t*p2[1];
+    const on = hiE(e), lc = CSEL? CL[CSEL].col : "var(--ink2)";
+    const tip = `${CN[a][LANG==="th"?3:4].replace(/\n/g," ")} → ${CN[b][LANG==="th"?3:4].replace(/\n/g," ")} (${sg})${e[3].length?" · "+e[3].join(", "):""}`;
+    return `<g class="ce ${on?"on":"off"}" data-tip="${esc(tip)}"><path d="M${p1[0]},${p1[1]} Q${mx},${my} ${p2[0]},${p2[1]}" fill="none" stroke="${on&&(CSEL||CNODE)?lc:"var(--muted)"}" stroke-width="${on&&(CSEL||CNODE)?2.6:1.5}" ${e[3].length?"":'stroke-dasharray="5 4"'} marker-end="url(#ah${on&&(CSEL||CNODE)?"On":""})"/>
+      <path d="M${p1[0]},${p1[1]} Q${mx},${my} ${p2[0]},${p2[1]}" fill="none" stroke="transparent" stroke-width="12"/>
+      <circle cx="${lx}" cy="${ly}" r="9" fill="var(--surface)" stroke="${sg==="+"?"#2f7d32":"#b3261e"}" stroke-width="1.5"/><text x="${lx}" y="${ly+4.5}" text-anchor="middle" font-size="14" font-weight="700" fill="${sg==="+"?"#2f7d32":"#b3261e"}">${sg}</text></g>`; }).join("");
+  const nodes = Object.keys(CN).map(id=>{ const [x,y,th]=CN[id], s=S[id], on=hiN(id);
+    const fao = FAO[id] ? `<rect x="${x-s.w/2+8}" y="${y+s.h/2-19}" width="${s.w-16}" height="14" rx="7" fill="${THC[th]}" opacity=".9"/><text x="${x}" y="${y+s.h/2-8.5}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">FAO · ${esc(LANG==="th"?FAO_TH[id]:FAO[id])}</text>` : "";
+    const ty = y - s.h/2 + 17;
+    return `<g class="cn ${on?"on":"off"}" data-cnode="${id}" style="cursor:pointer"><rect x="${x-s.w/2}" y="${y-s.h/2}" width="${s.w}" height="${s.h}" rx="12" fill="color-mix(in srgb, ${THC[th]} 12%, var(--surface))" stroke="${THC[th]}" stroke-width="${CNODE===id?3:1.6}"/>
+      ${s.lines.map((l,i)=>`<text x="${x}" y="${ty+i*17}" text-anchor="middle" font-size="13" font-weight="600" fill="var(--ink)">${esc(l)}</text>`).join("")}${fao}</g>`; }).join("");
+  const lbl = Object.entries(CL).map(([k,L])=>{ const on = !CSEL || CSEL===k; const [x,y]=L.pos;
+    return `<g class="cl ${on?"on":"off"}" data-cloop="${k}" style="cursor:pointer"><circle cx="${x}" cy="${y}" r="21" fill="${CSEL===k?L.col:"var(--surface)"}" stroke="${L.col}" stroke-width="2.2"/>
+      <path d="M${x+11},${y-13} A15,15 0 1,1 ${x-13},${y-9}" fill="none" stroke="${CSEL===k?"#fff":L.col}" stroke-width="1.6" opacity=".55"/>
+      <text x="${x}" y="${y+5.5}" text-anchor="middle" font-size="15" font-weight="800" fill="${CSEL===k?"#fff":L.col}">${k}</text></g>`; }).join("");
+  const svg = `<svg viewBox="0 0 1220 800" class="cldsvg" role="img" aria-label="${esc(c_("title"))}">
+    <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker>
+    <marker id="ahOn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${CSEL?CL[CSEL].col:"var(--ink)"}"/></marker></defs>
+    ${edges}${nodes}${lbl}</svg>`;
+  const chips = `<div class="cldchips"><button class="cchip ${!CSEL&&!CNODE?"sel":""}" data-cloop="">${c_("all")}</button>${Object.entries(CL).map(([k,L])=>`<button class="cchip ${CSEL===k?"sel":""}" data-cloop="${k}" style="--lc:${L.col}"><b>${k}</b> ${esc(L[LANG].t)}</button>`).join("")}</div>`;
+  let panel = "";
+  if (CSEL){ const L=CL[CSEL], T=L[LANG];
+    panel = `<div class="card cldpanel" style="border-top:6px solid ${L.col}"><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="cbadge" style="background:${L.col}">${CSEL}</span><h3 style="font-size:20px">${esc(T.t)}</h3><span class="pill">${L.type==="R"?(LANG==="th"?"วงจรเสริมแรง":"Reinforcing"):(LANG==="th"?"วงจรสมดุล":"Balancing")}</span></div>
+      <p style="color:var(--ink2)"><b>${c_("story")}:</b> ${esc(T.s)}</p>
+      <div class="grid g2"><div><b>${c_("evidence")}</b><ul>${T.e.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div><div><b>${c_("lever")}</b><ul>${T.l.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+      <button class="wd-link" data-go="${L.day===3?"facts":"prog"}" ${L.day===3?"":`data-day="${L.day===1?1:2}"`}>📍 ${c_("see")}: ${esc(DAYLINK[L.day][LANG])} →</button></div></div></div>`;
+  } else if (CNODE){ const n=CN[CNODE];
+    const ins = CE.filter(e=>e[1]===CNODE).map(e=>`<li>${esc(CN[e[0]][LANG==="th"?3:4].replace(/\n/g," "))} <b style="color:${e[2]==="+"?"#2f7d32":"#b3261e"}">(${e[2]})</b></li>`).join("");
+    const outs = CE.filter(e=>e[0]===CNODE).map(e=>`<li>${esc(CN[e[1]][LANG==="th"?3:4].replace(/\n/g," "))} <b style="color:${e[2]==="+"?"#2f7d32":"#b3261e"}">(${e[2]})</b></li>`).join("");
+    const loops = [...new Set(CE.filter(e=>e[0]===CNODE||e[1]===CNODE).flatMap(e=>e[3]))];
+    panel = `<div class="card cldpanel" style="border-top:6px solid ${THC[n[2]]}"><h3 style="font-size:20px">${esc(n[LANG==="th"?3:4].replace(/\n/g," "))}</h3>
+      <p class="muted" style="margin:4px 0 10px">${c_("theme")}: ${c_("t"+n[2])}${FAO[CNODE]?` · ${c_("faoEl")}: <b>${esc(LANG==="th"?FAO_TH[CNODE]:FAO[CNODE])}</b>`:""}</p>
+      <div class="grid g2"><div><b>${c_("nodeIn")}</b><ul>${ins||"<li>—</li>"}</ul></div><div><b>${c_("nodeOut")}</b><ul>${outs||"<li>—</li>"}</ul></div></div>
+      ${loops.length?`<div class="cldchips">${loops.map(k=>`<button class="cchip" data-cloop="${k}" style="--lc:${CL[k].col}"><b>${k}</b> ${esc(CL[k][LANG].t)}</button>`).join("")}</div>`:""}</div>`;
+  }
+  host.innerHTML = `${chips}${panel}<div class="cldwrap">${svg}</div>`;
+}
+document.addEventListener("click", e=>{
+  const l = e.target.closest("[data-cloop]"); if (l){ CSEL = l.dataset.cloop || null; CNODE=null; renderCLD(); return; }
+  const n = e.target.closest("[data-cnode]"); if (n){ CNODE = CNODE===n.dataset.cnode ? null : n.dataset.cnode; CSEL=null; renderCLD(); return; }
 });
 
 const h = location.hash.slice(1); if (TABS.some(x=>x[0]===h)) TAB=h;
