@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>แบบประเมินนิสิต · ADAPT-Nan Field Block 2026</title>
+<title>แบบประเมิน · Evaluation · ADAPT-Nan 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700&family=Noto+Serif+Thai:wght@600;700&display=swap" rel="stylesheet">
 <style>
@@ -16,17 +16,19 @@ a{color:var(--terra)}
 .wrap{max-width:860px;margin:0 auto;padding:0 16px}
 .top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:10px;height:56px}
-.back{color:var(--green);text-decoration:none;font-weight:700;white-space:nowrap}
-.top .t{margin-left:auto;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hero{padding:26px 0 8px}
+.back{color:var(--green);text-decoration:none;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.langsw{margin-left:auto;display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;flex:none}
+.langsw button{border:0;background:var(--surface);padding:6px 14px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;color:var(--ink2)}
+.langsw button[aria-pressed=true]{background:var(--green);color:var(--bg)}
+.hero{padding:24px 0 6px}
 .hero h1{font-size:clamp(24px,5vw,34px);color:var(--green)}
 .hero p{color:var(--ink2);margin:6px 0 0}
-.en{color:var(--muted);font-size:.86em;font-style:italic}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin:14px 0}
-.card h2{font-size:20px;color:var(--green);margin-bottom:4px}
+.card h2{font-size:20px;color:var(--green);margin-bottom:6px}
 .card h3{font-size:17px;color:var(--green)}
-.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-@media (max-width:640px){.roles{grid-template-columns:1fr}}
+.cards2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:640px){.cards2,.cards3{grid-template-columns:1fr}}
 .role{border:2px solid var(--line);background:var(--surface);border-radius:14px;padding:14px;cursor:pointer;text-align:left;font:inherit;color:inherit}
 .role b{display:block;color:var(--green);font-size:17px}
 .role small{color:var(--muted)}
@@ -38,13 +40,28 @@ textarea{min-height:76px;resize:vertical}
 @media (max-width:640px){.row2{grid-template-columns:1fr}}
 .item{padding:12px 0;border-top:1px dashed var(--line)}
 .item:first-of-type{border-top:0}
-.item .q{font-weight:600}
-.item .q .id{display:inline-block;min-width:34px;color:var(--terra);font-weight:700}
-.scale{display:grid;grid-template-columns:repeat(11,1fr);gap:4px;margin-top:8px;max-width:520px}
-.scale button{border:1px solid var(--line);background:var(--surface2);border-radius:8px;padding:7px 0;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink2)}
-.scale button:hover{border-color:var(--green2)}
-.scale button[aria-pressed=true]{background:var(--green);border-color:var(--green);color:var(--bg)}
-.item.missing .scale{outline:2px solid var(--terra);outline-offset:3px;border-radius:8px}
+.q{font-weight:600}
+.q .id{display:inline-block;min-width:38px;color:var(--terra);font-weight:700}
+.opts{display:grid;gap:5px;margin-top:8px}
+.opts.n11{grid-template-columns:repeat(11,1fr);max-width:540px}
+.opts.n10{grid-template-columns:repeat(10,1fr);max-width:500px}
+.opts.n6{grid-template-columns:repeat(6,1fr);max-width:360px}
+.opts.n5{grid-template-columns:repeat(5,1fr);max-width:300px}
+.opts.txt{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.opts.n3{grid-template-columns:repeat(3,1fr);max-width:420px}
+.opts button{border:1px solid var(--line);background:var(--surface2);border-radius:8px;padding:7px 6px;cursor:pointer;font:inherit;font-weight:600;font-size:14px;color:var(--ink2);line-height:1.3}
+.opts.txt button{text-align:left;padding:8px 10px;font-weight:500}
+.opts button:hover{border-color:var(--green2)}
+.opts button[aria-pressed=true]{background:var(--green);border-color:var(--green);color:var(--bg)}
+.ends{display:flex;justify-content:space-between;max-width:300px;font-size:11.5px;color:var(--muted);margin-top:2px}
+.item.missing .opts,.item.missing .bnrow,.missing-sel{outline:2px solid var(--terra);outline-offset:3px;border-radius:8px}
+.bnrow{display:grid;grid-template-columns:90px 1fr;align-items:center;gap:8px;margin-top:6px;max-width:400px}
+.bnrow span{font-size:13px;color:var(--muted);font-weight:600}
+.bnrow .opts{margin-top:0}
+.balrow{display:grid;grid-template-columns:minmax(120px,1fr) 2fr;gap:8px;align-items:center;margin-top:6px}
+.balrow .opts{margin-top:0}
+.w3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.other{margin-top:6px}
 .att{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:8px}
 @media (max-width:640px){.att{grid-template-columns:repeat(3,1fr)}}
 .att div{font-size:12px;color:var(--muted)}
@@ -55,7 +72,7 @@ details.rub summary{cursor:pointer;color:var(--green2);font-size:13px}
 @media (max-width:640px){.rubt{grid-template-columns:1fr 1fr}}
 .rubt div{background:var(--surface2);border-radius:8px;padding:6px 8px;font-size:12.5px}
 .rubt b{display:block;color:var(--green)}
-.legend{font-size:13px;color:var(--ink2);background:var(--surface2);border-radius:10px;padding:8px 12px}
+.legend{font-size:13px;color:var(--ink2);background:var(--surface2);border-radius:10px;padding:8px 12px;margin:6px 0}
 .peer{border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:12px 0;background:var(--surface)}
 .peer>summary{cursor:pointer;font-weight:700;color:var(--green);list-style:none;display:flex;justify-content:space-between;gap:8px}
 .peer>summary::-webkit-details-marker{display:none}
@@ -66,44 +83,51 @@ details.rub summary{cursor:pointer;color:var(--green2);font-size:13px}
 .bar .prog{flex:1;font-size:14px;color:var(--ink2)}
 .meter{height:6px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-top:4px}
 .meter i{display:block;height:100%;background:var(--green2);width:0}
-.btn{border:0;border-radius:999px;padding:12px 22px;font-weight:700;cursor:pointer;background:var(--terra);color:#fff;font-size:16px}
+.btn{border:0;border-radius:999px;padding:12px 22px;font-weight:700;cursor:pointer;background:var(--terra);color:#fff;font-size:16px;font-family:inherit}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
 .btn.ghost{background:none;border:1px solid var(--line);color:var(--ink)}
 .note{border-left:4px solid var(--gold);background:var(--surface2);padding:10px 14px;border-radius:8px;font-size:14px}
+.anon{border-left:4px solid var(--green2)}
 .ok-card{border-left:6px solid var(--green2)}
 .err{border-left:6px solid var(--terra)}
 .hidden{display:none!important}
 .sub{font-size:13px;color:var(--muted)}
 .total{font-weight:700;color:var(--green)}
+.sechead{font-size:13px;font-weight:700;color:var(--terra);letter-spacing:.02em;text-transform:uppercase}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <a class="back" href="./">← ADAPT-Nan · Field Block</a>
-  <span class="t">แบบประเมิน · Evaluation</span>
+  <a class="back" href="./" id="backLink"></a>
+  <div class="langsw" role="group" aria-label="Language">
+    <button data-lang="th" aria-pressed="true">ไทย</button><button data-lang="en" aria-pressed="false">EN</button>
+  </div>
 </div></header>
 
 <main class="wrap">
-  <section class="hero">
-    <h1>แบบประเมินนิสิตผู้เข้าร่วมกิจกรรมภาคสนาม</h1>
-    <p class="en">Student Evaluation — ADAPT-Nan Field Block · 8–15 Nov 2026, Nan</p>
-  </section>
-
-  <div class="note hidden" id="noBackend">ยังไม่ได้เชื่อมต่อ Google Sheet — เมื่อกดส่ง ระบบจะดาวน์โหลดไฟล์คำตอบ (.json) ให้ส่งต่อผู้ประสานงานแทน<br><span class="en">Not yet connected to Google Sheet — submitting will download your answers as a file to send to the coordinator.</span></div>
+  <section class="hero"><h1 id="hTitle"></h1><p id="hSub"></p></section>
+  <div class="note hidden" id="noBackend"></div>
 
   <div class="card">
-    <h2>1. คุณคือใคร? <span class="en">Who are you?</span></h2>
-    <div class="roles" id="roles">
-      <button class="role" data-role="student" aria-pressed="false"><b>นิสิต / Student</b><small>แบบที่ 3 เพื่อนประเมิน + แบบที่ 4 ประเมินตนเอง<br>Peer + self evaluation</small></button>
-      <button class="role" data-role="mentor" aria-pressed="false"><b>พี่เลี้ยง / Mentor</b><small>แบบที่ 1 ประเมินนิสิตรายบุคคล<br>Individual evaluation</small></button>
-      <button class="role" data-role="panel" aria-pressed="false"><b>กรรมการ / Panel</b><small>แบบที่ 2 การนำเสนอกลุ่ม (14 พ.ย.)<br>Group presentation</small></button>
+    <h2 id="lvlTitle"></h2>
+    <div class="cards2" id="levels">
+      <button class="role" data-level="field" aria-pressed="false"><b data-s="lvField"></b><small data-s="lvFieldD"></small></button>
+      <button class="role" data-level="course" aria-pressed="false"><b data-s="lvCourse"></b><small data-s="lvCourseD"></small></button>
+    </div>
+  </div>
+
+  <div id="fieldSetup" class="card hidden">
+    <h2 data-s="whoTitle"></h2>
+    <div class="cards3" id="roles">
+      <button class="role" data-role="student" aria-pressed="false"><b data-s="rStudent"></b><small data-s="rStudentD"></small></button>
+      <button class="role" data-role="mentor" aria-pressed="false"><b data-s="rMentor"></b><small data-s="rMentorD"></small></button>
+      <button class="role" data-role="panel" aria-pressed="false"><b data-s="rPanel"></b><small data-s="rPanelD"></small></button>
     </div>
     <div class="row2">
-      <div><label class="f" for="grp">กลุ่ม / Group</label><select id="grp"></select></div>
-      <div id="whoBox"><label class="f" for="who" id="whoLbl">ชื่อ / Name</label><select id="who"></select><input type="text" id="whoText" class="hidden" placeholder="ชื่อ-นามสกุล / Full name"></div>
+      <div><label class="f" for="grp" data-s="group"></label><select id="grp"></select></div>
+      <div><label class="f" for="who" id="whoLbl"></label><select id="who"></select><input type="text" id="whoText" class="hidden"></div>
     </div>
-    <div id="panelRoleBox" class="hidden"><label class="f" for="panelRole">บทบาท / Role</label>
-      <select id="panelRole"><option value="">— เลือก / choose —</option><option>อาจารย์ / Instructor</option><option>ผู้แทนชุมชน / Community stakeholder</option><option>พี่เลี้ยง / Mentor</option><option>อื่น ๆ / Other</option></select></div>
+    <div id="panelRoleBox" class="hidden"><label class="f" for="panelRole" data-s="pRole"></label><select id="panelRole"></select></div>
   </div>
 
   <div id="formArea"></div>
@@ -112,231 +136,344 @@ details.rub summary{cursor:pointer;color:var(--green2);font-size:13px}
 
 <div class="bar hidden" id="bar"><div class="wrap">
   <div class="prog"><span id="progTxt"></span><div class="meter"><i id="progBar"></i></div></div>
-  <button class="btn" id="submit">ส่ง / Submit</button>
+  <button class="btn" id="submit"></button>
 </div></div>
 
 <script>
-// ===== CONFIG: วาง URL ของ Google Apps Script Web App ที่นี่ / paste the Apps Script Web App URL here =====
+// ===== CONFIG =====
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxbh8BruWfGGrG8MLjaouoBkxmVgQjQEHbtLq8g9XW2P4iX4tLkp_itsSuplyGADoMnOg/exec";
-const DATA = {"groups": [{"no": 1, "en": "Market Integration", "th": "การเชื่อมโยงตลาด (Community-based Solution & Marketing)", "students": [["KU", "Mirei WAKATSUKI"], ["KU", "Saki UEMURA"], ["KU", "Yoshika YOKOYAMA"], ["KU", "Chan Rosa ORN"], ["KU", "Palat Lavichant"], ["RMUTL", "Papitchaya Kasosot"]], "mentors": [["NCC", "Phimonphan Sakidram"], ["ADAPT", "Jean-Christophe Castella"], ["ADAPT", "Nichaphart Inta"], ["ADAPT", "Sirinan Khamchu"]]}, {"no": 2, "en": "Integrated Farming", "th": "เกษตรผสมผสาน ความหลากหลายทางชีวภาพและวัฒนธรรม", "students": [["KU", "Yukie KATATA"], ["KU", "Haruna SUZUKI"], ["KU", "Kaito KURIHAR"], ["KU", "Thornthep Singrungruang"], ["KU", "Thammatida Promplod"], ["RMUTL", "Phatcharaphon Nopthon"]], "mentors": [["RMUTL", "Sakkarin Na Nan"], ["KU", "Buncha Chinnasri"], ["CU", "Kittipum Chansri"]]}, {"no": 3, "en": "Resources Management", "th": "การจัดการทรัพยากรธรรมชาติ", "students": [["KU", "Kokoro NIINOMI"], ["KU", "Maho MASAKI"], ["KU", "Sumire YAGI"], ["KU", "Kelyan SYLVESTRE"], ["KU", "Chanittha Arthan"], ["KU", "Janyawut Rodyodsroi"], ["RMUTL", "Thanaphat Saianan"]], "mentors": [["RMUTL", "Piyanuch Sinunta"], ["CU", "Pongchai Dumrongrojwatthana"], ["CU", "Lalita Srion"]]}], "levels": [{"range": "9–10", "th": "ดีเยี่ยม", "en": "Excellent"}, {"range": "7–8", "th": "ดี", "en": "Good"}, {"range": "5–6", "th": "พอใช้", "en": "Fair"}, {"range": "0–4", "th": "ต้องปรับปรุง", "en": "Needs improvement"}], "days": [{"d": "D2", "date": "9 พ.ย."}, {"d": "D3", "date": "10 พ.ย."}, {"d": "D4", "date": "11 พ.ย."}, {"d": "D5", "date": "12 พ.ย."}, {"d": "D6", "date": "13 พ.ย."}, {"d": "D7", "date": "14 พ.ย."}], "peer_items": [{"id": "S1", "th": "ช่วยงานกลุ่มอย่างเต็มที่และสม่ำเสมอ", "en": "Contributes fully and consistently to group work"}, {"id": "S2", "th": "เสนอความคิด/ข้อมูลที่เป็นประโยชน์ต่อการวิเคราะห์", "en": "Offers useful ideas and field information"}, {"id": "S3", "th": "สื่อสารชัดเจนและรับฟังความเห็นผู้อื่น", "en": "Communicates clearly and listens to others"}, {"id": "S4", "th": "ตรงต่อเวลาและรับผิดชอบงานที่ได้รับมอบหมาย", "en": "Punctual and reliable with assigned tasks"}, {"id": "S5", "th": "เคารพ ช่วยเหลือ และสร้างบรรยากาศที่ดีในทีม", "en": "Respectful, supportive, builds team spirit"}], "reflection": [{"th": "สิ่งสำคัญที่สุด 1–2 เรื่องที่ฉันได้เรียนรู้จากภาคสนามน่าน คืออะไร", "en": "What are the 1–2 most important things I learned in Nan?"}, {"th": "มุมมองของฉันต่อเกษตรนิเวศ/ชุมชนเปลี่ยนไปอย่างไร ยกตัวอย่างจากพื้นที่ที่ไปเยือน", "en": "How has my view of agroecology or rural communities changed? Give an example from a site."}, {"th": "บทบาทและสิ่งที่ฉันทำเพื่อกลุ่มคืออะไร", "en": "What was my role and contribution to the group?"}, {"th": "สิ่งที่ฉันควรพัฒนาต่อไป", "en": "What should I improve next time?"}, {"th": "ฉันจะนำสิ่งที่ได้เรียนรู้ไปใช้อย่างไร", "en": "How will I apply what I learned?"}], "form1_items": [{"id": "A1", "th": "การเข้าร่วมกิจกรรมครบถ้วนและตรงต่อเวลา", "en": "Attendance & punctuality (Day 2–7)", "d": [["เข้าร่วมครบทุกกิจกรรม ตรงเวลาสม่ำเสมอ", "Attends every session, always on time"], ["ขาด/สายเล็กน้อย 1 ครั้ง", "One minor absence or late arrival"], ["ขาดหรือสาย 2–3 ครั้ง", "2–3 absences or late arrivals"], ["ขาดหรือสายบ่อย กระทบงานกลุ่ม", "Frequently absent/late; affects group"]]}, {"id": "A2", "th": "ความกระตือรือร้นในการรับฟังและซักถามเจ้าของพื้นที่ (Observe)", "en": "Active listening & questioning with hosts (Observe)", "d": [["ตั้งใจฟัง จดบันทึก ถามคำถามเชิงลึกที่เชื่อมโยงกับธีมกลุ่ม", "Attentive, takes notes, asks probing theme-linked questions"], ["ตั้งใจฟัง ถามคำถามบ้าง", "Attentive, asks some questions"], ["ฟังแต่ไม่ค่อยซักถาม", "Listens but rarely asks"], ["ไม่สนใจ ทำกิจกรรมอื่น", "Disengaged or distracted"]]}, {"id": "A3", "th": "การลงมือปฏิบัติในฐานกิจกรรมภาคสนาม (Embody)", "en": "Hands-on engagement at field stations (Embody)", "d": [["ลงมือทำอย่างเต็มที่ ริเริ่มช่วยงานเกษตรกร", "Fully hands-on, takes initiative with farmers"], ["ลงมือทำตามที่ได้รับมอบหมาย", "Participates as instructed"], ["ลงมือทำบางส่วน ยืนดูเป็นส่วนใหญ่", "Partly involved, mostly observes"], ["ไม่ลงมือปฏิบัติ", "Does not take part"]]}, {"id": "A4", "th": "การมีส่วนร่วมในเกม WADIGA และเวที Mini Nan Forum", "en": "Engagement in WADIGA game & Mini Nan Forum", "d": [["เล่นบทบาท/ร่วมอภิปรายอย่างจริงจัง สะท้อนบทเรียนได้ชัด", "Plays role/debates seriously, draws clear lessons"], ["มีส่วนร่วมดี แสดงความคิดเห็นบ้าง", "Engaged, offers some views"], ["มีส่วนร่วมน้อย", "Limited involvement"], ["ไม่มีส่วนร่วม", "Not involved"]]}, {"id": "A5", "th": "ความเคารพชุมชน วัฒนธรรม และกติกาของพื้นที่", "en": "Respect for community, culture & site rules", "d": [["สุภาพ แต่งกายเหมาะสม ปฏิบัติตามกติกาเสมอ เป็นแบบอย่าง", "Courteous, dressed appropriately, role model"], ["ปฏิบัติตามกติกาเป็นส่วนใหญ่", "Mostly follows rules"], ["ต้องได้รับการเตือนบางครั้ง", "Needs occasional reminders"], ["ไม่เคารพกติกา/ชุมชน", "Disrespectful of rules or hosts"]]}, {"id": "B1", "th": "การมีส่วนร่วมวิพากษ์และประเมินพื้นที่ประจำวันกับกลุ่ม (Synthesize)", "en": "Contribution to daily group critique (Synthesize)", "d": [["เสนอประเด็นสำคัญจากข้อมูลภาคสนาม ช่วยสรุปงานกลุ่ม", "Brings key field-based points, helps synthesise"], ["ร่วมแสดงความเห็นสม่ำเสมอ", "Contributes regularly"], ["ร่วมแสดงความเห็นบางครั้ง", "Contributes occasionally"], ["แทบไม่มีส่วนร่วม", "Rarely contributes"]]}, {"id": "B2", "th": "การคิดเชิงระบบ เชื่อมโยงมิติ นิเวศ–เศรษฐกิจ–สังคม–วัฒนธรรม", "en": "Systems thinking: links ecological, economic, social & cultural dimensions", "d": [["เชื่อมโยงหลายมิติและผลกระทบต่อกันได้อย่างมีเหตุผล", "Links several dimensions and their interactions logically"], ["เชื่อมโยงได้ 2 มิติขึ้นไป", "Links at least two dimensions"], ["มองประเด็นแยกส่วน", "Treats issues in isolation"], ["ไม่สามารถวิเคราะห์ได้", "Little or no analysis"]]}, {"id": "B3", "th": "การสื่อสารและทำงานร่วมกับผู้อื่นในทีมต่างสถาบัน/ต่างวัฒนธรรม", "en": "Communication & collaboration in a multi-university, multicultural team", "d": [["สื่อสารชัดเจน รับฟัง ช่วยเชื่อมสมาชิกต่างภาษา/สถาบัน", "Clear, listens, bridges languages/institutions"], ["ทำงานร่วมกับผู้อื่นได้ดี", "Works well with others"], ["ทำงานเฉพาะกับคนที่คุ้นเคย", "Works only with familiar peers"], ["ไม่ร่วมมือ/สร้างความขัดแย้ง", "Uncooperative or causes conflict"]]}, {"id": "B4", "th": "ความรับผิดชอบต่องานที่ได้รับมอบหมาย", "en": "Responsibility for assigned tasks", "d": [["ทำงานเสร็จครบ มีคุณภาพ ก่อนกำหนด", "Complete, high quality, ahead of time"], ["ทำงานเสร็จตามกำหนด", "Complete and on time"], ["ต้องติดตามจึงเสร็จ", "Completes only when followed up"], ["ไม่ทำงานที่ได้รับมอบหมาย", "Does not complete tasks"]]}, {"id": "C1", "th": "บทบาทในการเตรียม/นำเสนอผลงานกลุ่ม และการตอบคำถาม", "en": "Role in preparing/presenting group work & answering questions", "d": [["มีบทบาทหลัก อธิบายและตอบคำถามได้ถูกต้องชัดเจน", "Key role; explains and answers clearly and accurately"], ["มีบทบาทชัดเจน ตอบคำถามได้บ้าง", "Clear role; answers some questions"], ["มีบทบาทน้อย", "Minor role"], ["ไม่มีบทบาท", "No visible role"]]}], "form2_items": [{"id": "P1", "th": "การวิเคราะห์ปัญหาโดยอ้างอิงหลักฐานจากพื้นที่ภาคสนาม", "en": "Problem analysis grounded in field evidence", "d": [["อ้างอิงข้อมูลจากหลายพื้นที่ชัดเจน วิเคราะห์ลึก", "Draws on several sites; deep analysis"], ["อ้างอิงข้อมูลภาคสนามเหมาะสม", "Uses field data appropriately"], ["อ้างอิงข้อมูลน้อย/ทั่วไป", "Little or generic evidence"], ["ไม่มีหลักฐานสนับสนุน", "No supporting evidence"]], "part": "เนื้อหา / Content"}, {"id": "P2", "th": "ความลึกและครอบคลุมประเด็นตามธีมของกลุ่ม", "en": "Depth & coverage of the group's assigned theme", "d": [["ครอบคลุมและลึกซึ้ง ตรงธีม", "Thorough, in-depth, on-theme"], ["ครอบคลุมประเด็นหลัก", "Covers main points"], ["ขาดบางประเด็นสำคัญ", "Misses key points"], ["ไม่ตรงธีม", "Off-theme"]], "part": "เนื้อหา / Content"}, {"id": "P3", "th": "การบูรณาการมิติ นิเวศ–เศรษฐกิจ–สังคม–วัฒนธรรม", "en": "Integration of ecological, economic, social & cultural dimensions", "d": [["บูรณาการทุกมิติอย่างสมดุล", "Balanced integration of all dimensions"], ["บูรณาการได้หลายมิติ", "Integrates several dimensions"], ["เน้นมิติเดียว", "Focuses on one dimension"], ["ไม่มีการบูรณาการ", "No integration"]], "part": "เนื้อหา / Content"}, {"id": "P4", "th": "ข้อเสนอแนวทางแก้ปัญหา/โมเดลธุรกิจ ที่สร้างสรรค์ (Design thinking)", "en": "Creative solution / business model (Design thinking)", "d": [["สร้างสรรค์ ชัดเจน ผ่านการทดสอบแนวคิดกับพี่เลี้ยง", "Original, clear, tested with mentor"], ["มีข้อเสนอชัดเจน", "Clear proposal"], ["ข้อเสนอกว้าง ไม่เฉพาะเจาะจง", "Vague proposal"], ["ไม่มีข้อเสนอ", "No proposal"]], "part": "เนื้อหา / Content"}, {"id": "P5", "th": "ความเป็นไปได้และความเหมาะสมกับบริบทชุมชนน่าน", "en": "Feasibility & fit with Nan community context", "d": [["เป็นไปได้จริง ระบุผู้เกี่ยวข้อง ทรัพยากร และข้อจำกัด", "Realistic; names actors, resources, constraints"], ["เป็นไปได้ในระดับหนึ่ง", "Reasonably feasible"], ["ยังไม่สอดคล้องบริบท", "Weak fit with context"], ["เป็นไปไม่ได้", "Not feasible"]], "part": "เนื้อหา / Content"}, {"id": "P6", "th": "โครงสร้างและลำดับการนำเสนอชัดเจน มีเหตุผล", "en": "Clear, logical structure", "d": [["ลำดับชัดเจน เชื่อมโยงต่อเนื่อง", "Clear, coherent flow"], ["ลำดับเข้าใจได้", "Understandable flow"], ["สับสนบางช่วง", "Confusing in parts"], ["ไม่มีโครงสร้าง", "No structure"]], "part": "การนำเสนอ / Delivery"}, {"id": "P7", "th": "สื่อประกอบ (สไลด์ ภาพ แผนภาพ ข้อมูล)", "en": "Visual aids (slides, photos, diagrams, data)", "d": [["สื่อสวย อ่านง่าย ใช้ภาพ/ข้อมูลจากภาคสนาม", "Clear, attractive, uses field photos/data"], ["สื่อเหมาะสม", "Appropriate"], ["สื่ออ่านยาก/ข้อความมาก", "Hard to read or text-heavy"], ["ไม่มีสื่อ", "None"]], "part": "การนำเสนอ / Delivery"}, {"id": "P8", "th": "ทักษะการสื่อสารและการบริหารเวลา", "en": "Delivery & time management", "d": [["พูดชัด มั่นใจ สบตาผู้ฟัง ตรงเวลา", "Clear, confident, engaging, on time"], ["พูดชัด เกินเวลาเล็กน้อย", "Clear, slightly over time"], ["อ่านสไลด์ เกินเวลามาก", "Reads slides, well over time"], ["สื่อสารไม่ได้", "Ineffective"]], "part": "การนำเสนอ / Delivery"}, {"id": "P9", "th": "การตอบคำถามจากอาจารย์และผู้แทนชุมชน", "en": "Answering questions from panel & stakeholders", "d": [["ตอบตรงประเด็น มีเหตุผล อ้างอิงข้อมูล", "Direct, reasoned, evidence-based"], ["ตอบได้เป็นส่วนใหญ่", "Answers most questions"], ["ตอบได้บางส่วน", "Answers some"], ["ตอบไม่ได้", "Cannot answer"]], "part": "การนำเสนอ / Delivery"}, {"id": "P10", "th": "การมีส่วนร่วมของสมาชิกทุกคนในการนำเสนอ", "en": "Involvement of all team members", "d": [["ทุกคนมีบทบาทชัดเจนและสมดุล", "All members, balanced roles"], ["สมาชิกส่วนใหญ่มีบทบาท", "Most members involved"], ["มีเพียงบางคนนำเสนอ", "Only a few present"], ["คนเดียวนำเสนอ", "One person only"]], "part": "การนำเสนอ / Delivery"}]};
-// ==========================================================================================
-
-const $ = s => document.querySelector(s);
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const DATA = {"groups": [{"no": 1, "en": "Market Integration", "th": "การเชื่อมโยงตลาด (Community-based Solution & Marketing)", "students": [["KU", "Mirei WAKATSUKI"], ["KU", "Saki UEMURA"], ["KU", "Yoshika YOKOYAMA"], ["KU", "Chan Rosa ORN"], ["KU", "Palat Lavichant"], ["RMUTL", "Papitchaya Kasosot"]], "mentors": [["NCC", "Phimonphan Sakidram"], ["ADAPT", "Jean-Christophe Castella"], ["ADAPT", "Nichaphart Inta"], ["ADAPT", "Sirinan Khamchu"]]}, {"no": 2, "en": "Integrated Farming", "th": "เกษตรผสมผสาน ความหลากหลายทางชีวภาพและวัฒนธรรม", "students": [["KU", "Yukie KATATA"], ["KU", "Haruna SUZUKI"], ["KU", "Kaito KURIHAR"], ["KU", "Thornthep Singrungruang"], ["KU", "Thammatida Promplod"], ["RMUTL", "Phatcharaphon Nopthon"]], "mentors": [["RMUTL", "Sakkarin Na Nan"], ["KU", "Buncha Chinnasri"], ["CU", "Kittipum Chansri"]]}, {"no": 3, "en": "Resources Management", "th": "การจัดการทรัพยากรธรรมชาติ", "students": [["KU", "Kokoro NIINOMI"], ["KU", "Maho MASAKI"], ["KU", "Sumire YAGI"], ["KU", "Kelyan SYLVESTRE"], ["KU", "Chanittha Arthan"], ["KU", "Janyawut Rodyodsroi"], ["RMUTL", "Thanaphat Saianan"]], "mentors": [["RMUTL", "Piyanuch Sinunta"], ["CU", "Pongchai Dumrongrojwatthana"], ["CU", "Lalita Srion"]]}], "levels": [{"range": "9–10", "th": "ดีเยี่ยม", "en": "Excellent"}, {"range": "7–8", "th": "ดี", "en": "Good"}, {"range": "5–6", "th": "พอใช้", "en": "Fair"}, {"range": "0–4", "th": "ต้องปรับปรุง", "en": "Needs improvement"}], "days": [{"d": "D2", "date": "9 พ.ย.", "date_en": "9 Nov"}, {"d": "D3", "date": "10 พ.ย.", "date_en": "10 Nov"}, {"d": "D4", "date": "11 พ.ย.", "date_en": "11 Nov"}, {"d": "D5", "date": "12 พ.ย.", "date_en": "12 Nov"}, {"d": "D6", "date": "13 พ.ย.", "date_en": "13 Nov"}, {"d": "D7", "date": "14 พ.ย.", "date_en": "14 Nov"}], "peer_items": [{"id": "S1", "th": "ช่วยงานกลุ่มอย่างเต็มที่และสม่ำเสมอ", "en": "Contributes fully and consistently to group work"}, {"id": "S2", "th": "เสนอความคิด/ข้อมูลที่เป็นประโยชน์ต่อการวิเคราะห์", "en": "Offers useful ideas and field information"}, {"id": "S3", "th": "สื่อสารชัดเจนและรับฟังความเห็นผู้อื่น", "en": "Communicates clearly and listens to others"}, {"id": "S4", "th": "ตรงต่อเวลาและรับผิดชอบงานที่ได้รับมอบหมาย", "en": "Punctual and reliable with assigned tasks"}, {"id": "S5", "th": "เคารพ ช่วยเหลือ และสร้างบรรยากาศที่ดีในทีม", "en": "Respectful, supportive, builds team spirit"}], "reflection": [{"th": "สิ่งสำคัญที่สุด 1–2 เรื่องที่ฉันได้เรียนรู้จากภาคสนามน่าน คืออะไร", "en": "What are the 1–2 most important things I learned in Nan?"}, {"th": "มุมมองของฉันต่อเกษตรนิเวศ/ชุมชนเปลี่ยนไปอย่างไร ยกตัวอย่างจากพื้นที่ที่ไปเยือน", "en": "How has my view of agroecology or rural communities changed? Give an example from a site."}, {"th": "บทบาทและสิ่งที่ฉันทำเพื่อกลุ่มคืออะไร", "en": "What was my role and contribution to the group?"}, {"th": "สิ่งที่ฉันควรพัฒนาต่อไป", "en": "What should I improve next time?"}, {"th": "ฉันจะนำสิ่งที่ได้เรียนรู้ไปใช้อย่างไร", "en": "How will I apply what I learned?"}], "form1_items": [{"id": "A1", "th": "การเข้าร่วมกิจกรรมครบถ้วนและตรงต่อเวลา", "en": "Attendance & punctuality (Day 2–7)", "d": [["เข้าร่วมครบทุกกิจกรรม ตรงเวลาสม่ำเสมอ", "Attends every session, always on time"], ["ขาด/สายเล็กน้อย 1 ครั้ง", "One minor absence or late arrival"], ["ขาดหรือสาย 2–3 ครั้ง", "2–3 absences or late arrivals"], ["ขาดหรือสายบ่อย กระทบงานกลุ่ม", "Frequently absent/late; affects group"]]}, {"id": "A2", "th": "ความกระตือรือร้นในการรับฟังและซักถามเจ้าของพื้นที่ (Observe)", "en": "Active listening & questioning with hosts (Observe)", "d": [["ตั้งใจฟัง จดบันทึก ถามคำถามเชิงลึกที่เชื่อมโยงกับธีมกลุ่ม", "Attentive, takes notes, asks probing theme-linked questions"], ["ตั้งใจฟัง ถามคำถามบ้าง", "Attentive, asks some questions"], ["ฟังแต่ไม่ค่อยซักถาม", "Listens but rarely asks"], ["ไม่สนใจ ทำกิจกรรมอื่น", "Disengaged or distracted"]]}, {"id": "A3", "th": "การลงมือปฏิบัติในฐานกิจกรรมภาคสนาม (Embody)", "en": "Hands-on engagement at field stations (Embody)", "d": [["ลงมือทำอย่างเต็มที่ ริเริ่มช่วยงานเกษตรกร", "Fully hands-on, takes initiative with farmers"], ["ลงมือทำตามที่ได้รับมอบหมาย", "Participates as instructed"], ["ลงมือทำบางส่วน ยืนดูเป็นส่วนใหญ่", "Partly involved, mostly observes"], ["ไม่ลงมือปฏิบัติ", "Does not take part"]]}, {"id": "A4", "th": "การมีส่วนร่วมในเกม WADIGA และเวที Mini Nan Forum", "en": "Engagement in WADIGA game & Mini Nan Forum", "d": [["เล่นบทบาท/ร่วมอภิปรายอย่างจริงจัง สะท้อนบทเรียนได้ชัด", "Plays role/debates seriously, draws clear lessons"], ["มีส่วนร่วมดี แสดงความคิดเห็นบ้าง", "Engaged, offers some views"], ["มีส่วนร่วมน้อย", "Limited involvement"], ["ไม่มีส่วนร่วม", "Not involved"]]}, {"id": "A5", "th": "ความเคารพชุมชน วัฒนธรรม และกติกาของพื้นที่", "en": "Respect for community, culture & site rules", "d": [["สุภาพ แต่งกายเหมาะสม ปฏิบัติตามกติกาเสมอ เป็นแบบอย่าง", "Courteous, dressed appropriately, role model"], ["ปฏิบัติตามกติกาเป็นส่วนใหญ่", "Mostly follows rules"], ["ต้องได้รับการเตือนบางครั้ง", "Needs occasional reminders"], ["ไม่เคารพกติกา/ชุมชน", "Disrespectful of rules or hosts"]]}, {"id": "B1", "th": "การมีส่วนร่วมวิพากษ์และประเมินพื้นที่ประจำวันกับกลุ่ม (Synthesize)", "en": "Contribution to daily group critique (Synthesize)", "d": [["เสนอประเด็นสำคัญจากข้อมูลภาคสนาม ช่วยสรุปงานกลุ่ม", "Brings key field-based points, helps synthesise"], ["ร่วมแสดงความเห็นสม่ำเสมอ", "Contributes regularly"], ["ร่วมแสดงความเห็นบางครั้ง", "Contributes occasionally"], ["แทบไม่มีส่วนร่วม", "Rarely contributes"]]}, {"id": "B2", "th": "การคิดเชิงระบบ เชื่อมโยงมิติ นิเวศ–เศรษฐกิจ–สังคม–วัฒนธรรม", "en": "Systems thinking: links ecological, economic, social & cultural dimensions", "d": [["เชื่อมโยงหลายมิติและผลกระทบต่อกันได้อย่างมีเหตุผล", "Links several dimensions and their interactions logically"], ["เชื่อมโยงได้ 2 มิติขึ้นไป", "Links at least two dimensions"], ["มองประเด็นแยกส่วน", "Treats issues in isolation"], ["ไม่สามารถวิเคราะห์ได้", "Little or no analysis"]]}, {"id": "B3", "th": "การสื่อสารและทำงานร่วมกับผู้อื่นในทีมต่างสถาบัน/ต่างวัฒนธรรม", "en": "Communication & collaboration in a multi-university, multicultural team", "d": [["สื่อสารชัดเจน รับฟัง ช่วยเชื่อมสมาชิกต่างภาษา/สถาบัน", "Clear, listens, bridges languages/institutions"], ["ทำงานร่วมกับผู้อื่นได้ดี", "Works well with others"], ["ทำงานเฉพาะกับคนที่คุ้นเคย", "Works only with familiar peers"], ["ไม่ร่วมมือ/สร้างความขัดแย้ง", "Uncooperative or causes conflict"]]}, {"id": "B4", "th": "ความรับผิดชอบต่องานที่ได้รับมอบหมาย", "en": "Responsibility for assigned tasks", "d": [["ทำงานเสร็จครบ มีคุณภาพ ก่อนกำหนด", "Complete, high quality, ahead of time"], ["ทำงานเสร็จตามกำหนด", "Complete and on time"], ["ต้องติดตามจึงเสร็จ", "Completes only when followed up"], ["ไม่ทำงานที่ได้รับมอบหมาย", "Does not complete tasks"]]}, {"id": "C1", "th": "บทบาทในการเตรียม/นำเสนอผลงานกลุ่ม และการตอบคำถาม", "en": "Role in preparing/presenting group work & answering questions", "d": [["มีบทบาทหลัก อธิบายและตอบคำถามได้ถูกต้องชัดเจน", "Key role; explains and answers clearly and accurately"], ["มีบทบาทชัดเจน ตอบคำถามได้บ้าง", "Clear role; answers some questions"], ["มีบทบาทน้อย", "Minor role"], ["ไม่มีบทบาท", "No visible role"]]}], "form2_items": [{"id": "P1", "th": "การวิเคราะห์ปัญหาโดยอ้างอิงหลักฐานจากพื้นที่ภาคสนาม", "en": "Problem analysis grounded in field evidence", "d": [["อ้างอิงข้อมูลจากหลายพื้นที่ชัดเจน วิเคราะห์ลึก", "Draws on several sites; deep analysis"], ["อ้างอิงข้อมูลภาคสนามเหมาะสม", "Uses field data appropriately"], ["อ้างอิงข้อมูลน้อย/ทั่วไป", "Little or generic evidence"], ["ไม่มีหลักฐานสนับสนุน", "No supporting evidence"]], "part": {"th": "เนื้อหา", "en": "Content"}}, {"id": "P2", "th": "ความลึกและครอบคลุมประเด็นตามธีมของกลุ่ม", "en": "Depth & coverage of the group's assigned theme", "d": [["ครอบคลุมและลึกซึ้ง ตรงธีม", "Thorough, in-depth, on-theme"], ["ครอบคลุมประเด็นหลัก", "Covers main points"], ["ขาดบางประเด็นสำคัญ", "Misses key points"], ["ไม่ตรงธีม", "Off-theme"]], "part": {"th": "เนื้อหา", "en": "Content"}}, {"id": "P3", "th": "การบูรณาการมิติ นิเวศ–เศรษฐกิจ–สังคม–วัฒนธรรม", "en": "Integration of ecological, economic, social & cultural dimensions", "d": [["บูรณาการทุกมิติอย่างสมดุล", "Balanced integration of all dimensions"], ["บูรณาการได้หลายมิติ", "Integrates several dimensions"], ["เน้นมิติเดียว", "Focuses on one dimension"], ["ไม่มีการบูรณาการ", "No integration"]], "part": {"th": "เนื้อหา", "en": "Content"}}, {"id": "P4", "th": "ข้อเสนอแนวทางแก้ปัญหา/โมเดลธุรกิจ ที่สร้างสรรค์ (Design thinking)", "en": "Creative solution / business model (Design thinking)", "d": [["สร้างสรรค์ ชัดเจน ผ่านการทดสอบแนวคิดกับพี่เลี้ยง", "Original, clear, tested with mentor"], ["มีข้อเสนอชัดเจน", "Clear proposal"], ["ข้อเสนอกว้าง ไม่เฉพาะเจาะจง", "Vague proposal"], ["ไม่มีข้อเสนอ", "No proposal"]], "part": {"th": "เนื้อหา", "en": "Content"}}, {"id": "P5", "th": "ความเป็นไปได้และความเหมาะสมกับบริบทชุมชนน่าน", "en": "Feasibility & fit with Nan community context", "d": [["เป็นไปได้จริง ระบุผู้เกี่ยวข้อง ทรัพยากร และข้อจำกัด", "Realistic; names actors, resources, constraints"], ["เป็นไปได้ในระดับหนึ่ง", "Reasonably feasible"], ["ยังไม่สอดคล้องบริบท", "Weak fit with context"], ["เป็นไปไม่ได้", "Not feasible"]], "part": {"th": "เนื้อหา", "en": "Content"}}, {"id": "P6", "th": "โครงสร้างและลำดับการนำเสนอชัดเจน มีเหตุผล", "en": "Clear, logical structure", "d": [["ลำดับชัดเจน เชื่อมโยงต่อเนื่อง", "Clear, coherent flow"], ["ลำดับเข้าใจได้", "Understandable flow"], ["สับสนบางช่วง", "Confusing in parts"], ["ไม่มีโครงสร้าง", "No structure"]], "part": {"th": "การนำเสนอ", "en": "Delivery"}}, {"id": "P7", "th": "สื่อประกอบ (สไลด์ ภาพ แผนภาพ ข้อมูล)", "en": "Visual aids (slides, photos, diagrams, data)", "d": [["สื่อสวย อ่านง่าย ใช้ภาพ/ข้อมูลจากภาคสนาม", "Clear, attractive, uses field photos/data"], ["สื่อเหมาะสม", "Appropriate"], ["สื่ออ่านยาก/ข้อความมาก", "Hard to read or text-heavy"], ["ไม่มีสื่อ", "None"]], "part": {"th": "การนำเสนอ", "en": "Delivery"}}, {"id": "P8", "th": "ทักษะการสื่อสารและการบริหารเวลา", "en": "Delivery & time management", "d": [["พูดชัด มั่นใจ สบตาผู้ฟัง ตรงเวลา", "Clear, confident, engaging, on time"], ["พูดชัด เกินเวลาเล็กน้อย", "Clear, slightly over time"], ["อ่านสไลด์ เกินเวลามาก", "Reads slides, well over time"], ["สื่อสารไม่ได้", "Ineffective"]], "part": {"th": "การนำเสนอ", "en": "Delivery"}}, {"id": "P9", "th": "การตอบคำถามจากอาจารย์และผู้แทนชุมชน", "en": "Answering questions from panel & stakeholders", "d": [["ตอบตรงประเด็น มีเหตุผล อ้างอิงข้อมูล", "Direct, reasoned, evidence-based"], ["ตอบได้เป็นส่วนใหญ่", "Answers most questions"], ["ตอบได้บางส่วน", "Answers some"], ["ตอบไม่ได้", "Cannot answer"]], "part": {"th": "การนำเสนอ", "en": "Delivery"}}, {"id": "P10", "th": "การมีส่วนร่วมของสมาชิกทุกคนในการนำเสนอ", "en": "Involvement of all team members", "d": [["ทุกคนมีบทบาทชัดเจนและสมดุล", "All members, balanced roles"], ["สมาชิกส่วนใหญ่มีบทบาท", "Most members involved"], ["มีเพียงบางคนนำเสนอ", "Only a few present"], ["คนเดียวนำเสนอ", "One person only"]], "part": {"th": "การนำเสนอ", "en": "Delivery"}}]};
+const COURSE = {"title": {"th": "แบบประเมินรายวิชา ADAPT-Nan", "en": "ADAPT-Nan Agroecology Course — Student Evaluation Questionnaire"}, "subtitle": {"th": "การเตรียมความพร้อมออนไลน์และภาคสนาม 7 วันที่จังหวัดน่าน", "en": "Online preparation and seven-day field block in Nan Province"}, "intro": {"th": "ขอบคุณที่เข้าร่วมรายวิชาเกษตรนิเวศ ADAPT-Nan (45 ชั่วโมง 3 หน่วยกิต: เตรียมความพร้อมออนไลน์ 16 ชั่วโมง และภาคสนาม 7 วัน 29 ชั่วโมงที่จังหวัดน่าน) แบบสอบถามนี้ช่วยให้ทีมผู้สอนปรับปรุงรายวิชาสำหรับนิสิตรุ่นต่อไป ใช้เวลาประมาณ 20 นาที คำตอบของคุณไม่ระบุตัวตนและไม่มีผลต่อคะแนน กรุณาตอบตามความเป็นจริง ความเห็นเชิงวิพากษ์มีประโยชน์ที่สุด", "en": "Thank you for taking part in the ADAPT-Nan agroecology course (45 hours, 3 credits: 16 hours of online preparation followed by a 29-hour, seven-day field block in Nan Province). This questionnaire helps the teaching team improve the course for future cohorts. It takes about 20 minutes. Your answers are anonymous and will not affect your grade. Please answer honestly — critical comments are the most useful."}, "scales": {"agree": {"legend": {"th": "1 = ไม่เห็นด้วยอย่างยิ่ง · 2 = ไม่เห็นด้วย · 3 = เป็นกลาง · 4 = เห็นด้วย · 5 = เห็นด้วยอย่างยิ่ง · N/A = ไม่เกี่ยวข้อง/ไม่ได้เข้าร่วม", "en": "1 = Strongly disagree · 2 = Disagree · 3 = Neutral · 4 = Agree · 5 = Strongly agree · N/A = Not applicable / did not take part"}, "lo": {"th": "ไม่เห็นด้วยอย่างยิ่ง", "en": "Strongly disagree"}, "hi": {"th": "เห็นด้วยอย่างยิ่ง", "en": "Strongly agree"}}, "quality": {"legend": {"th": "1 = แย่มาก · 2 = แย่ · 3 = พอใช้ · 4 = ดี · 5 = ดีเยี่ยม · N/A = ไม่เกี่ยวข้อง", "en": "1 = Very poor · 2 = Poor · 3 = Fair · 4 = Good · 5 = Excellent · N/A = Not applicable"}, "lo": {"th": "แย่มาก", "en": "Very poor"}, "hi": {"th": "ดีเยี่ยม", "en": "Excellent"}}, "useful": {"legend": {"th": "1 = ไม่มีประโยชน์เลย … 5 = มีประโยชน์อย่างยิ่ง · N/A = ไม่ได้เข้าร่วม", "en": "1 = Not useful at all … 5 = Extremely useful · N/A = did not take part"}, "lo": {"th": "ไม่มีประโยชน์เลย", "en": "Not useful at all"}, "hi": {"th": "มีประโยชน์อย่างยิ่ง", "en": "Extremely useful"}}}, "sections": [{"id": "A", "title": {"th": "ส่วน A – ข้อมูลเกี่ยวกับคุณ", "en": "Part A – About you"}, "items": [{"id": "A1", "type": "single", "q": {"th": "มหาวิทยาลัยต้นสังกัด", "en": "Home university"}, "opts": [{"v": "Kasetsart University", "th": "มหาวิทยาลัยเกษตรศาสตร์", "en": "Kasetsart University"}, {"v": "Rajamangala University of Technology Lanna Nan", "th": "มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา น่าน", "en": "Rajamangala University of Technology Lanna Nan"}], "other": false, "req": true}, {"id": "A2", "type": "single", "q": {"th": "ชั้นปี", "en": "Year of study"}, "opts": [{"v": "1st", "th": "ปี 1", "en": "1st"}, {"v": "2nd", "th": "ปี 2", "en": "2nd"}, {"v": "3rd", "th": "ปี 3", "en": "3rd"}, {"v": "4th", "th": "ปี 4", "en": "4th"}], "other": true, "req": true}, {"id": "A3", "type": "single", "q": {"th": "สาขาวิชาหลัก", "en": "Main field of study"}, "opts": [{"v": "Agriculture / agronomy", "th": "เกษตรศาสตร์ / พืชศาสตร์", "en": "Agriculture / agronomy"}, {"v": "Environmental science / ecology", "th": "วิทยาศาสตร์สิ่งแวดล้อม / นิเวศวิทยา", "en": "Environmental science / ecology"}, {"v": "Biology", "th": "ชีววิทยา", "en": "Biology"}, {"v": "Social sciences / humanities", "th": "สังคมศาสตร์ / มนุษยศาสตร์", "en": "Social sciences / humanities"}, {"v": "Economics / development", "th": "เศรษฐศาสตร์ / การพัฒนา", "en": "Economics / development"}], "other": true, "req": true}, {"id": "A4", "type": "single", "q": {"th": "ภาษาหลักที่คุณใช้ระหว่างเรียนรายวิชานี้", "en": "Main language(s) you used during the course"}, "opts": [{"v": "Thai", "th": "ไทย", "en": "Thai"}, {"v": "English", "th": "อังกฤษ", "en": "English"}, {"v": "Both", "th": "ทั้งสองภาษา", "en": "Both"}], "other": true, "req": true}, {"id": "A5", "type": "single", "q": {"th": "ก่อนเรียนรายวิชานี้ คุณมีประสบการณ์เกี่ยวกับการทำเกษตรหรือชุมชนชนบทมากน้อยเพียงใด", "en": "Before this course, how much experience did you have with farming or rural communities?"}, "opts": [{"v": "None", "th": "ไม่มีเลย", "en": "None"}, {"v": "A little (short visits)", "th": "เล็กน้อย (ไปเยี่ยมช่วงสั้น ๆ)", "en": "A little (short visits)"}, {"v": "Some (fieldwork, internship)", "th": "พอสมควร (ลงพื้นที่ ฝึกงาน)", "en": "Some (fieldwork, internship)"}, {"v": "A lot (family farm, long-term work)", "th": "มาก (ครอบครัวทำเกษตร ทำงานระยะยาว)", "en": "A lot (family farm, long-term work)"}], "other": false, "req": true}, {"id": "A6", "type": "single", "q": {"th": "ก่อนเรียนรายวิชานี้ คุณคุ้นเคยกับเกษตรนิเวศมากน้อยเพียงใด", "en": "Before this course, how familiar were you with agroecology?"}, "opts": [{"v": "Not at all", "th": "ไม่คุ้นเคยเลย", "en": "Not at all"}, {"v": "Slightly", "th": "เล็กน้อย", "en": "Slightly"}, {"v": "Moderately", "th": "ปานกลาง", "en": "Moderately"}, {"v": "Very familiar", "th": "คุ้นเคยมาก", "en": "Very familiar"}], "other": false, "req": true}, {"id": "A7", "type": "multi", "q": {"th": "เหตุผลที่คุณลงเรียน (เลือกได้มากกว่า 1 ข้อ)", "en": "Why did you enroll? (tick all that apply)"}, "opts": [{"v": "Interest in agroecology", "th": "สนใจเกษตรนิเวศ", "en": "Interest in agroecology"}, {"v": "Field experience in Nan", "th": "ประสบการณ์ภาคสนามที่น่าน", "en": "Field experience in Nan"}, {"v": "Credits", "th": "หน่วยกิต", "en": "Credits"}, {"v": "Career plans", "th": "แผนด้านอาชีพ", "en": "Career plans"}, {"v": "Recommended by a teacher/friend", "th": "อาจารย์/เพื่อนแนะนำ", "en": "Recommended by a teacher/friend"}, {"v": "International exchange", "th": "การแลกเปลี่ยนนานาชาติ", "en": "International exchange"}], "other": true, "req": true}]}, {"id": "B", "title": {"th": "ส่วน B – การประเมินภาพรวม", "en": "Part B – Overall assessment"}, "scale": "agree", "items": [{"id": "B1", "type": "likert", "scale": "agree", "q": {"th": "โดยรวม ฉันพึงพอใจกับรายวิชานี้", "en": "Overall, I am satisfied with the course."}, "req": true}, {"id": "B2", "type": "likert", "scale": "agree", "q": {"th": "รายวิชานี้เป็นไปตามที่ฉันคาดหวังไว้ตอนลงเรียน", "en": "The course met the expectations I had when I enrolled."}, "req": true}, {"id": "B3", "type": "likert", "scale": "agree", "q": {"th": "การเตรียมความพร้อมออนไลน์และภาคสนามเชื่อมโยงกันเป็นรายวิชาเดียวที่สอดคล้องกัน", "en": "The online preparation and the field block fitted together as one coherent course."}, "req": true}, {"id": "B4", "type": "likert", "scale": "agree", "q": {"th": "รายวิชานี้เปลี่ยนวิธีคิดของฉันเกี่ยวกับการเกษตรและระบบอาหาร", "en": "The course changed the way I think about farming and food systems."}, "req": true}, {"id": "B5", "type": "likert", "scale": "agree", "q": {"th": "ฉันจะแนะนำรายวิชานี้ให้นิสิตคนอื่น", "en": "I would recommend this course to other students."}, "req": true}, {"id": "B6", "type": "score10", "q": {"th": "คะแนนโดยรวมของรายวิชา (1–10)", "en": "Overall score for the course (1–10)"}, "req": true}, {"id": "B7", "type": "words3", "q": {"th": "คำ 3 คำที่อธิบายประสบการณ์ของคุณในรายวิชานี้", "en": "Three words that describe your experience of the course"}, "req": false}]}, {"id": "C", "title": {"th": "ส่วน C – การเตรียมความพร้อมออนไลน์", "en": "Part C – Online preparation"}, "scale": "agree", "items": [{"id": "C1", "type": "likert", "scale": "agree", "q": {"th": "มีการอธิบายวัตถุประสงค์ของบทเรียนออนไลน์อย่างชัดเจน", "en": "The objectives of the online sessions were clearly explained."}, "req": true}, {"id": "C2", "type": "likert", "scale": "agree", "q": {"th": "เนื้อหาออนไลน์ (บรรยาย เอกสารอ่าน วิดีโอ) ตรงประเด็นและมีคุณภาพดี", "en": "The online content (lectures, readings, videos) was relevant and of good quality."}, "req": true}, {"id": "C3", "type": "likert", "scale": "agree", "q": {"th": "บทเรียนออนไลน์ช่วยให้ฉันเข้าใจบริบทของน่านได้ดี (การเปลี่ยนแปลงภาคเกษตร พืชเชิงเดี่ยวข้าวโพดและยางพารา สารเคมีเกษตร หมอกควัน น้ำ)", "en": "The online sessions gave me a good understanding of Nan's context (agrarian change, maize and rubber monocultures, agrochemicals, haze, water)."}, "req": true}, {"id": "C4", "type": "likert", "scale": "agree", "q": {"th": "บทเรียนออนไลน์แนะนำวิธีการภาคสนาม (การสังเกต การสัมภาษณ์ การสนทนากลุ่ม เกมบทบาทสมมติ) ได้ดีพอที่ฉันจะนำไปใช้ที่น่าน", "en": "The online sessions introduced the field methods (observation, interviews, focus groups, role-play games) well enough for me to use them in Nan."}, "req": true}, {"id": "C5", "type": "likert", "scale": "agree", "q": {"th": "ระบบออนไลน์และสื่อการเรียนเข้าถึงและใช้งานได้ง่าย", "en": "The online platform and materials were easy to access and use."}, "req": true}, {"id": "C6", "type": "likert", "scale": "agree", "q": {"th": "ปริมาณงานออนไลน์มีความเหมาะสม", "en": "The amount of online work was reasonable."}, "req": true}, {"id": "C7", "type": "likert", "scale": "agree", "q": {"th": "โดยรวม ฉันเดินทางถึงน่านพร้อมสำหรับภาคสนามเป็นอย่างดี", "en": "Overall, I arrived in Nan well prepared for the field block."}, "req": true}, {"id": "C8", "type": "single", "q": {"th": "บทเรียนออนไลน์ 16 ชั่วโมง", "en": "The 16 hours online were:"}, "opts": [{"v": "Too short", "th": "สั้นเกินไป", "en": "Too short"}, {"v": "About right", "th": "พอดี", "en": "About right"}, {"v": "Too long", "th": "ยาวเกินไป", "en": "Too long"}], "other": false, "req": true}, {"id": "C9", "type": "open", "q": {"th": "บทเรียนหรือสื่อออนไลน์ใดมีประโยชน์ที่สุด เพราะเหตุใด", "en": "Which online session or resource was the most useful, and why?"}, "req": false}, {"id": "C10", "type": "open", "q": {"th": "การเตรียมความพร้อมออนไลน์ยังขาดอะไร หรือควรเปลี่ยนแปลงอะไร", "en": "What was missing from the online preparation, or should be changed?"}, "req": false}]}, {"id": "D1", "title": {"th": "ส่วน D – ภาคสนาม 7 วันที่น่าน · D-I เนื้อหาและกิจกรรมภาคสนาม", "en": "Part D – Seven-day field block in Nan · D-I Content and field activities"}, "scale": "agree", "items": [{"id": "D1", "type": "likert", "scale": "agree", "q": {"th": "กำหนดการแต่ละวันมีวัตถุประสงค์การเรียนรู้ที่ชัดเจน", "en": "The daily programme had clear learning objectives."}, "req": true}, {"id": "D2", "type": "likert", "scale": "agree", "q": {"th": "พื้นที่ศึกษาดูงาน (ฟาร์ม ศูนย์เรียนรู้ วัด โครงการพระราชดำริ) ได้รับการคัดเลือกอย่างเหมาะสม", "en": "The field sites (farms, learning centres, temples, royal projects) were well chosen."}, "req": true}, {"id": "D3", "type": "likert", "scale": "agree", "q": {"th": "ภาคสนามช่วยให้ฉันเชื่อมโยงแนวคิดจากบทเรียนออนไลน์กับสถานการณ์จริง", "en": "The field block helped me link the ideas from the online sessions to real situations."}, "req": true}, {"id": "D4", "type": "likert", "scale": "agree", "q": {"th": "ฉันได้เห็นทั้งปัญหา (สารเคมีเกษตร ความเสื่อมโทรมของที่ดิน หนี้สิน เกษตรกรสูงวัย หมอกควัน) และทางเลือกที่กำลังสร้างขึ้นในน่าน", "en": "I saw both the problems (agrochemicals, land degradation, debt, ageing farmers, haze) and the alternatives being built in Nan."}, "req": true}, {"id": "D5", "type": "likert", "scale": "agree", "q": {"th": "แต่ละวันมีเวลาเพียงพอสำหรับการสะท้อนคิดและอภิปราย", "en": "There was enough time each day for reflection and discussion."}, "req": true}, {"id": "D6", "type": "single", "q": {"th": "จังหวะของสัปดาห์ภาคสนาม", "en": "The pace of the field week was:"}, "opts": [{"v": "Too slow", "th": "ช้าเกินไป", "en": "Too slow"}, {"v": "About right", "th": "พอดี", "en": "About right"}, {"v": "Too intense", "th": "เข้มข้นเกินไป", "en": "Too intense"}], "other": false, "req": true}, {"id": "D7", "type": "single", "q": {"th": "ระยะเวลาภาคสนาม 7 วัน", "en": "The seven-day length of the field block was:"}, "opts": [{"v": "Too short", "th": "สั้นเกินไป", "en": "Too short"}, {"v": "About right", "th": "พอดี", "en": "About right"}, {"v": "Too long", "th": "ยาวเกินไป", "en": "Too long"}], "other": false, "req": true}]}, {"id": "D2", "title": {"th": "D-II การจัดการและโลจิสติกส์", "en": "D-II Organization and logistics"}, "scale": "quality", "items": [{"id": "D8", "type": "likert", "scale": "quality", "q": {"th": "ข้อมูลที่ได้รับก่อนออกเดินทาง", "en": "Information received before departure"}, "req": true}, {"id": "D9", "type": "likert", "scale": "quality", "q": {"th": "การเดินทาง", "en": "Transport"}, "req": true}, {"id": "D10", "type": "likert", "scale": "quality", "q": {"th": "ที่พัก", "en": "Accommodation"}, "req": true}, {"id": "D11", "type": "likert", "scale": "quality", "q": {"th": "อาหาร", "en": "Food"}, "req": true}, {"id": "D12", "type": "likert", "scale": "quality", "q": {"th": "สุขภาพและความปลอดภัย", "en": "Health and safety"}, "req": true}, {"id": "D13", "type": "likert", "scale": "quality", "q": {"th": "กำหนดการประจำวันและการบริหารเวลา", "en": "Daily schedule and time management"}, "req": true}, {"id": "D14", "type": "open", "q": {"th": "การดูงานหรือกิจกรรมภาคสนามใดที่ประทับใจที่สุด เพราะเหตุใด", "en": "Which field visit or activity was the most memorable, and why?"}, "req": false}, {"id": "D15", "type": "open", "q": {"th": "การดูงานหรือกิจกรรมใดที่คุณจะตัดออกหรือเปลี่ยนแปลง เพราะเหตุใด", "en": "Which visit or activity would you remove or change, and why?"}, "req": false}]}, {"id": "E", "title": {"th": "ส่วน E – วิธีการเรียนรู้", "en": "Part E – Learning methods"}, "scale": "useful", "note": {"th": "แต่ละวิธีมีประโยชน์ต่อการเรียนรู้ของคุณเพียงใด", "en": "How useful was each method for your learning?"}, "items": [{"id": "E1", "type": "likert", "scale": "useful", "q": {"th": "การสังเกตฟาร์มและภูมิทัศน์โดยตรง", "en": "Direct observation of farms and landscapes"}, "req": true}, {"id": "E2", "type": "likert", "scale": "useful", "q": {"th": "การสนทนากลุ่มกับเกษตรกรและผู้เกี่ยวข้องในท้องถิ่น", "en": "Focus group discussions with farmers and local actors"}, "req": true}, {"id": "E3", "type": "likert", "scale": "useful", "q": {"th": "เกมบทบาทสมมติและเกมเพื่อการเรียนรู้ (serious games)", "en": "Role-play games and serious games"}, "req": true}, {"id": "E4", "type": "likert", "scale": "useful", "q": {"th": "การฝึกปฏิบัติจริงระหว่างเวิร์กช็อป", "en": "Hands-on practice during workshops"}, "req": true}, {"id": "E5", "type": "likert", "scale": "useful", "q": {"th": "การเยี่ยมชมศูนย์เรียนรู้", "en": "Visits to learning centres"}, "req": true}, {"id": "E6", "type": "likert", "scale": "useful", "q": {"th": "การทำงานกลุ่มและโครงงานกลุ่ม", "en": "Group work and group project"}, "req": true}, {"id": "E7", "type": "likert", "scale": "useful", "q": {"th": "การเตรียมและนำเสนอผลงานกลุ่มในวันสุดท้าย", "en": "Preparing and presenting the final group session"}, "req": true}, {"id": "E8", "type": "balance", "q": {"th": "ควรปรับสัดส่วนกิจกรรมหรือไม่ (เลือก 1 ช่องต่อกิจกรรม)", "en": "Should the balance between activities change? For each, tick one."}, "req": true, "cols": [{"v": "Less", "th": "น้อยลง", "en": "Less"}, {"v": "Same", "th": "เท่าเดิม", "en": "Same"}, {"v": "More", "th": "มากขึ้น", "en": "More"}], "rows": [{"k": "Lectures", "th": "การบรรยาย", "en": "Lectures"}, {"k": "Games_workshops", "th": "เกมและเวิร์กช็อป", "en": "Games and workshops"}, {"k": "Fieldwork", "th": "การลงพื้นที่กับชุมชน", "en": "Fieldwork with local communities"}, {"k": "Group_work", "th": "งานกลุ่ม", "en": "Group work"}, {"k": "Free_time", "th": "เวลาว่าง / พักผ่อน", "en": "Free / rest time"}]}, {"id": "E9", "type": "open", "q": {"th": "คุณได้เรียนรู้อะไรจากเกมเพื่อการเรียนรู้ ที่ไม่สามารถเรียนรู้ได้ด้วยวิธีอื่น", "en": "What did you learn from the serious game that you could not have learned another way?"}, "req": false}]}, {"id": "F", "title": {"th": "ส่วน F – สิ่งที่คุณได้เรียนรู้", "en": "Part F – What you learned"}, "note": {"th": "ประเมินระดับของคุณ \"ก่อนเรียน\" และ \"ตอนนี้\" จาก 1 (ต่ำมาก) ถึง 5 (สูงมาก)", "en": "Rate your level BEFORE the course and NOW, from 1 (very low) to 5 (very high)."}, "items": [{"id": "F1", "type": "beforenow", "q": {"th": "ความเข้าใจเกษตรนิเวศในฐานะศาสตร์ การปฏิบัติ และขบวนการทางสังคม", "en": "Understanding agroecology as a science, a practice and a movement"}, "req": true}, {"id": "F2", "type": "beforenow", "q": {"th": "ความเข้าใจปัจจัยขับเคลื่อนการเปลี่ยนแปลงภาคเกษตรในน่าน (ตลาด หนี้สิน เกษตรกรสูงวัย ภัยแล้งและน้ำท่วม เทคโนโลยี)", "en": "Understanding the drivers of agrarian change in Nan (markets, debt, ageing farmers, droughts and floods, technologies)"}, "req": true}, {"id": "F3", "type": "beforenow", "q": {"th": "ความเข้าใจความเชื่อมโยงระหว่างสารเคมีเกษตร สุขภาพ และสิ่งแวดล้อม", "en": "Understanding the links between agrochemicals, health and environment"}, "req": true}, {"id": "F4", "type": "beforenow", "q": {"th": "ความเข้าใจความเชื่อมโยงระหว่างป่า ความหลากหลายทางชีวภาพ และการเกษตร", "en": "Understanding the links between forests, biodiversity and farming"}, "req": true}, {"id": "F5", "type": "beforenow", "q": {"th": "ความเข้าใจเครือข่ายเกษตรอินทรีย์ การรับรองมาตรฐาน และตลาด", "en": "Understanding organic farming networks, certification and markets"}, "req": true}, {"id": "F6", "type": "beforenow", "q": {"th": "ความเข้าใจบทบาทของภาคประชาสังคม ศูนย์เรียนรู้ และการริเริ่มในท้องถิ่น ต่อการเปลี่ยนผ่านสู่เกษตรนิเวศ", "en": "Understanding the role of civil society, learning centres and local initiatives in the agroecological transition"}, "req": true}, {"id": "F7", "type": "beforenow", "q": {"th": "การเรียนรู้จากภูมิปัญญาของเกษตรกรและความรู้ข้ามรุ่น", "en": "Learning from farmers' and intergenerational knowledge"}, "req": true}, {"id": "F8", "type": "beforenow", "q": {"th": "การสังเกตภาคสนามและการสัมภาษณ์", "en": "Conducting field observations and interviews"}, "req": true}, {"id": "F9", "type": "beforenow", "q": {"th": "การเข้าร่วมเวิร์กช็อปแบบมีส่วนร่วมและเกมบทบาทสมมติ", "en": "Taking part in participatory workshops and role-play games"}, "req": true}, {"id": "F10", "type": "beforenow", "q": {"th": "การคิดเชิงระบบ: มองเห็นความเชื่อมโยงของประเด็นสังคม เศรษฐกิจ และนิเวศ", "en": "Systems thinking: seeing how social, economic and ecological issues connect"}, "req": true}, {"id": "F11", "type": "beforenow", "q": {"th": "การทำงานเป็นทีมข้ามสาขาวิชา วัฒนธรรม และภาษา", "en": "Working in a team across disciplines, cultures and languages"}, "req": true}, {"id": "F12", "type": "beforenow", "q": {"th": "การนำเสนอและอภิปรายแนวคิดกับเกษตรกร เจ้าหน้าที่ และผู้มีส่วนได้ส่วนเสียอื่น ๆ", "en": "Presenting and discussing ideas with farmers, officials and other stakeholders"}, "req": true}, {"id": "F13", "type": "open", "q": {"th": "สิ่งที่สำคัญที่สุดเพียงหนึ่งเรื่องที่คุณได้เรียนรู้จากรายวิชานี้คืออะไร", "en": "What is the single most important thing you learned during this course?"}, "req": false}]}, {"id": "G", "title": {"th": "ส่วน G – ทีมผู้สอน การอำนวยการเรียนรู้ และภาษา", "en": "Part G – Teaching team, facilitation and language"}, "scale": "agree", "items": [{"id": "G1", "type": "likert", "scale": "agree", "q": {"th": "ทีมผู้สอนมีความรู้และเตรียมการมาอย่างดี", "en": "The teaching team was knowledgeable and well prepared."}, "req": true}, {"id": "G2", "type": "likert", "scale": "agree", "q": {"th": "ทีมผู้สอนพร้อมให้ความช่วยเหลือและสนับสนุนเมื่อฉันต้องการ", "en": "The teaching team was available and supportive when I needed help."}, "req": true}, {"id": "G3", "type": "likert", "scale": "agree", "q": {"th": "วิทยากรท้องถิ่น (เกษตรกร ครู ผู้นำชุมชน) มีส่วนร่วมในการสอนอย่างกลมกลืน", "en": "Local resource persons (farmers, teachers, community leaders) were well integrated into the teaching."}, "req": true}, {"id": "G4", "type": "likert", "scale": "agree", "q": {"th": "ภาษาไม่เป็นอุปสรรค การแปลระหว่างภาษาไทยและภาษาอังกฤษทำได้ดี", "en": "Language was not a barrier: translation between Thai and English worked well."}, "req": true}, {"id": "G5", "type": "likert", "scale": "agree", "q": {"th": "การเรียนร่วมกันระหว่างนิสิตไทยและนิสิตต่างชาติช่วยเพิ่มคุณค่าการเรียนรู้", "en": "Mixing Thai and international students was enriching."}, "req": true}, {"id": "G6", "type": "likert", "scale": "agree", "q": {"th": "ฉันรู้สึกเป็นอิสระที่จะถามคำถามและแสดงความเห็นที่แตกต่าง", "en": "I felt free to ask questions and express disagreement."}, "req": true}, {"id": "G7", "type": "likert", "scale": "agree", "q": {"th": "ฉันได้รับคำแนะนำอย่างดีเรื่องการปฏิบัติตัวอย่างให้เกียรติในชุมชน (บรรทัดฐานทางวัฒนธรรม การขอความยินยอม การถ่ายภาพ)", "en": "I was well briefed on how to behave respectfully in communities (cultural norms, consent, photography)."}, "req": true}]}, {"id": "H", "title": {"th": "ส่วน H – ความผูกพันของคุณกับเกษตรนิเวศ", "en": "Part H – Your engagement with agroecology"}, "scale": "agree", "items": [{"id": "H1", "type": "likert", "scale": "agree", "q": {"th": "รายวิชานี้เพิ่มความสนใจของฉันต่อการเกษตรและวิถีชีวิตชนบท", "en": "The course increased my interest in agriculture and rural life."}, "req": true}, {"id": "H2", "type": "likert", "scale": "agree", "q": {"th": "ตอนนี้ฉันเห็นว่าเกษตรนิเวศเป็นทางเลือกที่เป็นไปได้จริงสำหรับเกษตรกรในน่าน", "en": "I now see agroecology as a realistic option for farmers in Nan."}, "req": true}, {"id": "H3", "type": "likert", "scale": "agree", "q": {"th": "ฉันกำลังพิจารณาเรียนต่อ ทำวิจัย หรือประกอบอาชีพที่เกี่ยวข้องกับเกษตรนิเวศ", "en": "I am considering further study, research or a career related to agroecology."}, "req": true}, {"id": "H4", "type": "likert", "scale": "agree", "q": {"th": "ฉันตั้งใจจะเปลี่ยนทางเลือกบางอย่างของตัวเอง (อาหาร การบริโภค) หลังจบรายวิชานี้", "en": "I intend to change some of my own choices (food, consumption) after this course."}, "req": true}, {"id": "H5", "type": "likert", "scale": "agree", "q": {"th": "ฉันอยากติดต่อกับทีม ADAPT-Nan ต่อไป", "en": "I would like to stay in contact with ADAPT-Nan team."}, "req": true}]}, {"id": "I", "title": {"th": "ส่วน I – คำถามปลายเปิด", "en": "Part I – Open questions"}, "items": [{"id": "I1", "type": "open", "q": {"th": "จุดแข็งหลักของรายวิชานี้คืออะไร", "en": "What were the main strengths of the course?"}, "req": false}, {"id": "I2", "type": "open", "q": {"th": "จุดอ่อนหรือความยากลำบากหลักคืออะไร", "en": "What were the main weaknesses or difficulties?"}, "req": false}, {"id": "I3", "type": "open", "q": {"th": "หากเปลี่ยนแปลงได้หนึ่งอย่างสำหรับรุ่นปีหน้า คุณจะเปลี่ยนอะไร", "en": "If you could change one thing for next year's session, what would it be?"}, "req": false}, {"id": "I4", "type": "open", "q": {"th": "คุณมีคำแนะนำอะไรให้นิสิตที่จะเรียนรายวิชานี้ในปีหน้า", "en": "What advice would you give to students taking this course next year?"}, "req": false}, {"id": "I5", "type": "open", "q": {"th": "ความคิดเห็นอื่น ๆ", "en": "Any other comments?"}, "req": false}]}]};
+// ==================
+const S = {
+  back:["← ADAPT-Nan · ภาคสนาม","← ADAPT-Nan · Field Block"],
+  title:["แบบประเมิน ADAPT-Nan 2026","ADAPT-Nan 2026 Evaluation"],
+  sub:["รายวิชาเกษตรนิเวศ ADAPT-Nan · ภาคสนาม 8–15 พฤศจิกายน 2569 จังหวัดน่าน","ADAPT-Nan Agroecology Course · Field block 8–15 November 2026, Nan"],
+  noBackend:["ยังไม่ได้เชื่อมต่อ Google Sheet — เมื่อกดส่ง ระบบจะดาวน์โหลดไฟล์คำตอบ (.json) ให้ส่งต่อผู้ประสานงาน","Not connected to Google Sheet — submitting will download your answers as a file to send to the coordinator."],
+  lvlTitle:["1. เลือกแบบประเมิน","1. Choose an evaluation"],
+  lvField:["ระดับภาคสนาม","Field trip level"], lvFieldD:["ประเมินนิสิตรายบุคคล เพื่อน ตนเอง และการนำเสนอกลุ่ม (ระบุชื่อ)","Individual, peer, self and group-presentation evaluation (named)"],
+  lvCourse:["ระดับรายวิชา","Course level"], lvCourseD:["นิสิตประเมินรายวิชาทั้งหมด ออนไลน์ + ภาคสนาม (ไม่ระบุชื่อ, ~20 นาที)","Students evaluate the whole course, online + field (anonymous, ~20 min)"],
+  whoTitle:["2. คุณคือใคร?","2. Who are you?"],
+  rStudent:["นิสิต","Student"], rStudentD:["แบบที่ 3 ประเมินเพื่อน + แบบที่ 4 ประเมินตนเอง","Form 3 peer + Form 4 self-evaluation"],
+  rMentor:["พี่เลี้ยง","Mentor"], rMentorD:["แบบที่ 1 ประเมินนิสิตรายบุคคล","Form 1 individual evaluation"],
+  rPanel:["กรรมการ","Panel"], rPanelD:["แบบที่ 2 การนำเสนอผลงานกลุ่ม (14 พ.ย.)","Form 2 group presentation (14 Nov)"],
+  group:["กลุ่ม","Group"], chooseGroup:["— เลือกกลุ่ม —","— choose group —"], groupN:["กลุ่ม","Group"],
+  myName:["ชื่อของฉัน","My name"], chooseName:["— เลือกชื่อ —","— choose your name —"],
+  mentorName:["ชื่อพี่เลี้ยง","Mentor name"], choose:["— เลือก —","— choose —"], other:["อื่น ๆ (พิมพ์ชื่อ)","Other (type name)"],
+  evalName:["ชื่อผู้ประเมิน","Evaluator name"], fullName:["ชื่อ-นามสกุล","Full name"],
+  pRole:["บทบาท","Role"], pRoles:[["อาจารย์","ผู้แทนชุมชน","พี่เลี้ยง","อื่น ๆ"],["Instructor","Community stakeholder","Mentor","Other"]],
+  scale10:["สเกล: 9–10 ดีเยี่ยม · 7–8 ดี · 5–6 พอใช้ · 0–4 ต้องปรับปรุง","Scale: 9–10 Excellent · 7–8 Good · 5–6 Fair · 0–4 Needs improvement"],
+  showRubric:["ดูเกณฑ์","Show rubric"],
+  f4Title:["แบบที่ 4 ประเมินตนเอง","Form 4 · Self-evaluation"], reflTitle:["สะท้อนการเรียนรู้","Reflection"],
+  reflNote:["ตอบสั้น ๆ","Answer briefly."],
+  f3Title:["แบบที่ 3 ประเมินเพื่อนในกลุ่ม","Form 3 · Peer evaluation"],
+  f3Note:["ประเมินเพื่อนทุกคน ({n} คน) อย่างตรงไปตรงมาและสร้างสรรค์ ผลการประเมินเป็นความลับ","Rate every peer ({n}) honestly and constructively. Responses are confidential."],
+  strength:["จุดเด่น 1 ข้อ","One strength"], suggest:["ข้อเสนอแนะ 1 ข้อ","One suggestion"],
+  f1Title:["แบบที่ 1 ประเมินนิสิตรายบุคคล","Form 1 · Individual evaluation"],
+  f1Note:["บันทึกการเข้าร่วม D2–D7 เพื่อคำนวณข้อ A1 อัตโนมัติ แล้วให้คะแนน A2–C1 (0–10)","Record attendance D2–D7 (sets A1 automatically), then score A2–C1 (0–10)."],
+  a1:["การเข้าร่วมกิจกรรมครบถ้วนและตรงต่อเวลา","Attendance & punctuality"],
+  att:[["✓ มาตรงเวลา","สาย / บางส่วน","ขาด"],["✓ On time","Late / partial","Absent"]],
+  comment:["ข้อสังเกต / หลักฐาน","Comments / evidence"],
+  f2Title:["แบบที่ 2 การนำเสนอผลงานกลุ่ม","Form 2 · Group presentation"], members:["สมาชิก","Members"],
+  f2Str:["จุดเด่นของข้อเสนอ","Strengths of the proposal"], f2Imp:["สิ่งที่ควรพัฒนา / คำถามต่อยอด","To improve / questions to explore"],
+  anon:["แบบสอบถามนี้ไม่ระบุตัวตน ระบบไม่บันทึกชื่อ อีเมล หรือเวลาที่ส่ง (บันทึกเฉพาะวันที่)","This questionnaire is anonymous: no name, e-mail or time of submission is recorded (date only)."],
+  na:["N/A","N/A"], before:["ก่อนเรียน","Before"], now:["ตอนนี้","Now"], otherOpt:["อื่น ๆ","Other"], otherSpec:["โปรดระบุ","Please specify"],
+  word:["คำที่","Word"], optional:["(ไม่บังคับ)","(optional)"],
+  submit:["ส่ง","Submit"], sending:["กำลังส่ง…","Sending…"],
+  prog:["ตอบแล้ว {d}/{n} ข้อ","{d}/{n} answered"],
+  missing:["กรุณาตอบให้ครบทุกข้อที่มีตัวเลือก","Please answer all items with options."],
+  missingWho:["กรุณาใส่ชื่อและบทบาทผู้ประเมิน","Please enter your name and role."],
+  okTitle:["ส่งเรียบร้อย ขอบคุณครับ/ค่ะ 🙏","Submitted — thank you! 🙏"], okId:["รหัสการส่ง","Submission ID"],
+  again:["ประเมินชุดใหม่","New evaluation"], dl:["ดาวน์โหลดสำเนา","Download a copy"],
+  failT:["ส่งไม่สำเร็จ","Could not submit"], savedT:["บันทึกเป็นไฟล์แล้ว","Saved as a file"],
+  failD:["ระบบดาวน์โหลดไฟล์คำตอบให้แล้ว กรุณาส่งไฟล์นี้ให้ผู้ประสานงาน หรือกดส่งอีกครั้งเมื่อมีสัญญาณอินเทอร์เน็ต (คำตอบยังอยู่ในหน้านี้)","Your answers were downloaded as a file — send it to the coordinator, or press Submit again when online (your answers are kept on this page)."]
+};
+let L = (new URLSearchParams(location.search).get('lang') || '').toLowerCase() === 'en' ? 'en' : 'th';
+let level = (new URLSearchParams(location.search).get('level') || '').toLowerCase();
+if (!['field','course'].includes(level)) level = null;
+const s = (k, vars) => { let v = S[k][L === 'th' ? 0 : 1]; if (vars) for (const x in vars) v = v.replace('{' + x + '}', vars[x]); return v; };
+const t = o => o ? (o[L] ?? o.th) : '';
+const $ = q => document.querySelector(q);
+const esc = x => String(x ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const connected = /^https:\/\/script\.google(usercontent)?\.com\//.test(SCRIPT_URL);
-if (!connected) $('#noBackend').classList.remove('hidden');
 
 let role = null;
-const state = {};           // key -> value
-const required = new Set(); // keys that must be filled
+const state = {};
+const required = new Set();
 
-function store(){ try{ localStorage.setItem('adaptEval:'+draftKey(), JSON.stringify(state)); }catch(e){} }
-function draftKey(){ return [role, $('#grp').value, whoName()].join('|'); }
-function loadDraft(){ try{ const s = JSON.parse(localStorage.getItem('adaptEval:'+draftKey())||'{}'); Object.keys(state).forEach(k=>delete state[k]); Object.assign(state, s); }catch(e){} }
-
-function whoName(){
-  return role === 'panel' || (role === 'mentor' && $('#who').value === '__other') ? $('#whoText').value.trim() : $('#who').value;
-}
+function syncURL(){ const p = new URLSearchParams(location.search); p.set('lang', L); if (level) p.set('level', level); else p.delete('level'); history.replaceState(null, '', '?' + p.toString()); }
+function draftKey(){ return level === 'course' ? 'course' : [role, $('#grp').value, whoName()].join('|'); }
+function store(){ try { localStorage.setItem('adaptEval:' + draftKey(), JSON.stringify(state)); } catch (e) {} }
+function loadDraft(){ Object.keys(state).forEach(k => delete state[k]); try { Object.assign(state, JSON.parse(localStorage.getItem('adaptEval:' + draftKey()) || '{}')); } catch (e) {} }
+function whoName(){ return role === 'panel' || (role === 'mentor' && $('#who').value === '__other') ? $('#whoText').value.trim() : $('#who').value; }
 function group(){ return DATA.groups.find(g => String(g.no) === $('#grp').value); }
 
-// --- group select
-$('#grp').innerHTML = '<option value="">— เลือกกลุ่ม / choose group —</option>' +
-  DATA.groups.map(g => `<option value="${g.no}">กลุ่ม ${g.no} · ${esc(g.en)}</option>`).join('');
+// ---------- static text ----------
+function paintStatic(){
+  document.documentElement.lang = L;
+  document.querySelectorAll('.langsw button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === L));
+  $('#backLink').textContent = s('back'); $('#hTitle').textContent = s('title'); $('#hSub').textContent = s('sub');
+  $('#noBackend').textContent = s('noBackend'); $('#noBackend').classList.toggle('hidden', connected);
+  $('#lvlTitle').textContent = s('lvlTitle'); $('#submit').textContent = s('submit');
+  document.querySelectorAll('[data-s]').forEach(e => e.textContent = s(e.dataset.s));
+  const g = $('#grp').value;
+  $('#grp').innerHTML = `<option value="">${s('chooseGroup')}</option>` + DATA.groups.map(x => `<option value="${x.no}">${s('groupN')} ${x.no} · ${esc(L === 'th' ? x.th : x.en)}</option>`).join('');
+  $('#grp').value = g;
+  const pr = $('#panelRole').value; const R = S.pRoles[L === 'th' ? 0 : 1];
+  $('#panelRole').innerHTML = `<option value="">${s('choose')}</option>` + S.pRoles[1].map((v, i) => `<option value="${v}">${R[i]}</option>`).join('');
+  $('#panelRole').value = pr;
+  $('#whoText').placeholder = s('fullName');
+  fillWho(true);
+}
 
-document.querySelectorAll('.role').forEach(b => b.onclick = () => {
-  role = b.dataset.role;
-  document.querySelectorAll('.role').forEach(x => x.setAttribute('aria-pressed', x === b));
-  $('#panelRoleBox').classList.toggle('hidden', role !== 'panel');
-  fillWho(); render();
+document.querySelectorAll('.langsw button').forEach(b => b.onclick = () => { L = b.dataset.lang; syncURL(); paintStatic(); render(); });
+document.querySelectorAll('[data-level]').forEach(b => b.onclick = () => { level = b.dataset.level; syncURL(); paintLevel(); render(); });
+document.querySelectorAll('[data-role]').forEach(b => b.onclick = () => {
+  role = b.dataset.role; document.querySelectorAll('[data-role]').forEach(x => x.setAttribute('aria-pressed', x === b));
+  $('#panelRoleBox').classList.toggle('hidden', role !== 'panel'); fillWho(); render();
 });
+function paintLevel(){
+  document.querySelectorAll('[data-level]').forEach(x => x.setAttribute('aria-pressed', x.dataset.level === level));
+  $('#fieldSetup').classList.toggle('hidden', level !== 'field');
+}
 $('#grp').onchange = () => { fillWho(); render(); };
-$('#who').onchange = () => { $('#whoText').classList.toggle('hidden', !($('#who').value === '__other')); render(); };
+$('#who').onchange = () => { $('#whoText').classList.toggle('hidden', $('#who').value !== '__other'); render(); };
 $('#whoText').oninput = () => updateProgress();
 $('#panelRole').onchange = () => updateProgress();
 
-function fillWho(){
-  const g = group(); const sel = $('#who'), txt = $('#whoText');
-  sel.classList.remove('hidden'); txt.classList.add('hidden');
-  if (role === 'panel'){ sel.classList.add('hidden'); txt.classList.remove('hidden'); $('#whoLbl').textContent = 'ชื่อผู้ประเมิน / Evaluator name'; return; }
+function fillWho(keep){
+  const g = group(), sel = $('#who'), txt = $('#whoText'), cur = sel.value;
+  if (role === 'panel'){ sel.classList.add('hidden'); txt.classList.remove('hidden'); $('#whoLbl').textContent = s('evalName'); return; }
+  sel.classList.remove('hidden'); if (!(keep && cur === '__other')) txt.classList.add('hidden');
   if (role === 'mentor'){
-    $('#whoLbl').textContent = 'ชื่อพี่เลี้ยง / Mentor name';
-    sel.innerHTML = '<option value="">— เลือก / choose —</option>' + (g ? g.mentors.map(m => `<option>${esc(m[1])}</option>`).join('') : '') + '<option value="__other">อื่น ๆ (พิมพ์ชื่อ) / Other</option>';
-    return;
+    $('#whoLbl').textContent = s('mentorName');
+    sel.innerHTML = `<option value="">${s('choose')}</option>` + (g ? g.mentors.map(m => `<option>${esc(m[1])}</option>`).join('') : '') + `<option value="__other">${s('other')}</option>`;
+  } else {
+    $('#whoLbl').textContent = s('myName');
+    sel.innerHTML = `<option value="">${s('chooseName')}</option>` + (g ? g.students.map(x => `<option>${esc(x[1])}</option>`).join('') : '');
   }
-  $('#whoLbl').textContent = 'ชื่อของฉัน / My name';
-  sel.innerHTML = '<option value="">— เลือกชื่อ / choose your name —</option>' + (g ? g.students.map(s => `<option>${esc(s[1])}</option>`).join('') : '');
+  if (keep) sel.value = cur;
 }
 
-// --- building blocks
-function scale(key){
-  required.add(key);
-  let h = `<div class="scale" data-key="${key}">`;
-  for (let i = 0; i <= 10; i++) h += `<button type="button" data-v="${i}" aria-pressed="${state[key] === i}">${i}</button>`;
-  return h + '</div>';
-}
-function rubric(d){
-  return `<details class="rub"><summary>ดูเกณฑ์ / show rubric</summary><div class="rubt">${
-    d.map((x, i) => `<div><b>${DATA.levels[i].range} ${DATA.levels[i].th}</b>${esc(x[0])}<br><span class="en">${esc(x[1])}</span></div>`).join('')}</div></details>`;
-}
-function itemBlock(it, key, withRubric){
-  return `<div class="item" data-item="${key}"><div class="q"><span class="id">${it.id}</span>${esc(it.th)}<br><span class="en">${esc(it.en)}</span></div>${withRubric && it.d ? rubric(it.d) : ''}${scale(key)}</div>`;
-}
-function textArea(key, th, en, req){
+// ---------- widgets ----------
+function btns(key, opts, cls, req = true){
   if (req) required.add(key);
-  return `<label class="f">${esc(th)} <span class="en">${esc(en)}</span></label><textarea data-tkey="${key}">${esc(state[key]||'')}</textarea>`;
+  const cur = state[key];
+  const multi = Array.isArray(cur) || cls.includes('multi');
+  return `<div class="opts ${cls}" data-key="${key}" ${multi ? 'data-multi="1"' : ''}>` + opts.map(o => {
+    const on = multi ? (cur || []).includes(o.v) : cur === o.v;
+    return `<button type="button" data-v="${esc(o.v)}" aria-pressed="${on}">${esc(o.label)}</button>`; }).join('') + '</div>';
 }
-const legend = `<div class="legend">สเกล / Scale: 9–10 ดีเยี่ยม Excellent · 7–8 ดี Good · 5–6 พอใช้ Fair · 0–4 ต้องปรับปรุง Needs improvement</div>`;
+const nums = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => ({ v: String(a + i), label: String(a + i) }));
+function textArea(key, label, req){ if (req) required.add(key); return `<label class="f">${esc(label)}</label><textarea data-tkey="${key}">${esc(state[key] || '')}</textarea>`; }
+function textIn(key, ph){ return `<input type="text" data-tkey="${key}" placeholder="${esc(ph)}" value="${esc(state[key] || '')}">`; }
 
+// field-level item (0–10)
+function rubric(d){
+  return `<details class="rub"><summary>${s('showRubric')}</summary><div class="rubt">${d.map((x, i) =>
+    `<div><b>${DATA.levels[i].range} ${esc(L === 'th' ? DATA.levels[i].th : DATA.levels[i].en)}</b>${esc(L === 'th' ? x[0] : x[1])}</div>`).join('')}</div></details>`;
+}
+function fItem(it, key, withRubric){
+  return `<div class="item" data-item="${key}"><div class="q"><span class="id">${it.id}</span>${esc(L === 'th' ? it.th : it.en)}</div>${withRubric && it.d ? rubric(it.d) : ''}${btns(key, nums(0, 10), 'n11')}</div>`;
+}
+
+// ---------- render ----------
 function render(){
   required.clear(); $('#result').innerHTML = '';
-  const g = group(), who = whoName();
-  const area = $('#formArea');
-  const ready = role && g && (role === 'panel' || who);
+  if (level === 'course') return renderCourse();
+  const g = group(), who = whoName(), area = $('#formArea');
+  const ready = level === 'field' && role && g && (role === 'panel' || who);
   $('#bar').classList.toggle('hidden', !ready);
   if (!ready){ area.innerHTML = ''; return; }
   loadDraft();
+  const legend = `<div class="legend">${s('scale10')}</div>`;
   let h = '';
   if (role === 'student'){
-    const peers = g.students.filter(s => s[1] !== who);
-    h += `<div class="card"><h2>2. แบบที่ 4 ประเมินตนเอง <span class="en">Form 4 · Self-evaluation</span></h2>${legend}`;
-    DATA.peer_items.forEach(it => h += itemBlock(it, `self.${it.id}`));
-    h += `<h3 style="margin-top:16px">สะท้อนการเรียนรู้ <span class="en">Reflection</span></h3><p class="sub">ตอบสั้น ๆ ภาษาไทยหรืออังกฤษก็ได้ · Answer briefly in Thai or English.</p>`;
-    DATA.reflection.forEach((q, i) => h += textArea(`self.R${i+1}`, `R${i+1}. ${q.th}`, q.en, i < 2));
-    h += `</div><div class="card"><h2>3. แบบที่ 3 ประเมินเพื่อนในกลุ่ม <span class="en">Form 3 · Peer evaluation</span></h2>
-      <p class="sub">ประเมินเพื่อนทุกคน (${peers.length} คน) อย่างตรงไปตรงมาและสร้างสรรค์ ผลเป็นความลับ · Rate every peer honestly; responses are confidential.</p>${legend}`;
+    const peers = g.students.filter(x => x[1] !== who);
+    h += `<div class="card"><h2>3. ${s('f4Title')}</h2>${legend}`;
+    DATA.peer_items.forEach(it => h += fItem(it, `self.${it.id}`));
+    h += `<h3 style="margin-top:16px">${s('reflTitle')}</h3><p class="sub">${s('reflNote')}</p>`;
+    DATA.reflection.forEach((q, i) => h += textArea(`self.R${i+1}`, `R${i+1}. ${t(q)}`, i < 2));
+    h += `</div><div class="card"><h2>4. ${s('f3Title')}</h2><p class="sub">${s('f3Note', { n: peers.length })}</p>${legend}`;
     peers.forEach((p, k) => {
-      h += `<details class="peer" ${k === 0 ? 'open' : ''} data-peer="${k}"><summary><span>${esc(p[1])} <span class="sub">(${p[0]})</span></span><span class="badge" id="pb${k}"></span></summary>`;
-      DATA.peer_items.forEach(it => h += itemBlock(it, `peer.${k}.${it.id}`));
-      h += textArea(`peer.${k}.strength`, 'จุดเด่น 1 ข้อ', 'One strength', false) + textArea(`peer.${k}.suggest`, 'ข้อเสนอแนะ 1 ข้อ', 'One suggestion', false) + '</details>';
+      h += `<details class="peer" ${k === 0 ? 'open' : ''} data-peer="${k}"><summary><span>${esc(p[1])} <span class="sub">(${p[0]})</span></span><span class="badge"></span></summary>`;
+      DATA.peer_items.forEach(it => h += fItem(it, `peer.${k}.${it.id}`));
+      h += textArea(`peer.${k}.strength`, s('strength')) + textArea(`peer.${k}.suggest`, s('suggest')) + '</details>';
     });
     h += '</div>';
   }
   if (role === 'mentor'){
-    h += `<div class="card"><h2>2. แบบที่ 1 ประเมินนิสิตรายบุคคล <span class="en">Form 1 · Individual evaluation</span></h2>
-      <p class="sub">บันทึกการเข้าร่วม D2–D7 เพื่อคำนวณข้อ A1 อัตโนมัติ แล้วให้คะแนน A2–C1 (0–10) · Attendance sets A1 automatically; score A2–C1.</p>${legend}</div>`;
-    g.students.forEach((s, k) => {
-      h += `<details class="peer card" ${k === 0 ? 'open' : ''} data-peer="${k}"><summary><span>${k+1}. ${esc(s[1])} <span class="sub">(${s[0]})</span></span><span class="badge" id="pb${k}"></span></summary>
-        <div class="item"><div class="q"><span class="id">A1</span>การเข้าร่วมกิจกรรมครบถ้วนและตรงต่อเวลา <span class="en">Attendance &amp; punctuality</span> → <span class="total" id="a1_${k}">–</span>/10</div><div class="att">${
+    const A = S.att[L === 'th' ? 0 : 1];
+    h += `<div class="card"><h2>3. ${s('f1Title')}</h2><p class="sub">${s('f1Note')}</p>${legend}</div>`;
+    g.students.forEach((st, k) => {
+      h += `<details class="peer card" ${k === 0 ? 'open' : ''} data-peer="${k}"><summary><span>${k+1}. ${esc(st[1])} <span class="sub">(${st[0]})</span></span><span class="badge"></span></summary>
+        <div class="item"><div class="q"><span class="id">A1</span>${s('a1')} → <span class="total" data-a1="${k}">–</span>/10</div><div class="att">${
         DATA.days.map((d, j) => { const key = `f1.${k}.att${j}`; required.add(key);
-          return `<div>${d.d} ${d.date}<select data-skey="${key}"><option value=""></option>${[['1','✓ มา on time'],['0.5','สาย / late'],['0','ขาด / absent']].map(o => `<option value="${o[0]}" ${String(state[key]) === o[0] ? 'selected' : ''}>${o[1]}</option>`).join('')}</select></div>`; }).join('')}</div></div>`;
-      DATA.form1_items.filter(it => it.id !== 'A1').forEach(it => h += itemBlock(it, `f1.${k}.${it.id}`, true));
-      h += textArea(`f1.${k}.comment`, 'ข้อสังเกต / หลักฐาน', 'Comments / evidence', false) + '</details>';
+          return `<div>${d.d} ${L === 'th' ? d.date : d.date_en}<select data-skey="${key}"><option value=""></option>${['1','0.5','0'].map((v, i) => `<option value="${v}" ${String(state[key]) === v ? 'selected' : ''}>${A[i]}</option>`).join('')}</select></div>`; }).join('')}</div></div>`;
+      DATA.form1_items.filter(it => it.id !== 'A1').forEach(it => h += fItem(it, `f1.${k}.${it.id}`, true));
+      h += textArea(`f1.${k}.comment`, s('comment')) + '</details>';
     });
   }
   if (role === 'panel'){
-    h += `<div class="card"><h2>2. แบบที่ 2 การนำเสนอผลงานกลุ่ม ${g.no} <span class="en">Form 2 · ${esc(g.en)}</span></h2>
-      <p class="sub">สมาชิก / Members: ${g.students.map(s => esc(s[1])).join(', ')}</p>${legend}`;
+    h += `<div class="card"><h2>3. ${s('f2Title')} · ${s('groupN')} ${g.no}</h2><p class="sub">${s('members')}: ${g.students.map(x => esc(x[1])).join(', ')}</p>${legend}`;
     let part = '';
-    DATA.form2_items.forEach(it => { if (it.part !== part){ part = it.part; h += `<h3 style="margin-top:14px">${esc(part)}</h3>`; } h += itemBlock(it, `f2.${it.id}`, true); });
-    h += textArea('f2.strength', 'จุดเด่นของข้อเสนอ', 'Strengths of the proposal', false) + textArea('f2.improve', 'สิ่งที่ควรพัฒนา / คำถามต่อยอด', 'To improve / questions to explore', false) + '</div>';
+    DATA.form2_items.forEach(it => { const p = t(it.part); if (p !== part){ part = p; h += `<h3 style="margin-top:14px">${esc(part)}</h3>`; } h += fItem(it, `f2.${it.id}`, true); });
+    h += textArea('f2.strength', s('f2Str')) + textArea('f2.improve', s('f2Imp')) + '</div>';
   }
-  area.innerHTML = h;
-  bind(); updateProgress();
+  area.innerHTML = h; bind(); updateProgress();
+}
+
+function renderCourse(){
+  loadDraft();
+  const SC = COURSE.scales;
+  let h = `<div class="card"><h2>${esc(t(COURSE.title))}</h2><p class="sub">${esc(t(COURSE.subtitle))}</p><p>${esc(t(COURSE.intro))}</p><div class="note anon">🔒 ${s('anon')}</div></div>`;
+  COURSE.sections.forEach(sec => {
+    h += `<div class="card"><h2>${esc(t(sec.title))}</h2>`;
+    if (sec.note) h += `<p class="sub">${esc(t(sec.note))}</p>`;
+    if (sec.scale) h += `<div class="legend">${esc(t(SC[sec.scale].legend))}</div>`;
+    sec.items.forEach(it => {
+      const key = 'c.' + it.id, q = `<div class="q"><span class="id">${it.id}</span>${esc(t(it.q))}${it.req ? '' : ` <span class="sub">${s('optional')}</span>`}</div>`;
+      h += `<div class="item" data-item="${key}">${q}`;
+      if (it.type === 'likert'){
+        const sc = SC[it.scale];
+        h += btns(key, nums(1, 5).concat([{ v: 'N/A', label: s('na') }]), 'n6') + `<div class="ends"><span>1 ${esc(t(sc.lo))}</span><span>5 ${esc(t(sc.hi))}</span></div>`;
+      } else if (it.type === 'score10'){
+        h += btns(key, nums(1, 10), 'n10');
+      } else if (it.type === 'single' || it.type === 'multi'){
+        const opts = it.opts.map(o => ({ v: o.v, label: o[L] })); if (it.other) opts.push({ v: 'Other', label: s('otherOpt') });
+        if (it.type === 'multi' && !Array.isArray(state[key])) state[key] = state[key] ? [state[key]] : [];
+        h += btns(key, opts, (it.opts.length <= 3 && !it.other ? 'n3' : 'txt') + (it.type === 'multi' ? ' multi' : ''));
+        if (it.other) h += `<div class="other">${textIn(key + '_other', s('otherSpec'))}</div>`;
+      } else if (it.type === 'words3'){
+        h += `<div class="w3">${[1,2,3].map(i => textIn(`${key}_${i}`, `${s('word')} ${i}`)).join('')}</div>`;
+      } else if (it.type === 'open'){
+        h += `<textarea data-tkey="${key}">${esc(state[key] || '')}</textarea>`;
+      } else if (it.type === 'balance'){
+        h += it.rows.map(r => `<div class="balrow"><span>${esc(r[L])}</span>${btns(`${key}.${r.k}`, it.cols.map(c => ({ v: c.v, label: c[L] })), 'n3')}</div>`).join('');
+      } else if (it.type === 'beforenow'){
+        h += `<div class="bnrow"><span>${s('before')}</span>${btns(key + '.before', nums(1, 5), 'n5')}</div><div class="bnrow"><span>${s('now')}</span>${btns(key + '.now', nums(1, 5), 'n5')}</div>`;
+      }
+      h += '</div>';
+    });
+    h += '</div>';
+  });
+  $('#formArea').innerHTML = h; $('#bar').classList.remove('hidden'); bind(); updateProgress();
 }
 
 function bind(){
-  document.querySelectorAll('.scale').forEach(sc => sc.onclick = e => {
-    const b = e.target.closest('button'); if (!b) return;
-    state[sc.dataset.key] = +b.dataset.v;
-    sc.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
-    sc.closest('.item').classList.remove('missing'); store(); updateProgress();
+  document.querySelectorAll('.opts').forEach(sc => sc.onclick = e => {
+    const b = e.target.closest('button'); if (!b) return; const k = sc.dataset.key, v = b.dataset.v;
+    if (sc.dataset.multi){ const a = state[k] = Array.isArray(state[k]) ? state[k] : []; const i = a.indexOf(v); if (i >= 0) a.splice(i, 1); else a.push(v); b.setAttribute('aria-pressed', i < 0); }
+    else { state[k] = v; sc.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); }
+    const it = sc.closest('.item'); if (it) it.classList.remove('missing');
+    store(); updateProgress();
   });
-  document.querySelectorAll('[data-tkey]').forEach(t => t.oninput = () => { state[t.dataset.tkey] = t.value; store(); updateProgress(); });
-  document.querySelectorAll('[data-skey]').forEach(t => t.onchange = () => { t.style.outline = ''; if (t.value === '') delete state[t.dataset.skey]; else state[t.dataset.skey] = +t.value; store(); updateProgress(); });
+  document.querySelectorAll('[data-tkey]').forEach(x => x.oninput = () => { state[x.dataset.tkey] = x.value; store(); updateProgress(); });
+  document.querySelectorAll('[data-skey]').forEach(x => x.onchange = () => { x.classList.remove('missing-sel'); if (x.value === '') delete state[x.dataset.skey]; else state[x.dataset.skey] = x.value; store(); updateProgress(); });
 }
 
-function a1(k){
-  const v = DATA.days.map((_, j) => state[`f1.${k}.att${j}`]);
-  return v.every(x => typeof x === 'number') ? Math.round(v.reduce((a, b) => a + b, 0) / 6 * 100) / 10 : null;
-}
-function filled(k){ const v = state[k]; return typeof v === 'number' || (typeof v === 'string' && v.trim() !== ''); }
+const num = v => (v === undefined || v === '' || v === 'N/A') ? null : +v;
+function a1(k){ const v = DATA.days.map((_, j) => num(state[`f1.${k}.att${j}`])); return v.every(x => x !== null) ? Math.round(v.reduce((a, b) => a + b, 0) / 6 * 100) / 10 : null; }
+function filled(k){ const v = state[k]; return Array.isArray(v) ? v.length > 0 : (v !== undefined && String(v).trim() !== ''); }
 
 function updateProgress(){
-  const req = [...required]; const done = req.filter(filled).length;
+  const req = [...required], done = req.filter(filled).length;
   let ok = done === req.length;
-  if (role === 'panel' && (!whoName() || !$('#panelRole').value)) ok = false;
-  if (role === 'mentor' && !whoName()) ok = false;
-  $('#progTxt').textContent = `กรอกแล้ว ${done}/${req.length} ข้อ · ${done}/${req.length} answered`;
+  if (level === 'field' && role === 'panel' && (!whoName() || !$('#panelRole').value)) ok = false;
+  if (level === 'field' && role === 'mentor' && !whoName()) ok = false;
+  $('#progTxt').textContent = s('prog', { d: done, n: req.length });
   $('#progBar').style.width = (req.length ? done / req.length * 100 : 0) + '%';
   document.querySelectorAll('[data-peer]').forEach(d => {
     const k = d.dataset.peer, pre = role === 'mentor' ? `f1.${k}.` : `peer.${k}.`;
-    const mine = req.filter(r => r.startsWith(pre)); const dn = mine.filter(filled).length;
-    const b = d.querySelector('.badge');
-    if (role === 'mentor'){ const v = a1(k); const t = d.querySelector('#a1_' + k); if (t) t.textContent = v === null ? '–' : v; }
-    const tot = role === 'mentor'
-      ? (dn === mine.length ? (a1(k) + DATA.form1_items.filter(i => i.id !== 'A1').reduce((s, i) => s + state[`f1.${k}.${i.id}`], 0)).toFixed(1) + '/100' : null)
-      : (dn === mine.length ? DATA.peer_items.reduce((s, i) => s + state[`peer.${k}.${i.id}`], 0) + '/50' : null);
+    const mine = req.filter(r => r.startsWith(pre)), dn = mine.filter(filled).length, b = d.querySelector('.badge');
+    if (role === 'mentor'){ const v = a1(k), x = d.querySelector('[data-a1]'); if (x) x.textContent = v === null ? '–' : v; }
+    const tot = dn !== mine.length ? null : role === 'mentor'
+      ? (a1(k) + DATA.form1_items.filter(i => i.id !== 'A1').reduce((sm, i) => sm + num(state[`f1.${k}.${i.id}`]), 0)).toFixed(1) + '/100'
+      : DATA.peer_items.reduce((sm, i) => sm + num(state[`peer.${k}.${i.id}`]), 0) + '/50';
     if (b){ b.textContent = tot ? '✓ ' + tot : `${dn}/${mine.length}`; b.classList.toggle('ok', !!tot); }
   });
-  $('#submit').disabled = false;
   $('#submit').dataset.ok = ok ? '1' : '';
 }
 
-// --- payload
+// ---------- payloads ----------
+const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 function buildPayload(){
-  const g = group(), who = whoName(), id = Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-  const base = { submission_id: id, submitted_at: new Date().toISOString(), group: g.no, group_name: g.en, role, evaluator: who, user_agent: navigator.userAgent.slice(0, 120) };
+  if (level === 'course'){
+    const A = [['Lang', L]];
+    COURSE.sections.forEach(sec => sec.items.forEach(it => {
+      const k = 'c.' + it.id, v = state[k];
+      if (it.type === 'single'){ A.push([it.id, v === 'Other' ? 'Other: ' + (state[k + '_other'] || '') : (v || '')]); }
+      else if (it.type === 'multi'){ const a = (v || []).map(x => x === 'Other' ? 'Other: ' + (state[k + '_other'] || '') : x); A.push([it.id, a.join('; ')]); }
+      else if (it.type === 'words3'){ A.push([it.id, [1,2,3].map(i => (state[`${k}_${i}`] || '').trim()).filter(Boolean).join(' · ')]); }
+      else if (it.type === 'balance'){ it.rows.forEach(r => A.push([`${it.id}_${r.k}`, state[`${k}.${r.k}`] || ''])); }
+      else if (it.type === 'beforenow'){ A.push([`${it.id}_before`, num(state[k + '.before'])]); A.push([`${it.id}_now`, num(state[k + '.now'])]); }
+      else if (it.type === 'likert'){ A.push([it.id, v === 'N/A' ? 'N/A' : num(v)]); }
+      else if (it.type === 'score10'){ A.push([it.id, num(v)]); }
+      else A.push([it.id, (v || '').trim()]);
+    }));
+    return { role: 'course', submission_id: newId(), lang: L, answers: A };
+  }
+  const g = group(), who = whoName();
+  const base = { submission_id: newId(), submitted_at: new Date().toISOString(), group: g.no, group_name: g.en, role, evaluator: who, lang: L };
   if (role === 'student'){
-    const me = g.students.find(s => s[1] === who);
-    const peers = g.students.filter(s => s[1] !== who);
+    const me = g.students.find(x => x[1] === who), peers = g.students.filter(x => x[1] !== who);
     return { ...base, institution: me ? me[0] : '',
-      self: { scores: Object.fromEntries(DATA.peer_items.map(i => [i.id, state[`self.${i.id}`]])), reflection: DATA.reflection.map((_, i) => state[`self.R${i+1}`] || '') },
-      peers: peers.map((p, k) => ({ name: p[1], scores: Object.fromEntries(DATA.peer_items.map(i => [i.id, state[`peer.${k}.${i.id}`]])), strength: state[`peer.${k}.strength`] || '', suggestion: state[`peer.${k}.suggest`] || '' })) };
+      self: { scores: Object.fromEntries(DATA.peer_items.map(i => [i.id, num(state[`self.${i.id}`])])), reflection: DATA.reflection.map((_, i) => state[`self.R${i+1}`] || '') },
+      peers: peers.map((p, k) => ({ name: p[1], scores: Object.fromEntries(DATA.peer_items.map(i => [i.id, num(state[`peer.${k}.${i.id}`])])), strength: state[`peer.${k}.strength`] || '', suggestion: state[`peer.${k}.suggest`] || '' })) };
   }
   if (role === 'mentor'){
-    return { ...base, students: g.students.map((s, k) => ({ name: s[1], institution: s[0],
-      attendance: DATA.days.map((_, j) => state[`f1.${k}.att${j}`]), scores: Object.assign({ A1: a1(k) }, Object.fromEntries(DATA.form1_items.filter(i => i.id !== 'A1').map(i => [i.id, state[`f1.${k}.${i.id}`]]))),
+    return { ...base, students: g.students.map((st, k) => ({ name: st[1], institution: st[0],
+      attendance: DATA.days.map((_, j) => num(state[`f1.${k}.att${j}`])),
+      scores: Object.assign({ A1: a1(k) }, Object.fromEntries(DATA.form1_items.filter(i => i.id !== 'A1').map(i => [i.id, num(state[`f1.${k}.${i.id}`])]))),
       comment: state[`f1.${k}.comment`] || '' })) };
   }
-  return { ...base, evaluator_role: $('#panelRole').value, scores: Object.fromEntries(DATA.form2_items.map(i => [i.id, state[`f2.${i.id}`]])), strength: state['f2.strength'] || '', improve: state['f2.improve'] || '' };
+  return { ...base, evaluator_role: $('#panelRole').value, scores: Object.fromEntries(DATA.form2_items.map(i => [i.id, num(state[`f2.${i.id}`])])), strength: state['f2.strength'] || '', improve: state['f2.improve'] || '' };
 }
 
 function download(obj){
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 2)], { type: 'application/json' }));
-  a.download = `ADAPT-Nan_eval_${obj.role}_G${obj.group}_${(obj.evaluator || 'anon').replace(/\W+/g, '_')}.json`;
+  a.download = obj.role === 'course' ? `ADAPT-Nan_course_eval_${obj.submission_id}.json` : `ADAPT-Nan_eval_${obj.role}_G${obj.group}_${String(obj.evaluator || 'anon').replace(/\W+/g, '_')}.json`;
   a.click();
 }
 
 $('#submit').onclick = async () => {
   if (!$('#submit').dataset.ok){
     const miss = [...required].filter(k => !filled(k));
-    document.querySelectorAll('.item').forEach(it => it.classList.toggle('missing', miss.includes(it.dataset.item)));
-    document.querySelectorAll('[data-skey]').forEach(t => t.style.outline = miss.includes(t.dataset.skey) ? '2px solid var(--terra)' : '');
-    const missAtt = miss.find(k => k.includes('.att'));
-    const first = document.querySelector('.item.missing') || (missAtt && document.querySelector(`[data-skey="${missAtt}"]`));
+    document.querySelectorAll('.item').forEach(it => {
+      const k = it.dataset.item; it.classList.toggle('missing', !!k && miss.some(m => m === k || m.startsWith(k + '.')));
+    });
+    document.querySelectorAll('[data-skey]').forEach(x => x.classList.toggle('missing-sel', miss.includes(x.dataset.skey)));
+    const first = document.querySelector('.item.missing, .missing-sel');
     if (first){ const d = first.closest('details'); if (d) d.open = true; first.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-    let msg = 'กรุณากรอกให้ครบทุกข้อที่มีคะแนน · Please answer all scored items.';
-    if (role === 'panel' && (!whoName() || !$('#panelRole').value)) msg = 'กรุณาใส่ชื่อและบทบาทผู้ประเมิน · Please enter your name and role.';
-    $('#result').innerHTML = `<div class="card err">${msg}</div>`;
+    const whoMiss = level === 'field' && ((role === 'panel' && (!whoName() || !$('#panelRole').value)) || (role === 'mentor' && !whoName()));
+    $('#result').innerHTML = `<div class="card err">${whoMiss ? s('missingWho') : s('missing')}</div>`;
     if (!first) $('#result').scrollIntoView({ behavior: 'smooth' });
     return;
   }
-  const payload = buildPayload();
-  const btn = $('#submit'); btn.disabled = true; btn.textContent = 'กำลังส่ง… / Sending…';
+  const payload = buildPayload(), btn = $('#submit');
+  btn.disabled = true; btn.textContent = s('sending');
   let ok = false, note = '';
   if (connected){
-    try {
-      const r = await fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
-      const j = await r.json(); ok = !!j.ok; note = j.error || '';
-    } catch (e) { note = String(e); }
+    try { const r = await fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }); const j = await r.json(); ok = !!j.ok; note = j.error || ''; }
+    catch (e) { note = String(e); }
   }
-  btn.textContent = 'ส่ง / Submit'; btn.disabled = false;
+  btn.textContent = s('submit'); btn.disabled = false;
   if (ok){
     try { localStorage.removeItem('adaptEval:' + draftKey()); } catch (e) {}
     $('#formArea').innerHTML = ''; $('#bar').classList.add('hidden');
-    $('#result').innerHTML = `<div class="card ok-card"><h2>ส่งเรียบร้อย ขอบคุณครับ/ค่ะ 🙏</h2><p class="en">Submitted — thank you!</p><p class="sub">รหัสการส่ง / Submission ID: ${payload.submission_id}</p>
-      <button class="btn ghost" id="again">ประเมินชุดใหม่ / New evaluation</button> <button class="btn ghost" id="dl">ดาวน์โหลดสำเนา / Download copy</button></div>`;
-    $('#again').onclick = () => location.reload();
-    $('#dl').onclick = () => download(payload);
+    $('#result').innerHTML = `<div class="card ok-card"><h2>${s('okTitle')}</h2><p class="sub">${s('okId')}: ${payload.submission_id}</p>
+      <button class="btn ghost" id="again">${s('again')}</button> <button class="btn ghost" id="dl">${s('dl')}</button></div>`;
+    $('#again').onclick = () => location.reload(); $('#dl').onclick = () => download(payload);
+    $('#result').scrollIntoView({ behavior: 'smooth' });
   } else {
     download(payload);
-    $('#result').innerHTML = `<div class="card err"><h3>${connected ? 'ส่งไม่สำเร็จ / Could not submit' : 'บันทึกเป็นไฟล์แล้ว / Saved as file'}</h3>
-      <p>ระบบได้ดาวน์โหลดไฟล์คำตอบให้แล้ว กรุณาส่งไฟล์นี้ให้ผู้ประสานงาน หรือลองกดส่งอีกครั้งเมื่อมีสัญญาณอินเทอร์เน็ต (คำตอบยังอยู่ในหน้านี้)</p>
-      <p class="en">Your answers were downloaded as a file — send it to the coordinator, or try Submit again when online (your answers are kept on this page).</p>${note ? `<p class="sub">${esc(note)}</p>` : ''}</div>`;
+    $('#result').innerHTML = `<div class="card err"><h3>${connected ? s('failT') : s('savedT')}</h3><p>${s('failD')}</p>${note ? `<p class="sub">${esc(note)}</p>` : ''}</div>`;
     $('#result').scrollIntoView({ behavior: 'smooth' });
   }
 };
+
+paintStatic(); paintLevel(); syncURL(); render();
 </script>
 </body>
 </html>
